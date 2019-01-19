@@ -1,0 +1,35 @@
+{% extends "base.jinja2" %}
+
+
+{% block mainbody %}
+
+
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel-group">
+                <div class="panel xmjj">
+                    <div class="panel-heading"><a>{{ dir_title }}</a></div>
+                </div>
+                {{ leftnav }}
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="col-sm-9">
+            <ol class="breadcrumb">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="{{ dir_slug }}.html">{{ dir_title }}</a></li>
+                <li>{{ title }}</li>
+            </ol>
+
+            <div class="row">
+                <div class="col-xs-9">
+                    <div class="content">
+                        {{ cnt }}
+                    </div>
+                </div>
+                {% block content %} {% endblock %}
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

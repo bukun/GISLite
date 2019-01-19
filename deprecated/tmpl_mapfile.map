@@ -1,0 +1,28 @@
+MAP
+NAME "{fc_name}"
+SIZE 300 300
+UNITS meters
+
+FONTSET "./fonts/fonts.list"
+
+EXTENT {fc_extent}
+SHAPEPATH  "{basedir}"
+
+PROJECTION
+    "init=epsg:4326"
+END
+
+SYMBOL
+  TYPE ellipse
+  POINTS 1 1 END
+  NAME "circle"
+END
+
+# Background color for the map canvas -- change as desired
+IMAGECOLOR 255 255 255
+IMAGEQUALITY 95
+IMAGETYPE png
+
+{fc_includes}
+
+END

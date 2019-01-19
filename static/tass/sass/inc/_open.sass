@@ -1,0 +1,2307 @@
+@charset "utf-8"
+
+/* CSS Document
+
+html
+  background: #FFF
+
+body
+  font-size: 14px
+  background-color: #fff
+  color: #323232
+  font-family: 'Microsoft YaHei', '微软雅黑', SimSun, '宋体', 'Lucida Grande', Tahoma, Arial, Helvetica, sans-serif
+
+html, body, address, blockquote, div, dl, form, ol, p, pre, table, ul, dd, dl, dt, li, tbody, td, tfoot, th, thead, tr, button, del, ins, map, object, a, abbr, acronym, b, bdo, big, br, cite, code, dfn, em, i, img, kbd, q, samp, small, span, strong, sub, sup, tt, var, legend, fieldset
+  margin: 0px
+  padding: 0px
+  font-size: 100%
+  -webkit-font-smoothing: subpixel-antialiased
+
+table
+  border-collapse: collapse
+  border-spacing: 0
+  width: 100%
+
+fieldset
+  border: 0
+
+img
+  border: 0
+  max-width: 100%
+  height: auto
+  width: auto \9
+
+  /* for ie8
+  -ms-interpolation-mode: bicubic
+
+object
+  max-width: 100%
+  height: auto
+  width: auto \9
+
+  /* for ie8
+  -ms-interpolation-mode: bicubic
+
+a
+  outline: none
+  blr: expression(this.onFocus=this.blur())
+  text-decoration: none
+  color: #323232
+
+  &:hover
+    color: #323232
+    text-decoration: none
+
+input[type='button']
+  outline: none
+  border: 0 none
+  background-color: transparent
+  cursor: pointer
+
+address, caption, cite, code, dfn, em, strong, th, var
+  font-style: normal
+  font-weight: 400
+
+/*定义清除浮动样式 方法一
+
+.clearfix
+  &:after
+    content: '\20'
+    display: block
+    height: 0
+    clear: both
+    visibility: hidden
+
+  zoom: 1
+
+/*定义清除浮动样式 方法二
+
+.clear
+  clear: both
+
+.img-thumbnail
+  border: 0
+
+.nav_bg
+  background: #002d40
+  font-weight: bold
+
+.navbar-toggle
+  position: relative
+  float: right
+  padding: 9px 10px
+  margin-top: 8px
+  margin-right: 15px
+  margin-bottom: 8px
+  background-color: #002d40
+  border: 1px solid #002d40
+  border-radius: 4px
+
+  &:focus
+    outline: 0
+
+  .icon-bar
+    display: block
+    width: 22px
+    height: 2px
+
+    /* border-radius: 1px solid #002d40;
+
+.navbar-inverse
+  .navbar-toggle
+    border-color: #002d40
+
+    &:focus, &:hover
+      background-color: #002d40
+
+  .navbar-collapse
+    border-color: #002d40
+
+  background-color: #002d40
+  border-color: #002d40
+
+  .navbar-brand
+    color: #fff
+    font-size: 16px
+
+  .navbar-nav
+    li > a
+      color: #fff
+      padding-left: 24px
+      padding-right: 24px
+
+      &:focus, &:hover
+        color: #fff
+        background-color: #007abe
+
+    .open > a
+      color: #fff
+      background-color: #007abe
+
+      &:focus, &:hover
+        color: #fff
+        background-color: #007abe
+
+.dropdown-menu
+  position: absolute
+  display: none
+  float: left
+  min-width: 170px
+  list-style: none
+  line-height: 30px
+  font-size: 14px
+  text-align: left
+  z-index: 9999
+  background: #002d40
+  color: #fff
+
+
+  li > a
+    color: #fff
+    font-size: 14px
+    line-height: 30px
+    border-top: none
+    text-align: left
+    font-weight: normal
+    height: auto
+    font-family: 'Microsoft YaHei'
+    z-index: 9999
+
+    &:focus, &:hover
+      background: #007abe
+      color: #fff
+
+  .disabled > a
+    color: #fff
+
+    &:focus, &:hover
+      color: #fff
+
+.dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu
+  top: auto
+  bottom: 100%
+  margin-bottom: 2px
+
+.articleList .listTitle
+  background: url("../../images/title_bg_03.png") repeat-x left center
+  width: 100%
+  height: 33px
+  display: block
+
+.more
+  float: right
+  padding-left: 13px
+  background: #ffffff
+  height: 33px
+  line-height: 33px
+
+  a
+    color: #000000
+    font-size: 14px
+
+.listTitle h2
+  font-size: 18px
+  padding: 0 15px 0 42px
+  color: #2fad65
+  background: url("../images/title01_03.png") no-repeat 4px center #ffffff
+  width: auto
+  float: left
+  font-weight: bold
+  line-height: 33px
+  margin: 0px
+
+.articleList00 .listTitle h2
+  background: url("../images/title02_03.png") no-repeat left center #ffffff
+
+.articleList ul li
+  border: 0
+  padding: 0 0 0 29px
+  background: url("../images/li_03.png") no-repeat left center
+  height: 30px
+  line-height: 30px
+  font-size: 14px
+  display: block
+  float: left
+  width: 100%
+
+  a
+    float: left
+
+    &:hover
+      color: #002d40
+
+  span
+    float: right
+    font-size: 12px
+    color: #4a4a4a
+
+/*底部开始
+
+.footer
+  background-color: #002d40
+  color: #fff
+
+.copyRight
+  width: 100%
+  margin: 0 auto
+  text-align: center
+  line-height: 30px
+  font-family: "微软雅黑"
+
+.footer_logo
+  float: left
+  position: absolute
+
+.banquan
+  padding: 30px 0 0 0
+  font-size: 13px
+
+/*------------------------------------------------------------------
+
+.content
+  ul
+    margin-left: 35px
+
+  h2
+    color: #003e43
+    text-align: center
+    font-family: 'Microsoft YaHei'
+    font-weight: bold
+
+.xmjj .panel-heading
+  height: 45px
+  line-height: 25px
+  background: #2fad65
+  text-align: center
+
+  a
+    font-size: 18px
+    color: #ffffff
+
+.mbclass
+  .panel-title, .panel-body
+    height: 41px
+    color: #2fad65
+    text-align: center
+
+  .panel-heading
+    border: none
+    height: 41px
+    line-height: 41px
+    border-bottom: 1px solid #d7d7d7
+    background: #f1f1f1
+    text-align: center
+    margin: 0 0 1px 0
+
+    &:hover, a.active
+      height: 41px
+      background: #ffffff
+      border-left: 5px solid #ff9c00
+      border-right: 5px solid #ff9c00
+
+  border-color: #ddd
+
+  > .panel-heading
+    color: #333
+    background-color: #f5f5f5
+    border-color: #ddd
+
+    + .panel-collapse > .panel-body
+      border-color: #ddd
+
+    .badge
+      color: #f5f5f5
+      background-color: #333
+
+    .active
+      background: #ffffff
+      border-left: 5px solid #ff9c00
+      border-right: 5px solid #ff9c00
+
+#leftnavli
+  background: #ffffff
+  border-left: 5px solid #ff9c00
+  border-right: 5px solid #ff9c00
+
+.content
+  font-size: 14px
+  color: #202020
+  line-height: 30px
+  text-indent: 2em
+  margin: 0 0 20px 0
+
+h4.active
+  color: #f00
+
+h3
+  line-height: 40px
+
+#demo
+  overflow: hidden
+  width: 100%
+
+  li
+    list-style: none
+
+  img
+    border: 3px solid #ddd
+    margin: 5px 2px
+    width: 200px
+
+#indemo
+  float: left
+  width: 800%
+
+#demo1, #demo2
+  float: left
+
+/* Custom Styles
+
+ul.nav-tabs
+  width: 180px
+  margin-top: 20px
+  margin-bottom: 300px
+  border-radius: 4px
+  border: 1px solid #ddd
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067)
+  bottom: 150px
+
+  li
+    margin: 0
+    border-top: 1px solid #ddd
+
+    &:first-child
+      border-top: none
+
+    a
+      margin: 0
+      padding: 8px 16px
+      border-radius: 0
+
+    &.active a
+      color: #fff
+      background: #0088cc
+      border: 1px solid #0088cc
+
+      &:hover
+        color: #fff
+        background: #0088cc
+        border: 1px solid #0088cc
+
+    &:first-child a
+      border-radius: 4px 4px 0 0
+
+    &:last-child a
+      border-radius: 0 0 4px 4px
+
+.img-thumbnail
+  display: inline-block
+  max-width: 100%
+  height: auto
+  padding: 4px
+  line-height: 1.42857143
+  background-color: #fff
+  border: 1px solid #ddd
+  border-radius: 4px
+  -webkit-transition: all .2s ease-in-out
+  -o-transition: all .2s ease-in-out
+  transition: all .2s ease-in-out
+
+.indexp
+  font-size: 16px
+  line-height: 30px
+
+.featurette
+  border-radius: 11px
+  background: #fff
+  border: 1px solid #ddd
+  padding-bottom: 15px
+  margin-bottom: 20px
+
+  h3
+    text-align: center
+
+.container
+  width: 100%
+  padding-right: 15px
+  padding-left: 15px
+  margin-right: auto
+  margin-left: auto
+
+@media (min-width: 576px)
+  .container
+    max-width: 540px
+
+@media (min-width: 768px)
+  .container
+    max-width: 720px
+
+@media (min-width: 992px)
+  .container
+    max-width: 960px
+
+@media (min-width: 1200px)
+  .container
+    max-width: 1140px
+
+.carousel
+  position: relative
+
+.carousel-inner
+  position: relative
+  overflow: hidden
+  width: 100%
+
+.carousel
+  height: 157px
+  margin-bottom: 30px
+
+/* Since positioning the image, we need to help out the caption
+
+.carousel-caption
+  z-index: 10
+
+/* Declare heights because of positioning of img element
+
+.carousel .item
+  height: 157px
+  background-color: #777
+
+.carousel-inner > .item > img
+  position: absolute
+  left: 0
+  min-width: 100%
+  height: 157px
+
+.carousel-control
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  width: 15%
+  opacity: 0.5
+  filter: alpha(opacity = 50)
+  font-size: 20px
+  color: #fff
+  text-align: center
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6)
+
+  &.left
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%)
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%)
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%)
+    background-repeat: repeat-x
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1)
+
+  &.right
+    left: auto
+    right: 0
+    background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%)
+    background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%)
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%)
+    background-repeat: repeat-x
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1)
+
+  &:hover, &:focus
+    outline: 0
+    color: #fff
+    text-decoration: none
+    opacity: 0.9
+    filter: alpha(opacity = 90)
+
+  .icon-prev, .icon-next, .glyphicon-chevron-left, .glyphicon-chevron-right
+    position: absolute
+    top: 50%
+    margin-top: -10px
+    z-index: 5
+    display: inline-block
+
+  .icon-prev, .glyphicon-chevron-left
+    left: 50%
+    margin-left: -10px
+
+  .icon-next, .glyphicon-chevron-right
+    right: 50%
+    margin-right: -10px
+
+  .icon-prev, .icon-next
+    width: 20px
+    height: 20px
+    line-height: 1
+    font-family: serif
+
+  .icon-prev:before
+    content: '\2039'
+
+  .icon-next:before
+    content: '\203a'
+
+/*crawler单独页面样式
+
+.swiper-gd1
+  max-width: 990px
+  width: 96%
+  margin: 0 auto
+  padding: 30px 0
+  position: relative
+
+  .swiper-slide
+    width: 100%
+
+    ul
+      width: 100%
+      padding: 15px
+      box-sizing: border-box
+      -webkit-box-sizing: border-box
+      overflow: hidden
+
+      li
+        list-style: none
+        position: relative
+        top: 0
+        float: left
+        width: 25%
+        height: 166px
+        box-sizing: border-box
+        -webkit-box-sizing: border-box
+        padding: 30px 0
+        transition: all 0.6s
+        -webkit-transition: all 0.6s
+
+        img
+          display: block
+          width: 66px
+          margin: 0 auto
+
+        .c-touying
+          display: block
+          width: 0
+          height: 0
+          margin: 0 auto
+          transition: all 0.6s
+          -webkit-transition: all 0.6s
+
+        &:hover
+          box-shadow: 0px 10px 26px rgba(0, 0, 0, 0.1)
+          top: -10px
+          padding: 20px 0
+
+          .c-touying
+            height: 20px
+            width: 100px
+
+        p
+          text-align: center
+          margin-top: 5px
+          color: #666
+
+  .swiper-pagination
+    bottom: 10px
+    left: 0
+    line-height: 18px
+
+    .swiper-pagination-bullet
+      width: 10px
+      height: 10px
+      display: inline-block
+      margin-bottom: 4px
+      opacity: 0.5
+
+    .swiper-pagination-bullet-active
+      width: 14px
+      height: 14px
+      border: 2px solid #09F
+      background-color: #FFF
+      margin-bottom: 0px
+
+.c-hexin
+  position: relative
+  overflow: hidden
+  padding-top: 50px
+  padding-bottom: 30px
+  box-shadow: 0 -30px 30px rgba(0, 0, 0, 0.1)
+  left: 0
+  z-index: 8
+  background-color: #fff
+
+.hexin-b
+  opacity: 0
+
+  h3
+    font-size: 30px
+    text-align: center
+    color: #333
+    font-weight: 100
+    line-height: 32px
+
+  p
+    font-size: 12px
+    text-align: center
+    color: #666
+
+.animated
+  -webkit-animation-duration: 1s
+  animation-duration: 1s
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
+
+  &.infinite
+    -webkit-animation-iteration-count: infinite
+    animation-iteration-count: infinite
+
+  &.hinge
+    -webkit-animation-duration: 2s
+    animation-duration: 2s
+
+  &.flipOutX, &.flipOutY, &.bounceIn, &.bounceOut
+    -webkit-animation-duration: .75s
+    animation-duration: .75s
+
+@-webkit-keyframes fadeInUp
+  from
+    opacity: 0
+    -webkit-transform: translate3d(0%, 100%, 0)
+    transform: translate3d(0%, 100%, 0)
+
+  to
+    opacity: 1
+    -webkit-transform: none
+    transform: none
+
+@keyframes fadeInUp
+  from
+    opacity: 0
+    -webkit-transform: translate3d(0%, 100%, 0)
+    transform: translate3d(0%, 100%, 0)
+
+  to
+    opacity: 1
+    -webkit-transform: none
+    transform: none
+
+.aotive .fadeInUp, .swiper-slide-active .fadeUp
+  -webkit-animation-name: fadeInUp
+  animation-name: fadeInUp
+
+/*{
+/*background: #fff
+/*;
+/*color: #4c4c4c
+/*}
+
+.banner
+  background: #1786e0
+
+  .banner-con
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/banner.jpg) no-repeat center #1786e0
+    width: 1280px
+    margin: 0 auto
+    height: 385px
+
+    .text
+      margin: 70px 0 0 40px
+      float: left
+      color: #fff
+
+    .text-1
+      font-size: 50px
+
+    .text-2
+      font-size: 38px
+      font-weight: 100
+
+    .text-3
+      overflow: hidden
+      margin: 10px 0 30px
+
+      span
+        float: left
+        border-right: 1px solid #3a98e5
+        padding-right: 18px
+        margin-right: 18px
+
+        &.border-r-none
+          border-right: 0
+
+    .text-4 .btn
+      font-size: 20px
+      border-radius: 6px
+      border: 1px solid #fff
+      padding: 10px 30px
+      cursor: pointer
+
+      &:hover
+        background: #fff
+        border: 1px solid #1786e0
+        color: #1786e0
+
+.coreService
+  background: #f5f5f5
+  overflow: hidden
+
+  .content
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/bg.png) no-repeat right bottom #fff
+    overflow: hidden
+    border: 1px solid #eee
+    border-radius: 5px
+    height: 480px
+    width: 1170px
+    margin: 0 auto
+
+    .con
+      float: left
+      width: 328px
+      padding: 10px 30px
+      height: 480px
+      margin-bottom: 10px
+      font-size: 12px
+      font-family: Helvetica, "PingFang SC", Simsun, Arial, "WenQuanYi Micro Hei", "tohoma,sans-serif"
+
+      .tit
+        padding-top: 120px
+        margin-bottom: 10px
+        font-family: Helvetica, "PingFang SC", "Microsoft YaHei", Arial, "tohoma,sans-serif"
+
+    .con-1
+      border-right: 1px solid #eee
+
+      .tit
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-1.jpg) no-repeat top left
+
+    .con-2
+      border-right: 1px solid #eee
+
+      .tit
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-2.jpg) no-repeat top left
+
+    .con-3 .tit
+      background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-3.jpg) no-repeat top left
+
+.ourReport
+  background: #f5f5f5
+  overflow: hidden
+
+  .content ul
+    overflow: hidden
+    margin-left: 10px
+
+    li
+      float: left
+      width: 301px
+      height: 112px
+      list-style-type: none
+      padding: 34px 30px
+
+      h4
+        font-size: 16px
+        color: #6c6c6c
+        margin: 0
+        margin-bottom: 10px
+        font-family: "PingFangSC Regular"
+
+      h3
+        font-size: 24px
+        margin: 0
+        margin-bottom: 24px
+        font-weight: 500
+        color: #3c3c3c
+        font-family: "PingFangSC Regular"
+
+      span
+        font-size: 16px
+        line-height: 34px
+        display: inline-block
+        width: 108px
+        text-align: center
+        border-radius: 3px
+        border: 1px solid #098efa
+        color: #098efa
+
+      &:hover span
+        background: #098efa
+        color: #fff
+
+    a
+      &:nth-child(1) li
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/case1.png) no-repeat center
+
+      &:nth-child(2) li
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/case2.png) no-repeat center
+        margin: 0 44px
+
+      &:nth-child(3) li
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/case3.png) no-repeat center
+
+.ourCustomer
+  background: #f5f5f5
+  overflow: hidden
+
+  .content
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/content-1.jpg) no-repeat center center
+    height: 400px
+    padding-bottom: 60px
+
+.workFlow
+  overflow: hidden
+  background: #fff
+
+  .content
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/content-2.jpg) no-repeat center center
+    height: 600px
+    padding-bottom: 60px
+
+.requirments
+  background: #f5f5f5
+  overflow: hidden
+
+  ul
+    margin-bottom: 30px
+
+  li
+    margin: 8px 0
+
+  .content
+    width: 600px
+    margin: 0 auto
+
+    .tip
+      width: 500px
+      margin: 0 auto
+
+      p
+        margin: 5px
+
+      .qq
+        width: 104px
+        height: 34px
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/qq.png) no-repeat center center
+        vertical-align: middle
+        margin-left: 8px
+        display: inline-block
+        cursor: pointer
+
+    .btn
+      background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/btn.png) no-repeat center center
+      width: 240px
+      height: 55px
+      line-height: 55px
+      text-align: center
+      cursor: pointer
+      margin: 20px auto 120px
+      color: #fff
+      font-size: 20px
+      box-shadow: 0 6px 20px #ccc
+      border-radius: 10px
+      position: relative
+
+  .feedback
+    position: relative
+
+    .input1
+      position: absolute
+      color: red
+      top: 14px
+      left: 270px
+
+    .input2
+      position: absolute
+      color: red
+      top: 14px
+      left: 578px
+
+.module
+  width: 1280px
+  margin: 0 auto
+
+.title
+  h3
+    margin-bottom: 10px
+    text-align: center
+    font-weight: normal
+    color: #006DCC
+    font-size: 24px
+
+  p
+    color: #c4c4c4
+    text-align: center
+    font-size: 18px
+
+.tit
+  color: #006DCC
+  font-size: 24px
+
+.des
+  color: #999
+
+.cc
+  p
+    padding-left: 24px
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-f-3.png) left top 5px no-repeat
+    line-height: 20px
+
+  a
+    color: #098efa
+
+.J_user
+  &:focus
+    outline: 0
+
+  &.error
+    border: 1px solid #ff4040
+
+.J_user_name
+  width: 238px
+  border: 1px solid #e5e5e5
+  border-radius: 5px
+  margin-right: 16px
+  padding: 0 10px 0 38px
+  height: 40px
+  line-height: 40px
+  background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-f-1.png) left 10px center no-repeat #fff
+
+.J_user_phone
+  width: 238px
+  border: 1px solid #e5e5e5
+  border-radius: 5px
+  padding: 0 10px 0 38px
+  height: 40px
+  line-height: 40px
+  background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-f-2.png) left 10px center no-repeat #fff
+
+.J_user_content
+  width: 576px
+  border: 1px solid #e5e5e5
+  border-radius: 5px
+  margin-top: 20px
+  padding: 10px
+  height: 180px
+
+.J_message_con
+  position: absolute
+  top: -200px
+  left: 0
+
+.J_message_phone
+  position: relative
+  right: -310px
+  top: 0
+
+/*{
+/*background: #fff
+/*;
+/*color: #4c4c4c
+/*}
+
+.banner
+  background: #1786e0
+
+  .banner-con
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/banner.jpg) no-repeat center #1786e0
+    width: 1280px
+    margin: 0 auto
+    height: 385px
+
+    .text
+      margin: 70px 0 0 40px
+      float: left
+      color: #fff
+
+    .text-1
+      font-size: 50px
+
+    .text-2
+      font-size: 38px
+      font-weight: 100
+
+    .text-3
+      overflow: hidden
+      margin: 10px 0 30px
+
+      span
+        float: left
+        border-right: 1px solid #3a98e5
+        padding-right: 18px
+        margin-right: 18px
+
+        &.border-r-none
+          border-right: 0
+
+    .text-4 .btn
+      font-size: 20px
+      border-radius: 6px
+      border: 1px solid #fff
+      padding: 10px 30px
+      cursor: pointer
+
+      &:hover
+        background: #fff
+        border: 1px solid #1786e0
+        color: #1786e0
+
+.coreService
+  background: #f5f5f5
+  overflow: hidden
+
+  .content
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/bg.png) no-repeat right bottom #fff
+    overflow: hidden
+    border: 1px solid #eee
+    border-radius: 5px
+    height: 480px
+    width: 1170px
+    margin: 0 auto
+
+    .con
+      float: left
+      width: 328px
+      padding: 10px 30px
+      height: 480px
+      margin-bottom: 10px
+      font-size: 12px
+      font-family: Helvetica, "PingFang SC", Simsun, Arial, "WenQuanYi Micro Hei", "tohoma,sans-serif"
+
+      .tit
+        padding-top: 120px
+        margin-bottom: 10px
+        font-family: Helvetica, "PingFang SC", "Microsoft YaHei", Arial, "tohoma,sans-serif"
+
+    .con-1
+      border-right: 1px solid #eee
+
+      .tit
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-1.jpg) no-repeat top left
+
+    .con-2
+      border-right: 1px solid #eee
+
+      .tit
+        background: url(../images/crawler/icon-2.jpg) no-repeat top left
+
+    .con-3 .tit
+      background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-3.jpg) no-repeat top left
+
+.ourReport
+  background: #f5f5f5
+  overflow: hidden
+
+  .content ul
+    overflow: hidden
+    margin-left: 10px
+
+    li
+      float: left
+      width: 301px
+      height: 112px
+      list-style-type: none
+      padding: 34px 30px
+
+      h4
+        font-size: 16px
+        color: #6c6c6c
+        margin: 0
+        margin-bottom: 10px
+        font-family: "PingFangSC Regular"
+
+      h3
+        font-size: 24px
+        margin: 0
+        margin-bottom: 24px
+        font-weight: 500
+        color: #3c3c3c
+        font-family: "PingFangSC Regular"
+
+      span
+        font-size: 16px
+        line-height: 34px
+        display: inline-block
+        width: 108px
+        text-align: center
+        border-radius: 3px
+        border: 1px solid #098efa
+        color: #098efa
+
+      &:hover span
+        background: #098efa
+        color: #fff
+
+    a
+      &:nth-child(1) li
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/case1.png) no-repeat center
+
+      &:nth-child(2) li
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/case2.png) no-repeat center
+        margin: 0 44px
+
+      &:nth-child(3) li
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/case3.png) no-repeat center
+
+.ourCustomer
+  background: #f5f5f5
+  overflow: hidden
+
+  .content
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/content-1.jpg) no-repeat center center
+    height: 400px
+    padding-bottom: 60px
+
+.workFlow
+  overflow: hidden
+  background: #fff
+
+  .content
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/content-2.jpg) no-repeat center center
+    height: 600px
+    padding-bottom: 60px
+
+.requirments
+  background: #f5f5f5
+  overflow: hidden
+
+  ul
+    margin-bottom: 30px
+
+  li
+    margin: 8px 0
+
+  .content
+    width: 600px
+    margin: 0 auto
+
+    .tip
+      width: 500px
+      margin: 0 auto
+
+      p
+        margin: 5px
+
+      .qq
+        width: 104px
+        height: 34px
+        background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/qq.png) no-repeat center center
+        vertical-align: middle
+        margin-left: 8px
+        display: inline-block
+        cursor: pointer
+
+    .btn
+      background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/btn.png) no-repeat center center
+      width: 240px
+      height: 55px
+      line-height: 55px
+      text-align: center
+      cursor: pointer
+      margin: 20px auto 120px
+      color: #fff
+      font-size: 20px
+      box-shadow: 0 6px 20px #ccc
+      border-radius: 10px
+      position: relative
+
+  .feedback
+    position: relative
+
+    .input1
+      position: absolute
+      color: red
+      top: 14px
+      left: 270px
+
+    .input2
+      position: absolute
+      color: red
+      top: 14px
+      left: 578px
+
+.title
+  h3
+    margin-bottom: 10px
+    text-align: center
+    font-size: 42px
+    font-weight: 400
+
+  p
+    color: #c4c4c4
+    text-align: center
+    font-size: 18px
+
+/*{
+/*background: #fff
+/*;
+/*color: #4c4c4c
+/*}
+
+.coreService .content .con-2
+  border-right: 1px solid #eee
+
+  .tit
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-2.jpg) no-repeat top left
+
+.module
+  width: 1280px
+  margin: 0 auto
+
+.title
+  h3
+    margin-bottom: 10px
+    text-align: center
+    font-size: 42px
+    font-weight: 400
+
+    span
+      border-bottom: 1px solid #098efa
+      padding-bottom: 10px
+      color: #4c4c4c
+
+  p
+    color: #c4c4c4
+    text-align: center
+    font-size: 18px
+
+.tit
+  font-size: 24px
+
+.des
+  color: #999
+
+.cc
+  p
+    padding-left: 24px
+    background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-f-3.png) left top 5px no-repeat
+    line-height: 20px
+
+  a
+    color: #098efa
+
+.J_user
+  &:focus
+    outline: 0
+
+  &.error
+    border: 1px solid #ff4040
+
+.J_user_name
+  width: 238px
+  border: 1px solid #e5e5e5
+  border-radius: 5px
+  margin-right: 16px
+  padding: 0 10px 0 38px
+  height: 40px
+  line-height: 40px
+  background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-f-1.png) left 10px center no-repeat #fff
+
+.J_user_phone
+  width: 238px
+  border: 1px solid #e5e5e5
+  border-radius: 5px
+  padding: 0 10px 0 38px
+  height: 40px
+  line-height: 40px
+  background: url(http://cdn.maijia.com/www-activity/pages/custom-data/pagelet/index/img/icon-f-2.png) left 10px center no-repeat #fff
+
+.J_user_content
+  width: 576px
+  border: 1px solid #e5e5e5
+  border-radius: 5px
+  margin-top: 20px
+  padding: 10px
+  height: 180px
+
+.J_message_con
+  position: absolute
+  top: -200px
+  left: 0
+
+.J_message_phone
+  position: relative
+  right: -310px
+  top: 0
+
+/*case单独页面样式
+
+.index_bak
+  background: #f5f5f5
+
+.bk_img
+  background: url("../images/bk.png") no-repeat 20px 0
+  background-size: 100%
+
+.port-1
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid #ddd
+  border-radius: 5px
+
+  .text-desc
+    opacity: 0.9
+    top: -100%
+    transition: 0.5s
+    color: #000
+    padding: 45px 20px 20px
+
+  img
+    transition: 0.5s
+
+  &:hover img
+    transform: scale(1.2)
+
+  &.effect-1:hover .text-desc
+    top: 0
+
+  &.effect-2
+    .text-desc
+      top: auto
+      bottom: -100%
+
+    &:hover .text-desc
+      bottom: 0
+
+  &.effect-3
+    .text-desc
+      top: 50%
+      left: 50%
+      width: 0
+      height: 0
+      overflow: hidden
+      padding: 0
+
+    &:hover .text-desc
+      width: 100%
+      top: 0
+      left: 0
+      height: 100%
+      padding: 45px 20px 20px
+
+/* effect-1 css end
+
+/* effect-2 css
+
+.port-2
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid rgba(255, 255, 255, 0.9)
+  perspective: 800px
+
+  .text-desc
+    z-index: -1
+    transition: 0.6s
+
+  .image-box
+    transition: 0.4s
+
+  &:hover .image-box
+    transform: rotateX(80deg)
+    transform-origin: center bottom 0
+    transition: 0.4s
+
+  &.effect-1:hover .text-desc
+    opacity: 1
+
+  &.effect-2
+    .text-desc
+      opacity: 1
+      top: -100%
+
+    &:hover .text-desc
+      top: 0
+
+  &.effect-3
+    .text-desc
+      opacity: 1
+      top: auto
+      bottom: -100%
+
+    &:hover .text-desc
+      bottom: 0
+
+/* effect-2 css end
+
+/* effect-3 css
+
+.port-3
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid rgba(255, 255, 255, 0.9)
+  perspective: 500px
+
+  img
+    transition: 0.5s
+
+  &.effect-1
+    .text-desc
+      z-index: -1
+      transition: 0.5s
+      transform: rotateX(80deg)
+      transform-origin: center top 0
+      padding: 45px 20px 20px
+      opacity: 1
+
+    &:hover
+      .text-desc
+        transform: none
+
+      img
+        opacity: 0
+        transform: scale(1.2)
+
+  &.effect-2
+    .text-desc
+      z-index: -1
+      transition: 0.5s
+      transform: rotateX(80deg)
+      transform-origin: center bottom 0
+      top: auto
+      bottom: 0
+      padding: 45px 20px 20px
+
+    &:hover
+      .text-desc
+        transform: none
+        opacity: 1
+
+      img
+        transform: translateY(-100%)
+
+  &.effect-3
+    .text-desc
+      z-index: -1
+      transition: 0.5s
+      transform: rotateX(80deg)
+      transform-origin: center top 0
+      padding: 45px 20px 20px
+
+    &:hover
+      .text-desc
+        transform: none
+        opacity: 1
+
+      img
+        transform: translateY(100%)
+
+/* effect-3 css end
+
+/* effect-4 css
+
+.port-4
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid rgba(255, 255, 255, 0.9)
+  z-index: 10
+
+  &.effect-1
+    img
+      transition: 0.5s
+      transform: rotateY(360deg) scale(1, 1)
+
+    .text-desc
+      transform: rotateY(0deg) scale(0, 0)
+      transition: 0.5s
+      opacity: 0
+      padding: 45px 20px 20px
+
+    &:hover
+      .text-desc
+        transform: rotateY(360deg) scale(1, 1)
+        opacity: 1
+
+      img
+        transform: rotateY(0deg) scale(0, 0)
+
+  &.effect-2
+    z-index: 12
+
+    img
+      transition: 0.5s
+      transform: rotateX(360deg) scale(1, 1)
+
+    .text-desc
+      transform: rotateX(0deg) scale(0, 0)
+      transition: 0.5s
+      opacity: 0
+      padding: 45px 20px 20px
+
+    &:hover
+      .text-desc
+        transform: rotateX(360deg) scale(1, 1)
+        opacity: 1
+
+      img
+        transform: rotateX(0deg) scale(0, 0)
+
+  &.effect-3
+    img
+      transition: 0.5s
+      transform: rotate(360deg) scale(1, 1)
+
+    .text-desc
+      transform: rotate(0deg) scale(0, 0)
+      transition: 0.5s
+      opacity: 0
+      padding: 45px 20px 20px
+
+    &:hover
+      .text-desc
+        transform: rotate(360deg) scale(1, 1)
+        opacity: 1
+
+      img
+        transform: rotate(0deg) scale(0, 0)
+
+/* effect-4 css end
+
+/* effect-5 css
+
+.port-5
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid rgba(255, 255, 255, 0.9)
+  overflow: visible
+
+  &.effect-1
+    z-index: 9
+
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(0.5) translateX(-100%)
+      position: relative
+      z-index: 9
+      border: 6px solid rgba(255, 255, 255, 0.9)
+
+    .text-desc
+      transform: translateX(100%)
+      opacity: 0
+      padding: 40px 20px 20px 90px
+      transition: 0.5s
+
+    &:hover .text-desc
+      transform: translateX(0px)
+      opacity: 1
+
+  &.effect-2
+    z-index: 10
+
+    img
+      transition: 0.5s
+      transform: none
+
+    &:hover img
+      transform: scale(0.5) translateY(100%)
+      position: relative
+      z-index: 9
+      border: 6px solid rgba(255, 255, 255, 0.9)
+
+    .text-desc
+      transform: translateY(-100%)
+      opacity: 0
+      padding: 20px
+      transition: 0.5s
+
+    &:hover .text-desc
+      transform: translateY(0px)
+      opacity: 1
+
+  &.effect-3
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(0.5) translateX(100%)
+      position: relative
+      z-index: 9
+      border: 6px solid rgba(255, 255, 255, 0.9)
+
+    .text-desc
+      transform: translateX(-100%)
+      opacity: 0
+      padding: 40px 90px 20px 20px
+      transition: 0.5s
+
+    &:hover .text-desc
+      transform: translateX(0px)
+      opacity: 1
+
+/* effect-5 css end
+
+/* effect-6 css
+
+.port-6
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid rgba(255, 255, 255, 0.9)
+  overflow: visible
+
+  &.effect-1
+    z-index: 8
+
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(0.3) translateY(110%)
+      position: relative
+      z-index: 9
+
+    .text-desc
+      transform: translateY(-100%)
+      opacity: 0
+      padding: 10px 20px
+      transition: 0.5s
+
+    &:hover .text-desc
+      transform: translateY(0px)
+      opacity: 1
+
+  &.effect-2
+    z-index: 7
+
+    img
+      transition: 0.6s
+      z-index: 1
+
+    &:hover img
+      transform: scale(0.3) translateX(110%)
+      position: relative
+      z-index: 9
+
+    .text-desc
+      transform: translateX(-100%)
+      opacity: 0
+      padding: 40px 120px 20px 20px
+      transition: 0.6s
+
+    &:hover .text-desc
+      transform: translateX(0px)
+      opacity: 1
+
+  &.effect-3
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(0.3) translateY(-110%)
+      position: relative
+      z-index: 9
+
+    .text-desc
+      transform: translateY(100%)
+      opacity: 0
+      padding: 85px 20px 10px
+      transition: 0.5s
+
+    &:hover .text-desc
+      transform: translateY(0px)
+      opacity: 1
+
+/* effect-6 css end
+
+/* effect-7 css
+
+.port-7
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid rgba(255, 255, 255, 0.9)
+  overflow: hidden
+
+  .text-desc
+    opacity: 0
+    transition: 0.5s
+    color: #000
+
+  &.effect-1
+    img
+      transition: 0.5s
+      position: relative
+      width: 100%
+      left: 0
+
+    &:hover img
+      left: 50%
+
+    .text-desc
+      transform: perspective(600px) rotateY(90deg)
+      transform-origin: left center 0
+      width: 50%
+      position: absolute
+      left: 0
+      top: 0
+      padding: 18px 10px
+
+    &:hover .text-desc
+      opacity: 1
+      transform: perspective(600px) rotateY(0deg)
+      z-index: 99
+
+  &.effect-2
+    img
+      transition: 0.5s
+      position: relative
+      width: 100%
+      top: 0
+
+    &:hover img
+      top: 50%
+
+    .text-desc
+      transform: perspective(600px) rotateX(90deg)
+      transform-origin: top center 0
+      width: 100%
+      position: absolute
+      left: 0
+      top: 0
+      height: 50%
+      padding: 5px 10px
+
+    &:hover .text-desc
+      opacity: 1
+      transform: perspective(600px) rotateX(0deg)
+      z-index: 99
+
+  &.effect-3
+    img
+      transition: 0.5s
+      position: relative
+      width: 100%
+      right: 0
+
+    &:hover img
+      right: 50%
+
+    .text-desc
+      transform: perspective(600px) rotateY(-90deg)
+      transform-origin: right center 0
+      width: 50%
+      position: absolute
+      left: auto
+      right: 0
+      top: 0
+      padding: 18px 10px
+
+    &:hover .text-desc
+      opacity: 1
+      transform: perspective(600px) rotateY(0deg)
+      z-index: 99
+
+/* effect-7 css end
+
+/* effect-8 css
+
+.port-8
+  float: left
+  width: 100%
+  position: relative
+  overflow: hidden
+  text-align: center
+  border: 4px solid rgba(255, 255, 255, 0.9)
+  overflow: hidden
+
+  .text-desc
+    opacity: 0
+    transition: 0.5s
+    color: #000
+    padding: 45px 20px 20px
+
+  &.effect-1
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(1.1)
+
+    .text-desc
+      left: 0
+      position: absolute
+      top: 0
+      width: 100%
+      height: 100%
+      transform: scale(0)
+      backface-visibility: hidden
+
+    &:hover .text-desc
+      opacity: 1
+      transform: scale(1)
+      border-radius: 20%
+
+  &.effect-2
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(1.1)
+
+    .text-desc
+      left: 0
+      position: absolute
+      top: 0
+      width: 100%
+      height: 100%
+      transform: scale(0)
+      backface-visibility: hidden
+
+    &:hover .text-desc
+      opacity: 1
+      transform: scale(1)
+      border-radius: 50% 0 50% 0
+
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(1.1)
+
+    .text-desc
+      left: 0
+      position: absolute
+      top: 0
+      width: 100%
+      height: 100%
+      transform: scale(0)
+      backface-visibility: hidden
+
+    &:hover .text-desc
+      opacity: 1
+      transform: scale(1)
+      border-radius: 50% 0 50% 0
+
+  &.effect-3
+    img
+      transition: 0.5s
+
+    &:hover img
+      transform: scale(1.1)
+
+    .text-desc
+      left: 0
+      position: absolute
+      top: 0
+      width: 100%
+      height: 100%
+      transform: scale(0)
+      backface-visibility: hidden
+      background: none
+      padding: 40px 70px 20px
+
+      &:before
+        background-color: #fff
+        border-radius: 50% 50% 0 0
+        content: ""
+        height: 100%
+        left: 50%
+        position: absolute
+        top: 0
+        transform: rotate(-50deg)
+        transform-origin: 0 100% 0
+        width: 50%
+        z-index: -1
+
+      &:after
+        background-color: #fff
+        border-radius: 50% 50% 0 0
+        content: ""
+        height: 100%
+        left: 50%
+        position: absolute
+        top: 0
+        transform: rotate(-50deg)
+        transform-origin: 0 100% 0
+        width: 50%
+        z-index: -1
+        left: 0
+        transform: rotate(50deg)
+        transform-origin: 100% 100% 0
+
+    &:hover .text-desc
+      opacity: 1
+      transform: scale(1)
+
+/* effect-8 css end
+
+#txt
+  ul
+    margin: 0 -1.5%
+    padding: 0 5%
+
+  li
+    float: left
+    width: 30%
+    margin: 10px 1%
+    list-style: none
+
+h3
+  font-size: 20px
+  margin: 5px 0 10px
+
+p
+  font-weight: 300
+  line-height: 20px
+  font-size: 14px
+  margin-bottom: 15px
+
+.btn
+  display: inline-block
+  padding: 5px 10px
+  font-size: 14px
+  color: #fff
+  border: 2px solid #4d92d9
+  background-color: #4d92d9
+  text-decoration: none
+  transition: 0.4s
+
+  &:hover
+    background-color: transparent
+    color: #4d92d9
+    transition: 0.4s
+
+.text-desc
+  position: absolute
+  left: 0
+  top: 0
+  background-color: #fff
+  height: 100%
+  opacity: 0
+  width: 100%
+  padding: 20px
+
+.index_img_height
+  height: 300px
+
+/*= Reset CSS End
+
+/* website 样式
+
+.featurette_train
+  border-bottom: 1px dashed #ddd
+  padding-bottom: 15px
+  margin-bottom: 20px
+
+.txt
+  font-size: 16px
+  padding: 30px
+  line-height: 30px
+
+.virtue
+  text-align: center
+  border-bottom: 1px solid #000
+  padding-bottom: 10px
+
+.merits
+  background: #ddd
+  width: 100%
+  height: 500px
+
+  ul li
+    margin: 10px
+    height: 50px
+    line-height: 50px
+    float: left
+    width: 90%
+    background: #fff
+    list-style: none
+
+.cent
+  text-align: center
+
+.big
+  cursor: pointer
+  transition: all 0.6s
+
+  &:hover
+    transform: scale(1.1)
+
+.advantage
+  float: left
+  color: #222
+  margin: 10px
+  width: 12%
+  text-align: center
+  height: 30px
+  line-height: 30px
+  background: #ddd
+  font-weight: bold
+
+  &:hover
+    background: #f00
+    color: #fff
+
+.python-about h1
+  margin-bottom: 70px
+
+.python-about-con
+  padding: 0 70px 190px
+
+  li
+    overflow: hidden
+    padding: 5px 0
+
+  .about-l
+    position: relative
+    float: left
+    padding: 10px 30px
+    width: 40.95%
+    font-size: 22px
+    color: #fff
+    line-height: 30px
+    font-weight: bold
+    background: #ba8b61
+
+    &:after
+      content: ""
+      position: absolute
+      top: 50%
+      right: -24px
+      margin-top: -12px
+      border: 12px
+      border-style: solid
+      border-width: 12px
+      border-color: transparent transparent transparent #ba8b61
+
+  .about-r
+    margin-left: 43.8%
+    padding: 5px 30px
+    color: #fff
+    font-size: 15px
+    line-height: 20px
+    background: #b2763f
+
+  li:hover .about-l
+    -webkit-transform: translateX(10px)
+    -moz-transform: translateX(10px)
+    -ms-transform: translateX(10px)
+    -o-transform: translateX(10px)
+    transform: translateX(10px)
+
+.python-develop-con
+  padding: 50px 0 10px
+
+.develop-tit
+  margin-bottom: 28px
+  text-align: center
+
+  span
+    display: inline-block
+    position: relative
+
+    &:before, &:after
+      content: ""
+      position: absolute
+      top: 50%
+      width: 145px
+      height: 1px
+      background: #b2763f
+
+    &:before
+      left: -156px
+
+    &:after
+      right: -156px
+
+.develop-group
+  padding: 0 25px
+
+  ul
+    overflow: hidden
+
+.develop-item
+  float: left
+  position: relative
+  padding: 30px 20px 30px 130px
+  width: 50%
+
+  .icons
+    position: absolute
+    top: 30px
+    left: 20px
+    width: 80px
+    height: 80px
+    -webkit-border-radius: 50%
+    -moz-border-radius: 50%
+    -ms-border-radius: 50%
+    -o-border-radius: 50%
+    border-radius: 50%
+    overflow: hidden
+
+  .icon-hover
+    position: absolute
+    top: 0
+    left: 0
+    opacity: 0
+    filter: Alpha(opacity = 0)
+    -webkit-transform: scale(0)
+    -moz-transform: scale(0)
+    -ms-transform: scale(0)
+    -o-transform: scale(0)
+    transform: scale(0)
+
+  &:hover
+    .icons
+      background: #b2763f
+
+    .icon-hover
+      opacity: 1
+      filter: Alpha(opacity = 1)
+      -webkit-transform: scale(1)
+      -moz-transform: scale(1)
+      -ms-transform: scale(1)
+      -o-transform: scale(1)
+      transform: scale(1)
+
+    .icon
+      opacity: 0
+      filter: Alpha(opacity = 0)
+
+.develop-item-con
+  position: relative
+  padding: 25px 30px 35px 35px
+  line-height: 28px
+  font-size: 16px
+  color: #444
+  background: #f2f2f2
+
+  &:before
+    content: ""
+    position: absolute
+    left: 0
+    top: 35px
+    border: 12px
+    border-style: solid
+    border-width: 12px
+    border-color: transparent transparent transparent #b2763f
+
+  h3
+    margin-bottom: 10px
+    font-size: 20px
+    color: #b2763f
+    font-weight: normal
+
+  p
+    height: 84px
+
+/*gis
+
+.pakage-cat li
+  width: 200px
+  margin-right: 60px
+  float: left
+  text-align: center
+  list-style: none
+
+  i
+    width: 120px
+    height: 120px
+    display: block
+    background: url(../images/icon-pakage.png) no-repeat 0 0
+    margin: 0 auto
+
+  .cat-name
+    line-height: 30px
+    padding: 13px 0
+    font-size: 24px
+
+  .cat-des
+    line-height: 24px
+    color: #999
+    padding-bottom: 20px
+
+  a
+    width: 118px
+    height: 38px
+    background: #fff
+    border: 1px solid #ccc
+    color: #666
+    display: block
+    margin: 0 auto
+    line-height: 38px
+
+  &.economic i
+    background-position: 0 0
+
+  &.standard i
+    background-position: 0 -140px
+
+  &.marketing i
+    background-position: 0 -280px
+
+  &.high-end i
+    background-position: 0 -420px
+
+  &.economic a:hover
+    background: #f76e00
+    color: #fff
+
+  &.standard a:hover
+    background: #9bcc00
+    color: #fff
+
+  &.marketing a:hover
+    background: #0088cb
+    color: #fff
+
+  &.high-end a:hover
+    background: #0dc9be
+    color: #fff
+
+.clearfix
+  &:before
+    content: " "
+    display: table
+
+  &:after
+    content: " "
+    display: table
+    clear: both
+
+.panel-black
+  border: 1px solid #007abe
+
+  .panel-heading
+    background: #007abe
+    color: #fff
+
+    b
+      font-size: 13px
+      color: #fff
+
+    em
+      float: right
+      padding-right: 10px
+      color: #fff
+
+      a
+        font-size: 12px
+        color: #fff
+
+        &:hover
+          text-underline: none
+
+pre
+  margin: 10px 25px
+  line-height: 30px
+  padding: 10px 0
+
+.row-content li a, .since
+  color: #fff
+
+  &:hover
+    color: #fff
+    text-decoration: underline

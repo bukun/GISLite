@@ -11,7 +11,7 @@ Example: http://gislite.osgeo.cn/
 说明
 ---------------------------------------
 
-使用静态网站形式对GIS数据进行发布。
+基于开源GIS技术开发，使用静态网站形式对GIS数据进行发布。
 
 演示网站： http://gislite.osgeo.cn/
 

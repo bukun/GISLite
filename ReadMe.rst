@@ -24,6 +24,14 @@ Example: http://gislite.osgeo.cn/
 - 使用开放电子表格格式 XLSX 定义样式
 - 可用于团队地理信息数据快速发布管理
 
+使用技术
+-------------------------------------
+
+- MapServer
+- MapProxy
+- LeafletJS
+- Python 3
+- Jinja2
 
 运行方式
 --------------------------

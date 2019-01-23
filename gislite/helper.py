@@ -186,9 +186,11 @@ def xlsx2dict(xls_file):
     max_col_num = sheet.max_column
     out_str = ''
     for xx in range(1, max_row_num + 1):
+        print('x:', xx)
         the_str = ''
         sig = True
         for yy in range(1, max_col_num + 1):
+            print('y:', yy)
 
             the_cell = sheet.cell(row=xx, column=yy)
             if the_cell and the_cell.value:
@@ -196,8 +198,10 @@ def xlsx2dict(xls_file):
                 the_cell_value = the_cell.value
 
                 colors = the_cell.fill.fgColor.index
+                print(colors)
 
-                if colors == '00000000':
+                # '00000000' for not filled, 0 for `white`.
+                if colors in ['00000000', 0]:
                     pass
                 elif len(colors) == 8:
                     a = int(hex2dec(colors[2:4]))

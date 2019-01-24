@@ -6,14 +6,14 @@ In English
 
 Static site generator (SSG) for GIS data publishment as light WebGIS application.
 
-Example: http://lyr.osgeo.cn/
+Example: http://gislite.osgeo.cn/
 
 说明
 ---------------------------------------
 
-使用静态网站形式对GIS数据进行发布。
+基于开源GIS技术开发，使用静态网站形式对GIS数据进行发布。
 
-演示网站： http://lyr.osgeo.cn/
+演示网站： http://gislite.osgeo.cn/
 
 基于 MapServer 的服务器端GIS数据图层发布管理系统。
 目的是用于解决发布较多数量的地图时的数据更新、样式修改，以及不同样式组合应用的问题。
@@ -24,6 +24,14 @@ Example: http://lyr.osgeo.cn/
 - 使用开放电子表格格式 XLSX 定义样式
 - 可用于团队地理信息数据快速发布管理
 
+使用技术
+-------------------------------------
+
+- MapServer
+- MapProxy
+- LeafletJS
+- Python 3
+- Jinja2
 
 运行方式
 --------------------------

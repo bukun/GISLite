@@ -70,7 +70,7 @@ END
 TPL_CLASS = """
 CLASS
     STYLE
-        COLOR 107 208 107        
+                
     END
     label
         FONT "simsun"
@@ -116,6 +116,15 @@ grids:
 
 globals:
 '''
+
+def get_mts(afile = None):
+    if afile:
+        return os.path.getmtime(afile)
+    else:
+        if os.path.exists('mts.log'):
+            return os.path.getatime('mts.log')
+        else:
+            return 0
 
 
 def lyr_list(mslug, xls_file):
@@ -186,11 +195,11 @@ def xlsx2dict(xls_file):
     max_col_num = sheet.max_column
     out_str = ''
     for xx in range(1, max_row_num + 1):
-        print('x:', xx)
+        # print('x:', xx)
         the_str = ''
         sig = True
         for yy in range(1, max_col_num + 1):
-            print('y:', yy)
+            # print('y:', yy)
 
             the_cell = sheet.cell(row=xx, column=yy)
             if the_cell and the_cell.value:
@@ -198,7 +207,7 @@ def xlsx2dict(xls_file):
                 the_cell_value = the_cell.value
 
                 colors = the_cell.fill.fgColor.index
-                print(colors)
+                # print(colors)
 
                 # '00000000' for not filled, 0 for `white`.
                 if colors in ['00000000', 0]:
@@ -231,15 +240,17 @@ def xlsx2dict(xls_file):
                 the_str = the_str + '  '
         out_str = out_str + the_str + '\r'
 
-    with open('xx_out.obj ', 'w') as fo:
+    with open('xx_out.xbj', 'w') as fo:
         fo.write(out_str)
     uu = yaml.load(out_str)
+    # from pprint import pprint
+    # pprint(uu)
 
     return uu
 
 
 def get_epsg_code(img_file, raster=False):
-    print(img_file)
+    # print(img_file)
     if os.path.isdir(img_file):
         raster = True
     elif img_file.lower().endswith('.tif'):

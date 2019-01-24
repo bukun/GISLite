@@ -25,7 +25,6 @@
 
             <script type="text/javascript">
                 var popup = L.popup();
-
                 function onMapClick(e) {
                     popup
                             .setLatLng(e.latlng)
@@ -36,7 +35,6 @@
                     center: [0, 0],
                     zoom: 2
                 });
-
                 var the_basemap = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
                     maxZoom: 18,
                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -44,13 +42,10 @@
                     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                     id: 'mapbox.light'
                 }).addTo(map);
-
-
                 var wmsLayer = L.tileLayer.wms('http://121.42.29.253:9011/service?', {
                     layers: 'maplet_world_mulwold',
                     format: 'image/png',
                     transparent: true
-
                 }).addTo(map);
                 map.on('click', onMapClick);
                 var baseMaps = {
@@ -59,7 +54,6 @@
                 var overlayMaps = {
                     'WMS': wmsLayer
                 };
-
                 L.control.layers(baseMaps, overlayMaps).addTo(map);
             </script>
 
@@ -69,6 +63,9 @@
                 <h3 class="bk_img">
                     <img src="./images/team_logo.png" width="5%"> MapServer发布管理
                 </h3>
+
+
+
 
                 <div class="col-sm-6">
                     <div class="panel panel-default">
@@ -83,17 +80,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+
+                 <div class="col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
+
+
+                            <a href="https://github.com/bukun/GISLite" style="float: right;">
+
+
+                                    <img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+
+
+                            </a>
                             <ul>
-                                <li>基于MapServer、MapProxy</li>
-                                <li>使用开放电子表格格式 XLSX 定义样式</li>
-                                <li>可用于团队地理信息数据快速发布管理</li>
+                                <li>基于MapServer、MapProxy；</li>
+                                <li>使用开放电子表格格式 XLSX 定义样式；</li>
+                                <li>可用于团队地理信息数据快速发布管理；</li>
+                                <li>开放源代码，发布于 Github 。 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
+
             </div>
 
 

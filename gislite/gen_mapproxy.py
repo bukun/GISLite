@@ -25,8 +25,6 @@ def chuli_serial_file(png, mapserver_ip, uu, wroot):
     for x in map_mata:
         for key in x:
 
-
-
             if key == 'data':
                 data_apth = x[key]
     if '[' in data_apth:

@@ -7,6 +7,8 @@ import gislite.helper as helper
 from config import GIS_BASE
 from gislite.helper import TPL_MAP, TPL_LAYER, TPL_CLASS
 
+MTS = helper.get_mts()
+
 
 def map_map(map_dir):
     '''
@@ -56,6 +58,9 @@ def get_lyr_mapfile(map_dir, wfile, wroot):
     '''
 
     rrxlsx_file = os.path.join(wroot, wfile)
+    print(rrxlsx_file)
+
+    t_mts = helper.get_mts(rrxlsx_file)
 
     map_mata = helper.xlsx2dict(rrxlsx_file)
 
@@ -66,15 +71,15 @@ def get_lyr_mapfile(map_dir, wfile, wroot):
                 data_apth = x[key]
     lyrs_file = []
     if '[' in data_apth:
-        print('-' * 40)
+        # print('-' * 40)
 
         print(data_apth)
         qq = data_apth.index('[')
         hh = data_apth.index(']')
         sig_q = data_apth[:qq]
         sig_h = data_apth[hh + 1:]
-        print(sig_q)
-        print(sig_h)
+        # print(sig_q)
+        # print(sig_h)
         for wwfile in os.listdir(wroot):
             if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
                 print(wwfile)
@@ -82,12 +87,12 @@ def get_lyr_mapfile(map_dir, wfile, wroot):
                 the_sig = wwfile[qq: hh - 1]
                 shp = os.path.join(wroot, wwfile)
 
-                lyr_file = generate_lyr_mapfile(map_dir, map_mata, shp, wfile, sig=the_sig)
+                lyr_file = generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=the_sig)
                 lyrs_file.append(lyr_file)
 
     else:
         shp = os.path.join(wroot, data_apth)
-        lyr_file = generate_lyr_mapfile(map_dir, map_mata, shp, wfile)
+        lyr_file = generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts)
         lyrs_file.append(lyr_file)
 
     # pprint(new_layer)
@@ -96,7 +101,7 @@ def get_lyr_mapfile(map_dir, wfile, wroot):
     return lyrs_file
 
 
-def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, sig=None):
+def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
     mqian, mhou = os.path.splitext(wfile)
     xxuu = mqian.split('_')
     if len(xxuu) > 2:
@@ -115,63 +120,65 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, sig=None):
     else:
         lyr_name = 'lyr_' + mslug + '.map'
     lyr_file = os.path.join(map_dir, lyr_name)
-    if shp_info['geom_type'].lower() in ['linestring', 'multilinestring']:
-        lyr_type = 'line'
-    elif shp_info['geom_type'].lower() in ['multipolygon']:
-        lyr_type = 'polygon'
-    else:
-        lyr_type = shp_info['geom_type']
-    new_layer['type'] = lyr_type
-    new_layer['data'] = shp
-    # new_layer['name'] = os.path.splitext(wfile)[0]
-    if sig:
-        new_layer['name'] = 'lyr_{}'.format(mslug.replace('[sig]', sig))
-    else:
-        new_layer['name'] = 'lyr_{}'.format(mslug)
-    new_layer['metadata']['ows_title'] = os.path.splitext(wfile)[0]
-    new_layer['metadata']['wms_title'] = os.path.splitext(wfile)[0]
-    new_layer['PROJECTION'] = "{}".format(shp_info['proj4_code'])
-    for idx, cl in enumerate(map_mata):
-        cls = mappyfile.loads(TPL_CLASS)
-        for key in cl:
+    if t_mts > MTS:
 
-            if key == 'classitem':
-                new_layer['classitem'] = cl[key]
+        if shp_info['geom_type'].lower() in ['linestring', 'multilinestring']:
+            lyr_type = 'line'
+        elif shp_info['geom_type'].lower() in ['multipolygon']:
+            lyr_type = 'polygon'
+        else:
+            lyr_type = shp_info['geom_type']
+        new_layer['type'] = lyr_type
+        new_layer['data'] = shp
+        # new_layer['name'] = os.path.splitext(wfile)[0]
+        if sig:
+            new_layer['name'] = 'lyr_{}'.format(mslug.replace('[sig]', sig))
+        else:
+            new_layer['name'] = 'lyr_{}'.format(mslug)
+        new_layer['metadata']['ows_title'] = os.path.splitext(wfile)[0]
+        new_layer['metadata']['wms_title'] = os.path.splitext(wfile)[0]
+        new_layer['PROJECTION'] = "{}".format(shp_info['proj4_code'])
+        for idx, cl in enumerate(map_mata):
+            cls = mappyfile.loads(TPL_CLASS)
+            for key in cl:
+                if key == 'classitem':
+                    new_layer['classitem'] = cl[key]
 
-            elif key == 'labelitem':
-                new_layer['labelitem'] = cl[key]
+                elif key == 'labelitem':
+                    new_layer['labelitem'] = cl[key]
 
-            elif key == 'data':
-                new_layer['data'] = shp
-            elif key.lower() == 'labelminscaledenom':
-                new_layer['labelminscaledenom'] = cl[key]
-            elif key.lower() == 'labelmaxscaledenom':
-                new_layer['labelmaxscaledenom'] = cl[key]
-            elif key.lower() == 'encoding':
-                new_layer['encoding'] = cl[key]
-            elif key == 'class':
-                pass
-            elif key.lower() == 'expression' and type(cl[key]) == type(1):
-                '''
-                注意，即使是使用数值作为条件，也需要添加引号。故需转换为字符串。
-                '''
-                cls[key] = str(cl[key])
-            elif key == 'style':
-                for subkey in cl[key]:
-                    cls['styles'][0][subkey] = cl[key][subkey]
+                elif key == 'data':
+                    new_layer['data'] = shp
+                elif key.lower() == 'labelminscaledenom':
+                    new_layer['labelminscaledenom'] = cl[key]
+                elif key.lower() == 'labelmaxscaledenom':
+                    new_layer['labelmaxscaledenom'] = cl[key]
+                elif key.lower() == 'encoding':
+                    new_layer['encoding'] = cl[key]
+                elif key == 'class':
+                    pass
+                elif key.lower() == 'expression' and type(cl[key]) == type(1):
+                    '''
+                    注意，即使是使用数值作为条件，也需要添加引号。故需转换为字符串。
+                    '''
+                    cls[key] = str(cl[key])
+                elif key == 'style':
+                    for subkey in cl[key]:
+                        cls['styles'][0][subkey] = cl[key][subkey]
 
-            elif key == 'label':
-                for subkey in cl[key]:
-                    cls['labels'][0][subkey] = cl[key][subkey]
-            else:
-                cls[key] = cl[key]
+                elif key == 'label':
+                    for subkey in cl[key]:
+                        cls['labels'][0][subkey] = cl[key][subkey]
+                else:
+                    cls[key] = cl[key]
 
-        new_layer["classes"].insert(0, cls)
-    # 去掉原来的。
-    new_layer['classes'].pop()
-    # print(help(new_layer['classes']))
-    with open(lyr_file, 'w') as fo:
-        fo.write(mappyfile.dumps(new_layer, indent=1, spacer="    "))
+            new_layer["classes"].insert(0, cls)
+        # 去掉原来的。
+        new_layer['classes'].pop()
+        new_layer['classes'].pop()
+        # print(help(new_layer['classes']))
+        with open(lyr_file, 'w') as fo:
+            fo.write(mappyfile.dumps(new_layer, indent=1, spacer="    "))
     return lyr_file
 
 

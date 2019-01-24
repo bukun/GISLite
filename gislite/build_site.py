@@ -274,6 +274,9 @@ def method_name(rrxlsx_file):
 #     return lyr_list
 
 def gen_html_index():
+    '''
+    生成首页 index.html
+    '''
     list_main = fetch_structure()  # print('5' * 40)
     # pprint(list_main)
     nav_formated = format_nav(list_main)

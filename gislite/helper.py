@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import yaml
 from openpyxl import load_workbook
@@ -117,7 +119,8 @@ grids:
 globals:
 '''
 
-def get_mts(afile = None):
+
+def get_mts(afile=None):
     if afile:
         return os.path.getmtime(afile)
     else:

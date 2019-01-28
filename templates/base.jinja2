@@ -2,7 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8">
-    <title>基于MapServer的图层发布管理系统</title>
+    <title>静态WebGIS网站生成器演示系统</title>
 
     <link rel="icon" href="./images/favicon.ico" mce_href="./images/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="./images/favicon.ico" mce_href="./images/favicon.ico" type="image/x-icon">
@@ -12,13 +12,8 @@
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./tass/css/style.css"/>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
-          integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-          crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-            integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-            crossorigin=""></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
 
     <style>
         html, body {
@@ -87,11 +82,14 @@
                         <ul>
                             <li><a href="http://webgis.osgeo.cn" target="_blank">开源WebGIS在线案例网站</a></li>
                             <li><a href="http://www.osgeo.cn/py4gis/" target="_blank">Python与开源GIS网站</a></li>
-                            <li><a href="http://www.osgeo.cn/gis_tutorial/" target="_blank">地理信息系统基础原理</a></li>
+                            <li><a href="http://www.osgeo.cn/gis_tutorial/" target="_blank">地理信息系统基础原理</a>
+                            </li>
                             <li><a href="http://www.osgeo.cn/qgis_tutorial/index.html" target="_blank">QGIS
                                 2教程：入门与提高</a></li>
-                            <li><a href="http://www.osgeo.cn/doc_pycsw/" target="_blank">pycsw中文文档（翻译）</a></li>
-                            <li><a href="http://www.osgeo.cn/grass_tutorial/" target="_blank">GRASS GIS中文教程</a>
+                            <li><a href="http://www.osgeo.cn/doc_pycsw/" target="_blank">pycsw中文文档（翻译）</a>
+                            </li>
+                            <li><a href="http://www.osgeo.cn/grass_tutorial/" target="_blank">GRASS
+                                GIS中文教程</a>
                             <li><a href="http://www.osgeo.cn/mapserver_tutorial/index.html" target="_blank">MapServer在线教程</a>
                             </li>
 
@@ -100,7 +98,8 @@
                                     犹他州立大学Python GDAL课程笔记
                                 </a>
                             </li>
-                            <li><a href="http://www.osgeo.cn/osgeo-live/" target="_blank">OSGeo Live中文文档</a></li>
+                            <li><a href="http://www.osgeo.cn/osgeo-live/" target="_blank">OSGeo Live中文文档</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="row-content col-sm-6">
@@ -128,7 +127,8 @@
                 </div>
             </div>
             <p align="center" style="margin-top: 20px;color:#fff;">Copyright &copy;
-                <a class="since" href="http://www.osgeo.cn/">OSGeo中国中心 开放地理空间实验室, Since 2014</a> 吉ICP备15000191号</p>
+                <a class="since" href="http://www.osgeo.cn/">OSGeo中国中心 开放地理空间实验室, Since 2014</a>
+                吉ICP备15000191号</p>
         </div>
     </div>
 </div>

@@ -25,12 +25,14 @@
 
             <script type="text/javascript">
                 var popup = L.popup();
+
                 function onMapClick(e) {
                     popup
-                            .setLatLng(e.latlng)
-                            .setContent("Location:" + e.latlng.toString())
-                            .openOn(map);
+                        .setLatLng(e.latlng)
+                        .setContent("Location:" + e.latlng.toString())
+                        .openOn(map);
                 }
+
                 var map = L.map('map', {
                     center: [0, 0],
                     zoom: 2
@@ -61,27 +63,27 @@
 
             <div class="row">
                 <h3 class="bk_img">
-                    <img src="./images/team_logo.png" width="5%"> MapServer发布管理
+                    <img src="./images/team_logo.png" width="5%">
+                    静态WebGIS网站生成器演示系统
                 </h3>
-
-
 
 
                 <div class="col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            基于 MapServer 的服务器端GIS数据图层发布管理系统。<p/>
+                            基于开源GIS技术开发，使用静态网站形式对GIS数据进行发布。<p/>
 
                             <p/>
                             目的是用于解决发布较多数量的地图时的数据更新、样式修改，以及不同样式组合应用的问题。 <p/>
                             尽量实现数据源唯一，使用 XLSX 文件定义样式。 <p/>
                             主要实现GIS数据图层的发布，但也实现了多源数据发布为单个地图切片，以及多个图层发布为图层分组的功能。 <p/>
 
+
                         </div>
                     </div>
                 </div>
 
-                 <div class="col-sm-6">
+                <div class="col-sm-6">
                     <div class="panel panel-default">
                         <div class="panel-body">
 
@@ -89,7 +91,10 @@
                             <a href="https://github.com/bukun/GISLite" style="float: right;">
 
 
-                                    <img width="149" height="149" src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149" class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1">
+                                <img width="149" height="149"
+                                     src="https://github.blog/wp-content/uploads/2008/12/forkme_right_darkblue_121621.png?resize=149%2C149"
+                                     class="attachment-full size-full" alt="Fork me on GitHub"
+                                     data-recalc-dims="1">
 
 
                             </a>
@@ -97,7 +102,16 @@
                                 <li>基于MapServer、MapProxy；</li>
                                 <li>使用开放电子表格格式 XLSX 定义样式；</li>
                                 <li>可用于团队地理信息数据快速发布管理；</li>
-                                <li>开放源代码，发布于 Github 。 </li>
+                                <li>开放源代码，发布于 Github 。</li>
+                            </ul>
+                            <h3>相关网站</h3>
+                            <ul>
+                                <li><a href="http://pygis.osgeo.cn/">http://pygis.osgeo.cn/</a>
+                                    《Python与开源GIS》，使用 Python 读取与处理 GIS数据 的工具。
+                                </li>
+                                <li><a href="http://webgis.osgeo.cn/">http://webgis.osgeo.cn/</a> 对 MapServer，
+                                    MapProxy， Leaflet 的基本介绍。
+                                </li>
                             </ul>
                         </div>
                     </div>

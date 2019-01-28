@@ -12,7 +12,6 @@ import gislite.helper as helper
 
 from config import GIS_BASE, TILE_SVR
 
-# pwd = os.path.split(__file__)[0]
 pwd = os.getcwd()
 
 src_ws = GIS_BASE
@@ -77,22 +76,17 @@ def format_leftnav(list_main, mname):
     '''
     格式化左侧导航栏
     '''
-    a_nav = '''
-
-    <li>
-    <a href="#configSetting{idx}" class="nav-header collapsed" data-toggle="collapse">
-            <i class="glyphicon glyphicon-th-list"></i>
-            {nav_title}
-            <span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
-        </a>
-
-        <ul id="configSetting{idx}" class=" secondmenu collapse  {ul_class}">{nav_arr}</ul>
-
-        </li>
-
-
-        '''
-    a_md = '<li style="padding:8px 0;overflow: hidden; text-overflow:ellipsis; white-space: nowrap;"><a href="{slug}.html">{title}</a></li>'
+    a_nav = '''<li>
+<a href="#configSetting{idx}" class="nav-header collapsed" data-toggle="collapse">
+<i class="glyphicon glyphicon-th-list"></i>
+{nav_title}
+<span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
+</a>
+<ul id="configSetting{idx}" class=" secondmenu collapse  {ul_class}">{nav_arr}</ul>
+</li>
+'''
+    a_md = '''<li style="padding:8px 0;overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">
+<a href="{slug}.html">{title}</a></li>'''
     out_str = ''
     idx = 1
     for idx_list, the_list in enumerate(list_main):
@@ -224,7 +218,6 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
 
     for wwfile in os.listdir(wroot):
         if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
-            # print(wwfile)
 
             the_sig = wwfile[qq: hh - 1]
             # print(the_sig)
@@ -248,8 +241,7 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
                 lyr_name=file_slug,
                 IP=TILE_SVR
             )
-            # gen_imagery4d(npng, mapserver_ip, uu, wroot)
-            # shutil.copy(, out_html_file)
+
 
 
 def method_name(rrxlsx_file):
@@ -269,9 +261,7 @@ def method_name(rrxlsx_file):
     return data_apth, hh, qq
 
 
-# def get_lyrs_arr(xlsfile):
-#     lyr_list = helper.lyr_list(xlsfile)
-#     return lyr_list
+
 
 def gen_html_index():
     '''
@@ -375,11 +365,10 @@ def fetch_structure():
                 md_dic['title'] = the_title
             file_name = dir_slug + '_' + lslug + '.html'
 
+            title_h = md_dic['title'] if 'title' in md_dic else os.path.splitext(wfile)[0].split('_')[-1]
             list_md.append({'slug': os.path.splitext(file_name)[0],
                             'file_name': os.path.splitext(wfile)[0].split('_')[-1],
-                            'title': md_dic['title'] if 'title' in md_dic else
-                            os.path.splitext(wfile)[0].split('_')[
-                                -1]})
+                            'title': title_h})
 
         list_main.append(
             {
@@ -388,9 +377,6 @@ def fetch_structure():
                 'list_md': list_md
             }
         )
-    # print('[' * 40)
-    # pprint(list_main)
-    # print(']' * 40)
 
     return list_main
 
@@ -405,14 +391,6 @@ def copy_static_files():
                 # outfile = dst_ws + infile[len(src_ws) : ]
                 outfile = os.path.join(dst_ws, wfile)
 
-                # dst_dir = os.path.split(outfile)[0]
-                # print(dst_dir)
-                #
-                # if os.path.exists(dst_dir):
-                #     pass
-                # else:
-                #     os.makedirs(dst_dir)
-                #
                 shutil.copy(infile, outfile)
 
     for ww in os.listdir(tpl_ws):

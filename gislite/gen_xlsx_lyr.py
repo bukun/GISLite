@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 对 XLSX 进行遍历，生成 Mapfile.
 '''
@@ -102,6 +103,9 @@ def get_lyr_mapfile(map_dir, wfile, wroot):
 
 
 def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
+    '''
+    生成图层的 Mapfile.
+    '''
     mqian, mhou = os.path.splitext(wfile)
     xxuu = mqian.split('_')
     if len(xxuu) > 2:

@@ -46,13 +46,17 @@ Example: http://gislite.osgeo.cn/
 -  http://pygis.osgeo.cn/  《Python与开源GIS》，使用 Python 读取与处理 GIS数据 的工具。
 -  http://webgis.osgeo.cn/  对 MapServer， MapProxy， Leaflet 的基本介绍。
 
-安装
+运行环境安装
 -----------------------------------------
+
+开发与测试运行于 Debian Stretch / Ubuntu 18.08 。 在管理员权限下安装运行环境：
 
 ::
 
-    apt install -y apache2 php libapache2-mod-fcgid cgi-mapserver mapserver-bin libapache2-mod-php python3-openpyxl python3-mapproxy
-    apt install -y build-essential  python3-gdal python3-pip 
+    apt install -y apache2 php libapache2-mod-fcgid cgi-mapserver mapserver-bin libapache2-mod-php
+    apt install -y python3-openpyxl python3-mapproxy
+    apt install -y build-essential  python3-gdal python3-pip
+    pip3 install mapproxy
 
 MapProxy使用
 -------------------------
@@ -61,8 +65,8 @@ MapProxy使用
 
 ::
 
-    mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:8011
+    # mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:8011
     ~/.local/bin/mapproxy-util serve-develop ./out_mapproxy.yaml -b 0.0.0.0:8011
-    mapproxy-util create -t base-config wcs_imgmap
+    # mapproxy-util create -t base-config wcs_imgmap
     ~/.local/bin/mapproxy-util create -t base-config wcs_imgmap
 

@@ -142,7 +142,10 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
         new_layer['metadata']['ows_title'] = os.path.splitext(wfile)[0]
         new_layer['metadata']['wms_title'] = os.path.splitext(wfile)[0]
         new_layer['PROJECTION'] = "{}".format(shp_info['proj4_code'])
+
+        new_layer['processing'] = []
         for idx, cl in enumerate(map_mata):
+
             cls = mappyfile.loads(TPL_CLASS)
             for key in cl:
                 if key.lower() == 'classitem':
@@ -158,7 +161,8 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
                 elif key.lower() == 'encoding':
                     new_layer['encoding'] = cl[key]
                 elif key.lower() == 'processing':
-                    new_layer['processing'] = cl[key]
+                    #  对于影像的单独处理
+                    new_layer['processing'].append(cl[key])
                 elif key.lower() == 'class':
                     pass
                 elif key.lower() == 'expression' and type(cl[key]) == type(1):

@@ -192,8 +192,7 @@ def gen_html_pages():
                 )
             elif '[' in md_file:
                 chuli_serial_file(md_file, wroot, mslug, lslug, jinja2_file, left_nav, mname,
-                                  nav=nav_formated,
-                                  lyr_name=file_slug)
+                                  nav=nav_formated)
             else:
                 helper.render_html(
                     jinja2_file,
@@ -204,12 +203,14 @@ def gen_html_pages():
                     left_nav=left_nav,
                     title=lname,
                     mname=mname
-
                 )
 
 
-def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, nav=None, lyr_name=None):
-    # print(png)
+def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, nav=None):
+    '''
+    处理满足条件的序列数据
+    '''
+
     rrxlsx_file = os.path.join(wroot, png)
 
     data_apth, hh, qq = method_name(rrxlsx_file)
@@ -218,7 +219,6 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
 
     for wwfile in os.listdir(wroot):
         if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
-
             the_sig = wwfile[qq: hh - 1]
             # print(the_sig)
 
@@ -243,7 +243,6 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
             )
 
 
-
 def method_name(rrxlsx_file):
     '''
     对于批量的使用变量的，获取路径，以及位置。
@@ -261,24 +260,17 @@ def method_name(rrxlsx_file):
     return data_apth, hh, qq
 
 
-
-
 def gen_html_index():
     '''
     生成首页 index.html
     '''
-    list_main = fetch_structure()  # print('5' * 40)
-    # pprint(list_main)
+    list_main = fetch_structure()
     nav_formated = format_nav(list_main)
     left_nav = format_leftnav(list_main, '')
     index_in = 'index.jinja2'
     index_out = os.path.join(dst_ws, 'index.html')
 
     helper.render_html(index_in, index_out, nav=nav_formated, left_nav=left_nav)
-
-    # with open(index_out, 'w') as fout:
-    #     with open(index_in) as fin:
-    #         fout.write(''.join(fin.readlines()).format(nav=nav_formated))
 
 
 def chuli_serial_structure(png, wroot):
@@ -318,8 +310,6 @@ def fetch_structure():
             continue
 
         wroot = os.path.join(src_ws, the_dir)
-        # the_files = [x  for x in os.listdir(wroot) ]
-        # the_files = filter(lambda x: x.endswith('.md'), os.listdir(wroot))
 
         the_files = os.listdir(wroot)
         the_files = [x for x in the_files if x.endswith('.xlsx') and x.startswith('meta_')]

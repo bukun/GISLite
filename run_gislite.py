@@ -9,12 +9,6 @@ from gislite import gen_mapproxy
 from gislite import build_site
 from config import TILE_SVR
 
-STR_RUN_WCS = '''
-#!/bin/bash
-# mapproxy-util create -t base-config wcs_imgmap
-~/.local/bin/mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:{port}
-'''.format(port=TILE_SVR.split(':')[-1])
-
 mapserver_ip = '127.0.0.1'
 out_yaml_file = 'out_mapproxy.yaml'
 
@@ -22,11 +16,7 @@ ts1 = time.time()
 
 ###########################################################
 gen_xlsx_lyr.run_it()
-
-###########################################################
 gen_mapproxy.gen_by_ip(mapserver_ip, out_yaml_file)
-
-###########################################################
 build_site.run_it()
 
 ###########################################################
@@ -35,11 +25,20 @@ if os.path.exists(wcs_cache_dir):
     shutil.rmtree(wcs_cache_dir)
 shutil.move(out_yaml_file, './wcs_imgmap/mapproxy.yaml')
 
-###########################################################
-# 生成运行 MapProxy 的脚本
-with open('./wcs_imgmap/run_mapproxy.sh', 'w') as fo:
-    fo.write(STR_RUN_WCS)
 
+def gen_run_mapproxy_sh():
+    ###########################################################
+    # 生成运行 MapProxy 的脚本
+    STR_RUN_WCS = '''
+        #!/bin/bash
+        # mapproxy-util create -t base-config wcs_imgmap
+        ~/.local/bin/mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:{port}
+        '''.format(port=TILE_SVR.split(':')[-1])
+    with open('./wcs_imgmap/run_mapproxy.sh', 'w') as fo:
+        fo.write(STR_RUN_WCS)
+
+
+gen_run_mapproxy_sh()
 
 ts2 = time.time()
 

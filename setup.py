@@ -27,7 +27,7 @@ setup(
 
     platforms='any',
     zip_safe=True,
-    install_requires=['ReadMe.rst', 'markdown', 'mapproxy', 'mapproxy', 'pyyaml'],
+    install_requires=['markdown', 'mapproxy', 'pyyaml', 'openpyxl'],
 
     classifiers=[
         # How mature is this project? Common values are

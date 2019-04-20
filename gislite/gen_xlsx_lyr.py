@@ -142,16 +142,17 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
         new_layer['metadata']['ows_title'] = os.path.splitext(wfile)[0]
         new_layer['metadata']['wms_title'] = os.path.splitext(wfile)[0]
         new_layer['PROJECTION'] = "{}".format(shp_info['proj4_code'])
+
+        new_layer['processing'] = []
         for idx, cl in enumerate(map_mata):
+
             cls = mappyfile.loads(TPL_CLASS)
             for key in cl:
-                if key == 'classitem':
+                if key.lower() == 'classitem':
                     new_layer['classitem'] = cl[key]
-
-                elif key == 'labelitem':
+                elif key.lower() == 'labelitem':
                     new_layer['labelitem'] = cl[key]
-
-                elif key == 'data':
+                elif key.lower() == 'data':
                     new_layer['data'] = shp
                 elif key.lower() == 'labelminscaledenom':
                     new_layer['labelminscaledenom'] = cl[key]
@@ -159,18 +160,21 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
                     new_layer['labelmaxscaledenom'] = cl[key]
                 elif key.lower() == 'encoding':
                     new_layer['encoding'] = cl[key]
-                elif key == 'class':
+                elif key.lower() == 'processing':
+                    #  对于影像的单独处理
+                    new_layer['processing'].append(cl[key])
+                elif key.lower() == 'class':
                     pass
                 elif key.lower() == 'expression' and type(cl[key]) == type(1):
                     '''
                     注意，即使是使用数值作为条件，也需要添加引号。故需转换为字符串。
                     '''
                     cls[key] = str(cl[key])
-                elif key == 'style':
+                elif key.lower() == 'style':
                     for subkey in cl[key]:
                         cls['styles'][0][subkey] = cl[key][subkey]
 
-                elif key == 'label':
+                elif key.lower() == 'label':
                     for subkey in cl[key]:
                         cls['labels'][0][subkey] = cl[key][subkey]
                 else:

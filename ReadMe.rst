@@ -40,16 +40,22 @@ Example: http://gislite.osgeo.cn/
 
     run_gislite.py
 
+或
+
+::
+
+    python3 run_gislite.py
+
 相关网站
 ---------------------------------
 
 -  http://pygis.osgeo.cn/  《Python与开源GIS》，使用 Python 读取与处理 GIS数据 的工具。
--  http://webgis.osgeo.cn/  对 MapServer， MapProxy， Leaflet 的基本介绍。
+-  http://webgis.osgeo.cn/  涉及到 MapServer， MapProxy， Leaflet 的在线 WebGIS 教学网站 。
 
 运行环境安装
 -----------------------------------------
 
-开发与测试运行于 Debian Stretch / Ubuntu 18.08 。 在管理员权限下安装运行环境：
+开发与测试运行于 Debian Stretch / Ubuntu 18.04 。 在管理员权限下安装运行环境：
 
 ::
 
@@ -58,15 +64,38 @@ Example: http://gislite.osgeo.cn/
     apt install -y build-essential  python3-gdal python3-pip
     pip3 install mapproxy
 
+另外，需要GIS数据，路径由 ``cfg.py`` 中的 ``GIS_BASE``指定。
+
+程序需要的资源，都在 ``cfg.py`` 中定义。 ``TILE_SVR`` 是 MapProxy 服务地址。
+
 MapProxy使用
 -------------------------
 
 使用了 MapProxy 生成地图切片。下面是脚本运行的方式。
 
+首先建立子项目：
+
+::
+
+    ~/.local/bin/mapproxy-util create -t base-config wcs_imgmap
+
+或
+
+::
+
+    mapproxy-util create -t base-config wcs_imgmap
+
+然后运行：
+
+::
+
+    ~/.local/bin/mapproxy-util serve-develop ./out_mapproxy.yaml -b 0.0.0.0:8011
+
+或
+
 ::
 
     # mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:8011
-    ~/.local/bin/mapproxy-util serve-develop ./out_mapproxy.yaml -b 0.0.0.0:8011
-    # mapproxy-util create -t base-config wcs_imgmap
-    ~/.local/bin/mapproxy-util create -t base-config wcs_imgmap
+
+
 

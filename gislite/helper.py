@@ -230,7 +230,8 @@ def xlsx2dict(xls_file):
                     'data',
                     'labelminscaledenom',
                     'labelmaxscaledenom',
-                    'encoding'
+                    'encoding',
+                    'processing',
                 ]:
                     the_str = '- ' + the_str
 

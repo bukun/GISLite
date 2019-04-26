@@ -49,8 +49,8 @@ Example: http://gislite.osgeo.cn/
 相关网站
 ---------------------------------
 
--  http://pygis.osgeo.cn/  《Python与开源GIS》，使用 Python 读取与处理 GIS数据 的工具。
--  http://webgis.osgeo.cn/  涉及到 MapServer， MapProxy， Leaflet 的在线 WebGIS 教学网站 。
+-  http://www.osgeo.cn/pygis/  《Python与开源GIS》，使用 Python 读取与处理 GIS数据 的工具。
+-  http://www.osgeo.cn/webgis/  涉及到 MapServer， MapProxy， Leaflet 的在线 WebGIS 教学网站 。
 
 运行环境安装
 -----------------------------------------

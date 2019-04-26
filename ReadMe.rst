@@ -6,14 +6,14 @@ In English
 
 Static site generator (SSG) for GIS data publishment as light WebGIS application.
 
-Example: http://www.osgeo.cn/gislite
+Example: http://www.osgeo.cn/gislite/
 
 说明
 ---------------------------------------
 
 基于开源GIS技术开发，使用静态网站形式对GIS数据进行发布。
 
-演示网站： http://www.osgeo.cn/gislite
+演示网站： http://www.osgeo.cn/gislite/
 
 基于 MapServer 的服务器端GIS数据图层发布管理系统。
 目的是用于解决发布较多数量的地图时的数据更新、样式修改，以及不同样式组合应用的问题。

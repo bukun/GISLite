@@ -19,7 +19,7 @@ def main():
         c.run('git pull')
         c.run('python3 build_gislite.py')
 
-    c.run('sudo chown -R www-data.www-data {}/dist'.format(SITE_WS))
+    c.run('sudo chown -R www-data.www-data {}/dist_site'.format(SITE_WS))
     c.run('sudo chown -R www-data.www-data {}'.format(GIS_BASE_REMOTE))
 
 

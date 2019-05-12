@@ -162,6 +162,9 @@ def hex2dec(string_num):
 
 
 def xlsx2dict(xls_file):
+    '''
+    将 XLSX 文件中记录的信息转换为 Python dict.
+    '''
     COLOR_INDEX = (
         '00000000', '00FFFFFF', '00FF0000', '0000FF00', '000000FF',
         # 0-4
@@ -224,15 +227,14 @@ def xlsx2dict(xls_file):
                 # else:
                 #     out_dic[row[0].value] = row[1].value
 
-                if str(the_cell_value).lower() in [
-                    'class', 'classitem',
-                    'labelitem',
-                    'data',
-                    'labelminscaledenom',
-                    'labelmaxscaledenom',
-                    'encoding',
-                    'processing',
-                ]:
+                if str(the_cell_value).lower() in ['class',
+                                                   'classitem',
+                                                   'labelitem',
+                                                   'data',
+                                                   'labelminscaledenom',
+                                                   'labelmaxscaledenom',
+                                                   'encoding',
+                                                   'processing', ]:
                     the_str = '- ' + the_str
 
                 if sig:
@@ -271,9 +273,6 @@ def get_epsg_code(img_file, raster=False):
         return {'epsg_code': '',
                 'proj4_code': sr2.ExportToProj4(),
                 'geom_type': 'raster'}
-
-
-
     else:
         ds = ogr.Open(img_file)
         lyr = ds.GetLayer(0)

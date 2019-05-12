@@ -15,10 +15,9 @@ def map_map(map_dir):
     '''
     生成总的 Mapfile.
     '''
+    mqian, mhou = os.path.split(map_dir)  # 得到路径与文件夹的名称
 
-    mqian, mhou = os.path.split(map_dir)
-
-    midx, mslug, mname = mhou.split('_')
+    midx, mslug, mname = mhou.split('_')  # 对文件夹名称进行切分，得到索引顺序， slug 与 名称。保存成变量
 
     fc_inc = ''
     for wroot, wdirs, wfiles in os.walk(map_dir):
@@ -55,8 +54,10 @@ def map_map(map_dir):
 
 def get_lyr_mapfile(map_dir, wfile, wroot):
     '''
-    生成图层的 Mapfile
+    得到图层的 Mapfile
     '''
+
+    # ToDo: 参数 wroot 是否有必要？
 
     rrxlsx_file = os.path.join(wroot, wfile)
     print(rrxlsx_file)

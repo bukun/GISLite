@@ -36,15 +36,11 @@ Example: http://www.osgeo.cn/gislite/
 运行方式
 --------------------------
 
-::
-
-    run_gislite.py
-
-或
+运行下面的命令，生成地图图层，网站 HTML 文件，以及运行 MapProxy 需要的文件。
 
 ::
 
-    python3 run_gislite.py
+    python3 build_gislite.py
 
 相关网站
 ---------------------------------
@@ -67,6 +63,9 @@ Example: http://www.osgeo.cn/gislite/
 另外，需要GIS数据，路径由 ``cfg.py`` 中的 ``GIS_BASE``指定。
 
 程序需要的资源，都在 ``cfg.py`` 中定义。 ``TILE_SVR`` 是 MapProxy 服务地址。
+
+使用了 Apache + CGI 来调用 MapServer， 需要 Apache 开启 ``80`` 端口。
+或者在 ``build_gislite.py`` 中修改 ``mapserver_ip`` 的值 。
 
 MapProxy使用
 -------------------------

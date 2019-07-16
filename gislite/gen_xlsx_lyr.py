@@ -94,10 +94,9 @@ def get_lyr_mapfile(map_dir, wfile, wroot):
 
     else:
         shp = os.path.join(wroot, data_apth)
+
         lyr_file = generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts)
         lyrs_file.append(lyr_file)
-
-    # pprint(new_layer)
 
     # print(yaml.dump(new_layer))
     return lyrs_file
@@ -125,7 +124,8 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
     else:
         lyr_name = 'lyr_' + mslug + '.map'
     lyr_file = os.path.join(map_dir, lyr_name)
-    if t_mts > MTS:
+    # if t_mts > MTS:
+    if True:
 
         if shp_info['geom_type'].lower() in ['linestring', 'multilinestring']:
             lyr_type = 'line'
@@ -134,7 +134,7 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
         else:
             lyr_type = shp_info['geom_type']
         new_layer['type'] = lyr_type
-        new_layer['data'] = shp
+        new_layer['data'] = [shp]
         # new_layer['name'] = os.path.splitext(wfile)[0]
         if sig:
             new_layer['name'] = 'lyr_{}'.format(mslug.replace('[sig]', sig))
@@ -154,7 +154,7 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
                 elif key.lower() == 'labelitem':
                     new_layer['labelitem'] = cl[key]
                 elif key.lower() == 'data':
-                    new_layer['data'] = shp
+                    new_layer['data'] = [shp]
                 elif key.lower() == 'labelminscaledenom':
                     new_layer['labelminscaledenom'] = cl[key]
                 elif key.lower() == 'labelmaxscaledenom':
@@ -186,6 +186,8 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
         new_layer['classes'].pop()
         new_layer['classes'].pop()
         # print(help(new_layer['classes']))
+
+
         with open(lyr_file, 'w') as fo:
             fo.write(mappyfile.dumps(new_layer, indent=1, spacer="    "))
     return lyr_file

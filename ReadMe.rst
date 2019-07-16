@@ -56,9 +56,9 @@ Example: http://www.osgeo.cn/gislite/
 ::
 
     apt install -y apache2 php libapache2-mod-fcgid cgi-mapserver mapserver-bin libapache2-mod-php
-    apt install -y python3-openpyxl python3-mapproxy
+    apt install -y python3-openpyxl python3-mapproxy python3-markdown
     apt install -y build-essential  python3-gdal python3-pip
-    pip3 install mapproxy
+    pip3 install mappyfile
 
 另外，需要GIS数据，路径由 ``cfg.py`` 中的 ``GIS_BASE``指定。
 
@@ -76,7 +76,13 @@ MapProxy使用
 
 ::
 
-    ~/.local/bin/mapproxy-util create -t base-config wcs_imgmap
+    /usr/lib/python3-mapproxy/mapproxy-util create -t base-config wcs_imgmap
+
+或
+
+::
+
+    ~/.local/bin/mapproxy-util  create -t base-config wcs_imgmap
 
 或
 
@@ -84,11 +90,18 @@ MapProxy使用
 
     mapproxy-util create -t base-config wcs_imgmap
 
-然后运行：
+
+cd wcs_imgmap , 然后运行：
 
 ::
 
-    ~/.local/bin/mapproxy-util serve-develop ./out_mapproxy.yaml -b 0.0.0.0:8011
+    /usr/lib/python3-mapproxy/mapproxy-util serve-develop  ./mapproxy.yaml -b 0.0.0.0:8011
+
+或
+
+::
+
+    ~/.local/bin/mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:8011
 
 或
 
@@ -96,5 +109,12 @@ MapProxy使用
 
     # mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:8011
 
+View HTML Result
+-----------------------------------------------------
 
+Under  directory ``dist_site``:
+
+::
+
+    python3 -m http.server 8888
 

@@ -62,7 +62,7 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
     rrxlsx_file = os.path.join(wroot, wfile)
     print(rrxlsx_file)
 
-    t_mts = helper.get_mts(rrxlsx_file)
+    # t_mts = helper.get_mts(rrxlsx_file)
 
     map_mata = helper.xlsx2dict(rrxlsx_file)
 
@@ -89,20 +89,20 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
                 the_sig = wwfile[qq: hh - 1]
                 shp = os.path.join(wroot, wwfile)
 
-                lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, t_mts, sig=the_sig)
+                lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=the_sig)
                 lyrs_file.append(lyr_file)
 
     else:
         shp = os.path.join(wroot, data_apth)
 
-        lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, t_mts)
+        lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, )
         lyrs_file.append(lyr_file)
 
     # print(yaml.dump(new_layer))
     return lyrs_file
 
 
-def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, t_mts, sig=None):
+def generate_lyr_mapfile(category_dir, map_mata, shp, wfile,  sig=None):
     '''
     生成图层的 Mapfile.
     '''
@@ -112,12 +112,12 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, t_mts, sig=None):
         midx, mslug, mname = xxuu
     else:
         midx, mslug = xxuu
-        mname = xxuu[-1]
+        # mname = xxuu[-1]
     new_layer = mappyfile.loads(TPL_LAYER)
     shp_info = helper.get_epsg_code(shp)
     # print(shp)
-    qian, hou = os.path.split(shp)
-    shpfile_name, shpfile_ext = os.path.splitext(hou)
+    # qian, hou = os.path.split(shp)
+    # shpfile_name, shpfile_ext = os.path.splitext(hou)
     # lyr_name = 'lyr_' + shpfile_name + '.map'
     if sig:
         lyr_name = 'lyr_' + mslug.replace('[sig]', sig) + '.map'

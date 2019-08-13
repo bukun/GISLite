@@ -168,7 +168,10 @@ def gen_html_pages():
             # ToDo: 对分组(grp)的XLSX进行处理。
             dir_idx, dir_slug, dir_title = the_dir.split('_')
 
-            file_slug = '{}_{}'.format(mslug, lslug)
+            # ToDo: 使用分类 slug
+            # file_slug = '{}_{}'.format(mslug, lslug)
+            # ToDo: 使用唯一ID
+            file_slug = '{}'.format(lslug)
             # file_title = md_dic['title']
             file_name = file_slug + '.html'
 
@@ -335,7 +338,7 @@ def fetch_structure():
                 lidx, lslug, lname = xxuu
             else:
                 lidx, lslug = xxuu
-                lname = xxuu[-1]
+                # lname = xxuu[-1]
 
             the_file = os.path.join(wroot, wfile)
 
@@ -353,7 +356,11 @@ def fetch_structure():
             if wfile.endswith('jinja2'):
                 the_title = helper.get_html_title(the_file)
                 md_dic['title'] = the_title
-            file_name = dir_slug + '_' + lslug + '.html'
+            # ToDo: with category
+            # file_name = dir_slug + '_' + lslug + '.html'
+
+            # Only layer slug
+            file_name = lslug + '.html'
 
             title_h = md_dic['title'] if 'title' in md_dic else os.path.splitext(wfile)[0].split('_')[-1]
             list_md.append({'slug': os.path.splitext(file_name)[0],

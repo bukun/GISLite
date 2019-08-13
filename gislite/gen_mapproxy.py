@@ -47,7 +47,7 @@ def chuli_serial_file(png, mapserver_ip, uu, wroot):
 
                 the_sig = wwfile[qq: hh - 1]
                 print(the_sig)
-                shp = os.path.join(wroot, wwfile)
+                # shp = os.path.join(wroot, wwfile)
                 npng = png.replace('[sig]', the_sig)
                 print(npng)
                 gen_imagery4d(npng, mapserver_ip, uu, wroot)
@@ -61,7 +61,7 @@ def do_for_raster(mapserver_ip, out_yaml_file):
 
             if png.startswith('meta_') and png.endswith('.xlsx'):
                 if '_mul' in png:
-                    gen_mul_lyr(png, mapserver_ip, uu, wroot)
+                    gen_mul_lyr(png,  uu, wroot)
                 elif '_grp' in png:
                     pass
                 elif '[' in png:
@@ -76,26 +76,29 @@ def do_for_raster(mapserver_ip, out_yaml_file):
         yaml.dump(uu, fo, encoding='utf-8', allow_unicode=True)
 
 
-def gen_mul_lyr(png, mapserver_ip, uu, wroot):
+def gen_mul_lyr(png,  uu, wroot):
     lqian, lhou = os.path.splitext(png)
     xxuu = lqian.split('_')
     if len(xxuu) > 2:
         lidx, lslug, lname = xxuu
     else:
         lidx, lslug = xxuu
-        lname = xxuu[-1]
+        # lname = xxuu[-1]
 
     mqian, mhou = os.path.split(wroot)
     midx, mslug, mname = mhou.split('_')
 
     the_file = os.path.join(wroot, png)
     lyr_list = helper.lyr_list(mslug, the_file)
-    (lyr_name, lyr_ext) = os.path.splitext(png)
-    lyr_name_arr = lyr_name.split('_')
-    the_name = '_'.join(lyr_name_arr[1:])
+    # (lyr_name, lyr_ext) = os.path.splitext(png)
+    # lyr_name_arr = lyr_name.split('_')
+    # the_name = '_'.join(lyr_name_arr[1:])
     # sig = 'maplet_' + the_name
 
-    sig = 'maplet_{}_{}'.format(mslug, lslug)
+    # with category
+    # sig = 'maplet_{}_{}'.format(mslug, lslug)
+    # with uid.
+    sig = 'maplet_{}'.format(lslug)
 
     uu['caches'][sig] = {}
     uu['caches'][sig]['grids'] = ['webmercator']
@@ -122,7 +125,9 @@ def gen_imagery4d(png, mapserver_ip, uu, wroot):
     lyr_name_arr = lyr_name.split('_')
     the_name = '_'.join(lyr_name_arr[1:])
 
-    sig = 'maplet_{}_{}'.format(mslug, lslug)
+    # ToDo:
+    # sig = 'maplet_{}_{}'.format(mslug, lslug)  # 使用分类的 slug
+    sig = 'maplet_{}'.format(lslug)  # 使用唯一 ID.
     # fo.write(tmpl.format('maplet_' + sig))
     uu['sources'][sig] = {}
     uu['sources'][sig]['type'] = 'wms'

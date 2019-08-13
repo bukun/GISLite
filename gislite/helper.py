@@ -138,7 +138,10 @@ def lyr_list(mslug, xls_file):
 
     out_str = []
     for xx in range(1, max_row_num + 1):
-        the_cell = 'maplet_' + mslug + '_' + sheet.cell(row=xx, column=1).value
+        # with category
+        # the_cell = 'maplet_' + mslug + '_' + sheet.cell(row=xx, column=1).value
+        # slug only
+        the_cell = 'maplet_' + sheet.cell(row=xx, column=1).value
         out_str.append(the_cell)
     return out_str
 

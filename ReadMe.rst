@@ -69,6 +69,7 @@ Example: http://www.osgeo.cn/gislite/
 使用了 Apache + CGI 来调用 MapServer， 需要 Apache 开启 ``80`` 端口。
 或者在 ``build_gislite.py`` 中修改 ``mapserver_ip`` 的值 。
 
+
 MapProxy使用
 -------------------------
 

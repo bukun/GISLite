@@ -11,16 +11,16 @@ from gislite.helper import TPL_MAP, TPL_LAYER, TPL_CLASS
 MTS = helper.get_mts()
 
 
-def map_map(map_dir):
+def do_for_map_category(category_dir):
     '''
-    生成总的 Mapfile.
+    按分类进行处理，生成总的 Mapfile.
     '''
-    mqian, mhou = os.path.split(map_dir)  # 得到路径与文件夹的名称
+    mqian, mhou = os.path.split(category_dir)  # 得到路径与文件夹的名称
 
     midx, mslug, mname = mhou.split('_')  # 对文件夹名称进行切分，得到索引顺序， slug 与 名称。保存成变量
 
     fc_inc = ''
-    for wroot, wdirs, wfiles in os.walk(map_dir):
+    for wroot, wdirs, wfiles in os.walk(category_dir):
         for wfile in wfiles:
             if wfile.endswith('.xlsx'):
                 if '_mul' in wfile:
@@ -32,8 +32,8 @@ def map_map(map_dir):
             else:
                 continue
 
-            for lyr_name in get_lyr_mapfile(map_dir, wfile, wroot):
-                # lyr_name =
+            # 只加入单个图层的。
+            for lyr_name in get_lyr_mapfile(category_dir, wfile, wroot):
                 fc_inc = fc_inc + 'include "{}"\n'.format(lyr_name)
 
     # fc_map_file = os.path.join(map_dir, 'mapfile.map')
@@ -41,7 +41,7 @@ def map_map(map_dir):
 
     with open(fc_map_file, 'w') as fo2:
         tmp_str = TPL_MAP.format(
-            basedir=map_dir,
+            basedir=category_dir,
             fc_name='map_dir_sig', fc_includes=fc_inc,
             fc_extent='{x_min} {y_min} {x_max} {y_max}'.format(
                 x_min=-180,
@@ -52,7 +52,7 @@ def map_map(map_dir):
         fo2.write(tmp_str)
 
 
-def get_lyr_mapfile(map_dir, wfile, wroot):
+def get_lyr_mapfile(category_dir, wfile, wroot):
     '''
     得到图层的 Mapfile
     '''
@@ -89,20 +89,20 @@ def get_lyr_mapfile(map_dir, wfile, wroot):
                 the_sig = wwfile[qq: hh - 1]
                 shp = os.path.join(wroot, wwfile)
 
-                lyr_file = generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=the_sig)
+                lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, t_mts, sig=the_sig)
                 lyrs_file.append(lyr_file)
 
     else:
         shp = os.path.join(wroot, data_apth)
 
-        lyr_file = generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts)
+        lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, t_mts)
         lyrs_file.append(lyr_file)
 
     # print(yaml.dump(new_layer))
     return lyrs_file
 
 
-def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
+def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, t_mts, sig=None):
     '''
     生成图层的 Mapfile.
     '''
@@ -123,7 +123,7 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
         lyr_name = 'lyr_' + mslug.replace('[sig]', sig) + '.map'
     else:
         lyr_name = 'lyr_' + mslug + '.map'
-    lyr_file = os.path.join(map_dir, lyr_name)
+    lyr_file = os.path.join(category_dir, lyr_name)
     # if t_mts > MTS:
     if True:
 
@@ -188,6 +188,7 @@ def generate_lyr_mapfile(map_dir, map_mata, shp, wfile, t_mts, sig=None):
         # print(help(new_layer['classes']))
 
 
+
         with open(lyr_file, 'w') as fo:
             fo.write(mappyfile.dumps(new_layer, indent=1, spacer="    "))
     return lyr_file
@@ -198,7 +199,7 @@ def run_it():
         for wdir in wdirs:
             if wdir.startswith('maplet'):
                 # if 'maplet80' in wdir:
-                map_map(os.path.join(wroot, wdir))
+                do_for_map_category(os.path.join(wroot, wdir))
 
 
 if __name__ == '__main__':

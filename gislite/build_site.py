@@ -153,20 +153,21 @@ def gen_html_pages():
         for idx_file, md_file in enumerate(md_files):
 
             mqian, mhou = os.path.split(the_dir)
-            midx, mslug, mname = mhou.split('_')
+            midx, mname, mslug = mhou.split('_')
             lqian, lhou = os.path.splitext(md_file)
-            xxuu = lqian.split('_')
+
 
             left_nav = format_leftnav(list_main, mname)
 
+            xxuu = lqian.split('_')
             if len(xxuu) > 2:
-                lidx, lslug, lname = xxuu
+                lidx, lname, lslug = xxuu
             else:
                 lidx, lslug = xxuu
                 lname = xxuu[-1]
 
             # ToDo: 对分组(grp)的XLSX进行处理。
-            dir_idx, dir_slug, dir_title = the_dir.split('_')
+            # dir_idx, dir_slug, dir_title = the_dir.split('_')
 
             # ToDo: 使用分类 slug
             # file_slug = '{}_{}'.format(mslug, lslug)
@@ -228,7 +229,8 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
             npng = png.replace('[sig]', the_sig)
             print(npng)
 
-            file_slug = '{}_{}'.format(mslug, lslug.replace('[sig]', the_sig))
+            # file_slug = '{}_{}'.format(mslug, lslug.replace('[sig]', the_sig))
+            file_slug = '{}'.format(lslug.replace('[sig]', the_sig))
 
             file_name = file_slug + '.html'
 
@@ -327,7 +329,7 @@ def fetch_structure():
 
         tt = the_dir.split('_')
 
-        dir_idx, dir_slug, dir_title = tt
+        dir_idx, dir_title, dir_slug = tt
 
         list_md = []
         for wfile in the_files:
@@ -335,10 +337,10 @@ def fetch_structure():
             lqian, lhou = os.path.splitext(wfile)
             xxuu = lqian.split('_')
             if len(xxuu) > 2:
-                lidx, lslug, lname = xxuu
+                lidx, lname, lslug = xxuu
             else:
                 lidx, lslug = xxuu
-                # lname = xxuu[-1]
+                lname = xxuu[-1]
 
             the_file = os.path.join(wroot, wfile)
 
@@ -362,9 +364,9 @@ def fetch_structure():
             # Only layer slug
             file_name = lslug + '.html'
 
-            title_h = md_dic['title'] if 'title' in md_dic else os.path.splitext(wfile)[0].split('_')[-1]
+            title_h = md_dic['title'] if 'title' in md_dic else lname
             list_md.append({'slug': os.path.splitext(file_name)[0],
-                            'file_name': os.path.splitext(wfile)[0].split('_')[-1],
+                            'file_name': lname,
                             'title': title_h})
 
         list_main.append(

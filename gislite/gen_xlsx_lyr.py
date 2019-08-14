@@ -17,7 +17,7 @@ def do_for_map_category(category_dir):
     '''
     mqian, mhou = os.path.split(category_dir)  # 得到路径与文件夹的名称
 
-    midx, mslug, mname = mhou.split('_')  # 对文件夹名称进行切分，得到索引顺序， slug 与 名称。保存成变量
+    midx, mname, mslug = mhou.split('_')  # 对文件夹名称进行切分，得到索引顺序， slug 与 名称。保存成变量
 
     fc_inc = ''
     for wroot, wdirs, wfiles in os.walk(category_dir):
@@ -66,20 +66,20 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
 
     map_mata = helper.xlsx2dict(rrxlsx_file)
 
-    data_apth = ''
+    data_path = ''
     for x in map_mata:
         for key in x:
             if key == 'data':
-                data_apth = x[key]
+                data_path = x[key]
     lyrs_file = []
-    if '[' in data_apth:
+    if '[' in data_path:
         # print('-' * 40)
 
-        print(data_apth)
-        qq = data_apth.index('[')
-        hh = data_apth.index(']')
-        sig_q = data_apth[:qq]
-        sig_h = data_apth[hh + 1:]
+        print(data_path)
+        qq = data_path.index('[')
+        hh = data_path.index(']')
+        sig_q = data_path[:qq]
+        sig_h = data_path[hh + 1:]
         # print(sig_q)
         # print(sig_h)
         for wwfile in os.listdir(wroot):
@@ -93,7 +93,7 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
                 lyrs_file.append(lyr_file)
 
     else:
-        shp = os.path.join(wroot, data_apth)
+        shp = os.path.join(wroot, data_path)
 
         lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, )
         lyrs_file.append(lyr_file)
@@ -109,7 +109,7 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile,  sig=None):
     mqian, mhou = os.path.splitext(wfile)
     xxuu = mqian.split('_')
     if len(xxuu) > 2:
-        midx, mslug, mname = xxuu
+        midx, mname, mslug = xxuu
     else:
         midx, mslug = xxuu
         # mname = xxuu[-1]

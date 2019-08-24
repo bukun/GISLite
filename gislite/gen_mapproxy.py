@@ -12,11 +12,11 @@ from config import GIS_BASE
 import gislite.helper as helper
 from gislite.helper import TPL_MAPPROXY
 
-raw_yaml = ''
-if os.path.exists('/home/bk/wcs_maplet/mapproxy.yaml'):
-    raw_yaml = '/home/bk/wcs_maplet/mapproxy.yaml'
-else:
-    pass
+# raw_yaml = ''
+# # if os.path.exists('/home/bk/wcs_maplet/mapproxy.yaml'):
+# #     raw_yaml = '/home/bk/wcs_maplet/mapproxy.yaml'
+# # else:
+# #     pass
 
 
 def chuli_serial_file(png, mapserver_ip, uu, wroot):

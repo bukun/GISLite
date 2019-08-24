@@ -18,11 +18,13 @@ def main():
     c.run('sudo chown -R bk {}'.format(GIS_BASE_REMOTE))
 
     with c.cd(SITE_WS):
+        # c.run('git reset --hard')
         # c.run('git pull')
         c.run('python3 build_gislite.py')
 
     c.run('sudo chown -R www-data.www-data {}/dist_site'.format(SITE_WS))
     c.run('sudo chown -R www-data.www-data {}'.format(GIS_BASE_REMOTE))
+    c.run('sudo supervisorctl restart gislite')
 
 
 if __name__ == '__main__':

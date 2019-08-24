@@ -57,11 +57,12 @@ def do_for_raster(mapserver_ip, out_yaml_file):
     uu = yaml.load(TPL_MAPPROXY)
     rst_ws = GIS_BASE
     for wroot, wdirs, wfiles in os.walk(rst_ws):
+        if 'maplet' in wroot:
+            pass
+        else:
+            continue
         for png in wfiles:
-            if 'maplet' in wroot:
-                pass
-            else:
-                continue
+
 
             if png.startswith('meta_') and png.endswith('.xlsx'):
                 if '_mul' in png:

@@ -16,8 +16,12 @@ out_yaml_file = 'out_mapproxy.yaml'
 ts1 = time.time()
 
 ###########################################################
+
+print('Generating ma pfiles ...')
 gen_xlsx_lyr.run_it()
+print('Generating mapproxy yaml ...')
 gen_mapproxy.gen_by_ip(mapserver_ip, out_yaml_file)
+print('build webgis ...')
 build_site.run_it()
 
 ###########################################################

@@ -80,13 +80,13 @@ def gen_mul_lyr(png,  uu, wroot):
     lqian, lhou = os.path.splitext(png)
     xxuu = lqian.split('_')
     if len(xxuu) > 2:
-        lidx, lslug, lname = xxuu
+        lidx, lname, lslug = xxuu
     else:
         lidx, lslug = xxuu
         # lname = xxuu[-1]
 
     mqian, mhou = os.path.split(wroot)
-    midx, mslug, mname = mhou.split('_')
+    midx, mname, mslug = mhou.split('_')
 
     the_file = os.path.join(wroot, png)
     lyr_list = helper.lyr_list(mslug, the_file)
@@ -112,18 +112,18 @@ def gen_imagery4d(png, mapserver_ip, uu, wroot):
     lqian, lhou = os.path.splitext(png)
     xxuu = lqian.split('_')
     if len(xxuu) > 2:
-        lidx, lslug, lname = xxuu
+        lidx, lname, lslug = xxuu
     else:
         lidx, lslug = xxuu
         lname = xxuu[-1]
 
     mqian, mhou = os.path.split(wroot)
-    midx, mslug, mname = mhou.split('_')
+    midx, mname, mslug = mhou.split('_')
     fc_map_file = os.path.join(mqian, 'mfile_{}.map'.format(mslug))
 
-    (lyr_name, lyr_ext) = os.path.splitext(png)
-    lyr_name_arr = lyr_name.split('_')
-    the_name = '_'.join(lyr_name_arr[1:])
+    # (lyr_name, lyr_ext) = os.path.splitext(png)
+    # lyr_name_arr = lyr_name.split('_')
+    # the_name = '_'.join(lyr_name_arr[1:])
 
     # ToDo:
     # sig = 'maplet_{}_{}'.format(mslug, lslug)  # 使用分类的 slug

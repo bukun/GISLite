@@ -28,6 +28,8 @@ build_site.run_it()
 wcs_cache_dir = 'wcs_imgmap/cache_data'
 if os.path.exists(wcs_cache_dir):
     shutil.rmtree(wcs_cache_dir)
+else:
+    os.makedirs(wcs_cache_dir)
 shutil.move(out_yaml_file, './wcs_imgmap/mapproxy.yaml')
 
 

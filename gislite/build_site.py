@@ -142,7 +142,7 @@ def gen_html_pages():
     for idx_dir, the_dir in enumerate(the_dirs):
         wroot = os.path.join(src_ws, the_dir)
 
-        if os.path.isdir(wroot):
+        if os.path.isdir(wroot) and 'maplet' in wroot:
             pass
         else:
             continue
@@ -309,7 +309,7 @@ def fetch_structure():
         if the_dir in ['symbols', 'fonts']:
             continue
         xx_dir = os.path.join(src_ws, the_dir)
-        if os.path.isdir(xx_dir):
+        if os.path.isdir(xx_dir) and 'maplet' in xx_dir:
             pass
         else:
             continue

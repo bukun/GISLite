@@ -12,7 +12,10 @@ from config import TILE_SVR
 
 STR_RUN_WCS_TMPL = '''#!/bin/bash
 # mapproxy-util create -t base-config wcs_imgmap
-mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:{port}
+# /usr/lib/python3-mapproxy/mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:{port}
+# ~/.local/bin/mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:{port}
+# mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:{port}
+/usr/lib/python3-mapproxy/mapproxy-util serve-develop ./mapproxy.yaml -b 0.0.0.0:{port}
 '''
 
 mapserver_ip = '127.0.0.1'

@@ -92,7 +92,7 @@ flasky/static
 templates/modules
 
 # Map files.
-mw_*/ 
+mw_*/
 mw_china
 mw_ydyl3857
 
@@ -101,3 +101,6 @@ out_mapproxy.yaml
 wcs_*
 
 .sass-cache
+
+# Default directory for data.
+geodata

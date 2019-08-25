@@ -2,3 +2,5 @@ mappyfile
 markdown
 pyyaml
 openpyxl
+bs4
+jinja2

@@ -41,7 +41,6 @@ else:
 shutil.move(out_yaml_file, './wcs_imgmap/mapproxy.yaml')
 
 
-
 def gen_run_mapproxy_sh():
     ###########################################################
     # 生成运行 MapProxy 的脚本

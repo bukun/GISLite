@@ -1,5 +1,5 @@
 '''
-发布 WebGIS.
+Deploy GISLite on server side.
 '''
 from fabric import Connection
 

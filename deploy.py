@@ -1,3 +1,7 @@
+'''
+Running locally. For Development.
+'''
+
 import subprocess
 
 from cfg import SITE_WS, GIS_BASE

@@ -63,7 +63,7 @@ Example: http://www.osgeo.cn/gislite/
     apt install -y build-essential  python3-gdal python3-pip
     pip3 install mappyfile
 
-另外，需要GIS数据，路径由 ``cfg.py`` 中的 ``GIS_BASE``指定。
+另外，需要GIS数据，路径由 ``cfg.py`` 中的 ``GIS_BASE`` 指定。
 
 程序需要的资源，都在 ``cfg.py`` 中定义。 ``TILE_SVR`` 是 MapProxy 服务地址。
 

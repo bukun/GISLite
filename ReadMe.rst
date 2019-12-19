@@ -8,6 +8,7 @@ Static site generator (SSG) for GIS data publishment as light WebGIS application
 SSG JUST means for HTML, CSS and JavaScript.
 The application run with MapServer with Apache2 CGI, and MapProxy which running via Python.
 
+
 Example: http://www.osgeo.cn/gislite/
 
 说明
@@ -47,13 +48,13 @@ Example: http://www.osgeo.cn/gislite/
 相关网站
 ---------------------------------
 
--  http://www.osgeo.cn/pygis/  《Python与开源GIS》，使用 Python 读取与处理 GIS数据 的工具。
--  http://www.osgeo.cn/webgis/  涉及到 MapServer， MapProxy， Leaflet 的在线 WebGIS 教学网站 。
+-  https://www.osgeo.cn/pygis/  《Python与开源GIS》，使用 Python 读取与处理 GIS数据 的工具。
+-  http://webgis.cn/  涉及到 MapServer， MapProxy， Leaflet 的在线 WebGIS 教学网站 。
 
 运行环境安装
 -----------------------------------------
 
-开发与测试运行于 Debian Stretch / Ubuntu 18.04 。 在管理员权限下安装运行环境：
+开发与测试运行于 Debian Buster 。 在管理员权限下安装运行环境：
 
 ::
 
@@ -121,3 +122,4 @@ Under  directory ``dist_site``:
 
     python3 -m http.server 8888
 
+Open the brower for the demo.

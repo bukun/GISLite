@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 desc = ('Static site generator (SSG) for GIS data publishment as light WebGIS application.')
 setup(
     name='gislite',
-    version='0.0.1',
+    version='0.0.2',
     keywords=('WebGIS', 'Static site generator'),
     description=desc,
     long_description=''.join(open('ReadMe.rst').readlines()),
@@ -44,8 +44,6 @@ setup(
         'License :: OSI Approved :: MIT License',
 
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7'
     ],
 )

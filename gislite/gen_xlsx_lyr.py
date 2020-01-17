@@ -57,7 +57,6 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
     得到图层的 Mapfile
     '''
 
-    # ToDo: 参数 wroot 是否有必要？
 
     rrxlsx_file = os.path.join(wroot, wfile)
     print(rrxlsx_file)
@@ -67,26 +66,25 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
     map_mata = helper.xlsx2dict(rrxlsx_file)
 
     data_path = ''
-    for x in map_mata:
-        for key in x:
+    for mata in map_mata:
+        for key in mata:
             if key == 'data':
-                data_path = x[key]
+                data_path = mata[key]
     lyrs_file = []
     if '[' in data_path:
         # print('-' * 40)
 
         print(data_path)
-        qq = data_path.index('[')
-        hh = data_path.index(']')
-        sig_q = data_path[:qq]
-        sig_h = data_path[hh + 1:]
-        # print(sig_q)
-        # print(sig_h)
+        q_place = data_path.index('[')
+        h_place = data_path.index(']')
+        sig_q = data_path[:q_place]
+        sig_h = data_path[h_place + 1:]
+
         for wwfile in os.listdir(wroot):
             if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
                 print(wwfile)
 
-                the_sig = wwfile[qq: hh - 1]
+                the_sig = wwfile[q_place: h_place - 1]
                 shp = os.path.join(wroot, wwfile)
 
                 lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=the_sig)
@@ -102,16 +100,16 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
     return lyrs_file
 
 
-def generate_lyr_mapfile(category_dir, map_mata, shp, wfile,  sig=None):
+def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=None):
     '''
     生成图层的 Mapfile.
     '''
     mqian, mhou = os.path.splitext(wfile)
-    xxuu = mqian.split('_')
-    if len(xxuu) > 2:
-        midx, mname, mslug = xxuu
+    file_name = mqian.split('_')
+    if len(file_name) > 2:
+        midx, mname, mslug = file_name
     else:
-        midx, mslug = xxuu
+        midx, mslug = file_name
         # mname = xxuu[-1]
     new_layer = mappyfile.loads(TPL_LAYER)
     shp_info = helper.get_epsg_code(shp)
@@ -195,10 +193,14 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile,  sig=None):
 
 
 def run_it():
+    """
+    程序入口
+
+    """
     for wroot, wdirs, wfile in os.walk(GIS_BASE):
         for wdir in wdirs:
             if wdir.startswith('maplet'):
-                # if 'maplet80' in wdir:
+
                 do_for_map_category(os.path.join(wroot, wdir))
 
 

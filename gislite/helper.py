@@ -3,9 +3,11 @@
 import os
 import yaml
 from openpyxl import load_workbook
-from osgeo import gdal, ogr, osr
 from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
+from osgeo import gdal, ogr, osr
+
+
 
 JINJA_ENV = Environment(loader=FileSystemLoader('templates'))
 
@@ -121,6 +123,10 @@ globals:
 
 
 def get_mts(afile=None):
+    """
+    输出最近修改时间
+
+    """
     if afile:
         return os.path.getmtime(afile)
     else:
@@ -131,24 +137,32 @@ def get_mts(afile=None):
 
 
 def lyr_list(mslug, xls_file):
+    """
+    解析得到excel表内的值放入列表内
+
+    """
     wb = load_workbook(filename=xls_file)
     sheet = wb.active
 
     max_row_num = sheet.max_row
 
     out_str = []
-    for xx in range(1, max_row_num + 1):
+    for row in range(1, max_row_num + 1):
         # with category
         # the_cell = 'maplet_' + mslug + '_' + sheet.cell(row=xx, column=1).value
         # slug only
-        the_cell = 'maplet_' + sheet.cell(row=xx, column=1).value
+        the_cell = 'maplet_' + sheet.cell(row=row, column=1).value
         out_str.append(the_cell)
     return out_str
 
 
 def get_html_title(html_file):
-    uu = BeautifulSoup(open(html_file), "html.parser")
-    return uu.title.text
+    """
+    是从网页抓取数据
+
+    """
+    #uu = BeautifulSoup(open(html_file), "html.parser")
+    return BeautifulSoup(open(html_file), "html.parser").title.text
 
 
 def render_html(tmpl, outfile, **kwargs):
@@ -168,49 +182,49 @@ def xlsx2dict(xls_file):
     '''
     将 XLSX 文件中记录的信息转换为 Python dict.
     '''
-    COLOR_INDEX = (
-        '00000000', '00FFFFFF', '00FF0000', '0000FF00', '000000FF',
-        # 0-4
-        '00FFFF00', '00FF00FF', '0000FFFF', '00000000', '00FFFFFF',
-        # 5-9
-        '00FF0000', '0000FF00', '000000FF', '00FFFF00', '00FF00FF',
-        # 10-14
-        '0000FFFF', '00800000', '00008000', '00000080', '00808000',
-        # 15-19
-        '00800080', '00008080', '00C0C0C0', '00808080', '009999FF',
-        # 20-24
-        '00993366', '00FFFFCC', '00CCFFFF', '00660066', '00FF8080',
-        # 25-29
-        '000066CC', '00CCCCFF', '00000080', '00FF00FF', '00FFFF00',
-        # 30-34
-        '0000FFFF', '00800080', '00800000', '00008080', '000000FF',
-        # 35-39
-        '0000CCFF', '00CCFFFF', '00CCFFCC', '00FFFF99', '0099CCFF',
-        # 40-44
-        '00FF99CC', '00CC99FF', '00FFCC99', '003366FF', '0033CCCC',
-        # 45-49
-        '0099CC00', '00FFCC00', '00FF9900', '00FF6600', '00666699',
-        # 50-54
-        '00969696', '00003366', '00339966', '00003300', '00333300',
-        # 55-59
-        '00993300', '00993366', '00333399', '00333333',
-        'System Foreground', 'System Background'
-        # 60-64
-    )
+    # COLOR_INDEX = (
+    #     '00000000', '00FFFFFF', '00FF0000', '0000FF00', '000000FF',
+    #     # 0-4
+    #     '00FFFF00', '00FF00FF', '0000FFFF', '00000000', '00FFFFFF',
+    #     # 5-9
+    #     '00FF0000', '0000FF00', '000000FF', '00FFFF00', '00FF00FF',
+    #     # 10-14
+    #     '0000FFFF', '00800000', '00008000', '00000080', '00808000',
+    #     # 15-19
+    #     '00800080', '00008080', '00C0C0C0', '00808080', '009999FF',
+    #     # 20-24
+    #     '00993366', '00FFFFCC', '00CCFFFF', '00660066', '00FF8080',
+    #     # 25-29
+    #     '000066CC', '00CCCCFF', '00000080', '00FF00FF', '00FFFF00',
+    #     # 30-34
+    #     '0000FFFF', '00800080', '00800000', '00008080', '000000FF',
+    #     # 35-39
+    #     '0000CCFF', '00CCFFFF', '00CCFFCC', '00FFFF99', '0099CCFF',
+    #     # 40-44
+    #     '00FF99CC', '00CC99FF', '00FFCC99', '003366FF', '0033CCCC',
+    #     # 45-49
+    #     '0099CC00', '00FFCC00', '00FF9900', '00FF6600', '00666699',
+    #     # 50-54
+    #     '00969696', '00003366', '00339966', '00003300', '00333300',
+    #     # 55-59
+    #     '00993300', '00993366', '00333399', '00333333',
+    #     'System Foreground', 'System Background'
+    #     # 60-64
+    # )
     wb = load_workbook(filename=xls_file)
     sheet = wb.active
 
     max_row_num = sheet.max_row
     max_col_num = sheet.max_column
     out_str = ''
-    for xx in range(1, max_row_num + 1):
+    for row in range(1, max_row_num + 1):
         # print('x:', xx)
         the_str = ''
         sig = True
-        for yy in range(1, max_col_num + 1):
+        for col in range(1, max_col_num + 1):
             # print('y:', yy)
 
-            the_cell = sheet.cell(row=xx, column=yy)
+            the_cell = sheet.cell(row=row, column=col)
             if the_cell and the_cell.value:
 
                 the_cell_value = the_cell.value
@@ -222,10 +236,10 @@ def xlsx2dict(xls_file):
                 if colors in ['00000000', 0]:
                     pass
                 elif len(colors) == 8:
-                    a = int(hex2dec(colors[2:4]))
-                    b = int(hex2dec(colors[4:6]))
-                    c = int(hex2dec(colors[6:8]))
-                    the_cell_value = [a, b, c]
+                    red = int(hex2dec(colors[2:4]))
+                    green = int(hex2dec(colors[4:6]))
+                    blue = int(hex2dec(colors[6:8]))
+                    the_cell_value = [red, green, blue]
 
                 # else:
                 #     out_dic[row[0].value] = row[1].value
@@ -251,11 +265,11 @@ def xlsx2dict(xls_file):
 
     with open('xx_out.xbj', 'w') as fo:
         fo.write(out_str)
-    uu = yaml.load(out_str)
+    #uu = yaml.load(out_str)
     # from pprint import pprint
     # pprint(uu)
 
-    return uu
+    return yaml.load(out_str)
 
 
 def get_epsg_code(img_file, raster=False):
@@ -266,8 +280,8 @@ def get_epsg_code(img_file, raster=False):
         raster = True
     if raster:
         # print(img_file)
-        ds = gdal.Open(img_file)
-        srs = ds.GetProjection()
+        gdal_open = gdal.Open(img_file)
+        srs = gdal_open.GetProjection()
 
         sr2 = osr.SpatialReference()
         sr2.SetFromUserInput(srs)
@@ -305,6 +319,6 @@ def get_epsg_code(img_file, raster=False):
             'geom_type': geom_type}
 
 
-# ws1=wb.get_sheet_by_name("Sheet1")
+
 if __name__ == '__main__':
     xlsx2dict('meta_poly.xlsx')

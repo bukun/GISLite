@@ -12,11 +12,11 @@ import gislite.helper as helper
 
 from config import GIS_BASE, TILE_SVR
 
-pwd = os.getcwd()
+#pwd = os.getcwd()
 
 src_ws = GIS_BASE
-tpl_ws = os.path.join(pwd, 'static')
-dst_ws = os.path.join(pwd, 'dist_site')
+tpl_ws = os.path.join(os.getcwd(), 'static')
+dst_ws = os.path.join(os.getcwd(), 'dist_site')
 
 if os.path.exists(dst_ws):
     pass
@@ -85,7 +85,8 @@ def format_leftnav(list_main, mname):
 <ul id="configSetting{idx}" class=" secondmenu collapse  {ul_class}">{nav_arr}</ul>
 </li>
 '''
-    a_md = '''<li style="padding:8px 0;overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">
+    a_md = '''<li style="padding:8px 0;overflow: hidden; 
+                text-overflow:ellipsis; white-space: nowrap;">
 <a href="{slug}.html">{title}</a></li>'''
     out_str = ''
     idx = 1
@@ -158,19 +159,19 @@ def gen_html_pages():
 
             left_nav = format_leftnav(list_main, mname)
 
-            xxuu = lqian.split('_')
-            if len(xxuu) > 2:
-                lidx, lname, lslug = xxuu
+            file_dirs = lqian.split('_')
+            if len(file_dirs) > 2:
+                lidx, lname, lslug = file_dirs
             else:
-                lidx, lslug = xxuu
-                lname = xxuu[-1]
+                lidx, lslug = file_dirs
+                lname = file_dirs[-1]
 
-            # ToDo: 对分组(grp)的XLSX进行处理。
+            #  对分组(grp)的XLSX进行处理。
             # dir_idx, dir_slug, dir_title = the_dir.split('_')
 
-            # ToDo: 使用分类 slug
+            # 使用分类 slug
             # file_slug = '{}_{}'.format(mslug, lslug)
-            # ToDo: 使用唯一ID
+            #  使用唯一ID
             file_slug = '{}'.format(lslug)
             # file_title = md_dic['title']
             file_name = file_slug + '.html'
@@ -181,7 +182,7 @@ def gen_html_pages():
             jinja2_file = '/'.join(jinja2_file.split('/')[1:])
 
             if '_grp' in md_file:
-                # ToDo: 处理。
+                #  处理。
                 helper.render_html(
                     'lyrgrp.jinja2',
                     out_html_file,
@@ -216,14 +217,14 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
 
     rrxlsx_file = os.path.join(wroot, png)
 
-    data_apth, hh, qq = method_name(rrxlsx_file)
-    sig_q = data_apth[:qq]
-    sig_h = data_apth[hh + 1:]
+    data_apth, h_place, q_place = method_name(rrxlsx_file)
+    sig_q = data_apth[:q_place]
+    sig_h = data_apth[h_place + 1:]
 
     for wwfile in os.listdir(wroot):
         if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
-            the_sig = wwfile[qq: hh - 1]
-            # print(the_sig)
+            the_sig = wwfile[q_place: h_place - 1]
+
 
             npng = png.replace('[sig]', the_sig)
             print(npng)
@@ -253,15 +254,15 @@ def method_name(rrxlsx_file):
     '''
     map_mata = helper.xlsx2dict(rrxlsx_file)
     data_apth = ''
-    for x in map_mata:
-        for key in x:
+    for mata in map_mata:
+        for key in mata:
             if key == 'data':
-                data_apth = x[key]
+                data_apth = mata[key]
     print('-' * 40)
     print(data_apth)
-    qq = data_apth.index('[')
-    hh = data_apth.index(']')
-    return data_apth, hh, qq
+    q_place = data_apth.index('[')
+    h_place = data_apth.index(']')
+    return data_apth, h_place, q_place
 
 
 def gen_html_index():
@@ -277,21 +278,21 @@ def gen_html_index():
     helper.render_html(index_in, index_out, nav=nav_formated, left_nav=left_nav)
 
 
-def chuli_serial_structure(png, wroot):
+def chuli_serial_structure(file_path, wroot):
     out_arr = []
-    # print(png)
-    rrxlsx_file = os.path.join(wroot, png)
 
-    data_apth, hh, qq = method_name(rrxlsx_file)
-    sig_q = data_apth[:qq]
-    sig_h = data_apth[hh + 1:]
+    rrxlsx_file = os.path.join(wroot, file_path)
+
+    data_apth, h_place, q_place = method_name(rrxlsx_file)
+    sig_q = data_apth[:q_place]
+    sig_h = data_apth[h_place + 1:]
 
     for wwfile in os.listdir(wroot):
         if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
-            # print(wwfile)
 
-            the_sig = wwfile[qq: hh - 1]
-            out_arr.append(png.replace('[sig]', the_sig))
+
+            the_sig = wwfile[q_place: h_place - 1]
+            out_arr.append(file_path.replace('[sig]', the_sig))
     return out_arr
 
 
@@ -327,20 +328,20 @@ def fetch_structure():
 
         the_files.sort()
 
-        tt = the_dir.split('_')
+        dir = the_dir.split('_')
 
-        dir_idx, dir_title, dir_slug = tt
+        dir_idx, dir_title, dir_slug = dir
 
         list_md = []
         for wfile in the_files:
 
             lqian, lhou = os.path.splitext(wfile)
-            xxuu = lqian.split('_')
-            if len(xxuu) > 2:
-                lidx, lname, lslug = xxuu
+            file_path = lqian.split('_')
+            if len(file_path) > 2:
+                lidx, lname, lslug = file_path
             else:
-                lidx, lslug = xxuu
-                lname = xxuu[-1]
+                lidx, lslug = file_path
+                lname = file_path[-1]
 
             the_file = os.path.join(wroot, wfile)
 
@@ -358,7 +359,7 @@ def fetch_structure():
             if wfile.endswith('jinja2'):
                 the_title = helper.get_html_title(the_file)
                 md_dic['title'] = the_title
-            # ToDo: with category
+            #  with category
             # file_name = dir_slug + '_' + lslug + '.html'
 
             # Only layer slug
@@ -392,13 +393,12 @@ def copy_static_files():
 
                 shutil.copy(infile, outfile)
 
-    for ww in os.listdir(tpl_ws):
+    for file_name in os.listdir(tpl_ws):
 
-        inbb = os.path.join(tpl_ws, ww)
+        inbb = os.path.join(tpl_ws, file_name)
 
-        outbb = os.path.join(dst_ws, ww)
-        # print(inbb)
-        # print(outbb)
+        outbb = os.path.join(dst_ws, file_name)
+
         if os.path.isdir(inbb):
             if os.path.exists(outbb):
                 shutil.rmtree(outbb)

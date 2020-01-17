@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-
-
+"""
+发布程序入口
+"""
 import os
 import shutil
 import time
@@ -21,11 +22,11 @@ STR_RUN_WCS_TMPL = '''#!/bin/bash
 mapserver_ip = '127.0.0.1'
 out_yaml_file = 'out_mapproxy.yaml'
 
-ts1 = time.time()
+start_time = time.time()
 
 ###########################################################
 
-print('Generating ma pfiles ...')
+print('Generating mapfiles ...')
 gen_xlsx_lyr.run_it()
 print('Generating mapproxy yaml ...')
 gen_mapproxy.gen_by_ip(mapserver_ip, out_yaml_file)
@@ -51,10 +52,10 @@ def gen_run_mapproxy_sh():
 
 gen_run_mapproxy_sh()
 
-ts2 = time.time()
+end_time = time.time()
 
 # 保存时间戳到文件。此文件用来判断要新处理的XLSX文件。
 with open('mts.log', 'w') as fo:
-    fo.write(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(ts2)))
+    fo.write(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(end_time)))
 
-print('Running time: ', ts2 - ts1)
+print('Running time: ', end_time - start_time)

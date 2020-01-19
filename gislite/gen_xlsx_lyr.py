@@ -10,6 +10,9 @@ from gislite.helper import TPL_MAP, TPL_LAYER, TPL_CLASS
 
 MTS = helper.get_mts()
 
+#pylint: disable=invalid-name
+#pylint: disable=unused-variable
+#针对未使用的变量进行忽略
 
 def do_for_map_category(category_dir):
     '''

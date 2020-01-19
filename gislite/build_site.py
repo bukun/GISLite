@@ -3,7 +3,8 @@
 '''
 Running with python3, with markdown module.
 '''
-
+#pylint: disable=invalid-name
+#pylint: disable=unused-variable
 import os
 import shutil
 import markdown
@@ -67,8 +68,7 @@ def format_nav(list_main):
             nav_title=the_list['title']
         )
         out_str = out_str + a_nav_f
-    # print('x' * 20)
-    # print(out_str)
+
     return out_str
 
 
@@ -134,31 +134,25 @@ def gen_html_pages():
     '''
     根据输入的 MarkDown 文件，生成 HTML 结果。
     '''
-    list_main = fetch_structure()  # print('5' * 40)
-    # pprint(list_main)
+    list_main = fetch_structure()
     nav_formated = format_nav(list_main)
-
     the_dirs = os.listdir(src_ws)
     the_dirs.sort()
     for idx_dir, the_dir in enumerate(the_dirs):
         wroot = os.path.join(src_ws, the_dir)
-
         if os.path.isdir(wroot) and 'maplet' in wroot:
             pass
         else:
             continue
 
-        ################
+
         # 处理 HTML 文件
         md_files = [x for x in os.listdir(wroot) if x.endswith('.xlsx') and x.startswith('meta_')]
         for idx_file, md_file in enumerate(md_files):
-
-            mqian, mhou = os.path.split(the_dir)
-            midx, mname, mslug = mhou.split('_')
+            name_before, name_after = os.path.split(the_dir)
+            midx, mname, mslug = name_after.split('_')
             lqian, lhou = os.path.splitext(md_file)
-
             left_nav = format_leftnav(list_main, mname)
-
             file_dirs = lqian.split('_')
             if len(file_dirs) > 2:
                 lidx, lname, lslug = file_dirs
@@ -168,16 +162,12 @@ def gen_html_pages():
 
             #  对分组(grp)的XLSX进行处理。
             # dir_idx, dir_slug, dir_title = the_dir.split('_')
-
             # 使用分类 slug
             # file_slug = '{}_{}'.format(mslug, lslug)
             #  使用唯一ID
             file_slug = '{}'.format(lslug)
-            # file_title = md_dic['title']
             file_name = file_slug + '.html'
-
             out_html_file = os.path.join(dst_ws, file_name)
-
             jinja2_file = 'templates/lyr.jinja2'
             jinja2_file = '/'.join(jinja2_file.split('/')[1:])
 
@@ -228,14 +218,9 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
 
             npng = png.replace('[sig]', the_sig)
             print(npng)
-
-            # file_slug = '{}_{}'.format(mslug, lslug.replace('[sig]', the_sig))
             file_slug = '{}'.format(lslug.replace('[sig]', the_sig))
-
             file_name = file_slug + '.html'
-
             out_html_file = os.path.join(dst_ws, file_name)
-
             helper.render_html(
                 jinja2_file,
                 out_html_file,

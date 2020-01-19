@@ -10,7 +10,9 @@ import yaml
 from config import GIS_BASE
 import gislite.helper as helper
 from gislite.helper import TPL_MAPPROXY
-
+#pylint: disable=invalid-name
+#pylint: disable=unused-variable
+#针对未使用的变量进行忽略
 
 # raw_yaml = ''
 # # if os.path.exists('/home/bk/wcs_maplet/mapproxy.yaml'):

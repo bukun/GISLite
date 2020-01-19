@@ -7,7 +7,8 @@ from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
 from osgeo import gdal, ogr, osr
 
-
+#pylint: disable=invalid-name
+#pylint: disable=unused-variable
 
 JINJA_ENV = Environment(loader=FileSystemLoader('templates'))
 

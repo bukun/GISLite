@@ -27,9 +27,9 @@ start_time = time.time()
 ###########################################################
 
 print('Generating mapfiles ...')
-gen_xlsx_lyr.run_it()
+# gen_xlsx_lyr.run_it()
 print('Generating mapproxy yaml ...')
-gen_mapproxy.gen_yaml_file(mapserver_ip, out_yaml_file)
+# gen_mapproxy.gen_yaml_file(mapserver_ip, out_yaml_file)
 print('build webgis ...')
 build_site.run_it()
 

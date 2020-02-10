@@ -138,7 +138,10 @@ def gen_html_pages():
     list_main = fetch_structure()
     nav_formated = format_nav(list_main)
 
-    for idx_dir, the_dir in enumerate(os.listdir(src_ws).sort()):
+    the_dirs = os.listdir(src_ws)
+    the_dirs.sort()
+
+    for idx_dir, the_dir in enumerate( the_dirs ):
         wroot = os.path.join(src_ws, the_dir)
         if os.path.isdir(wroot) and 'maplet' in wroot:
             pass

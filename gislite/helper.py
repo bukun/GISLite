@@ -7,11 +7,14 @@ from bs4 import BeautifulSoup
 from jinja2 import Environment, FileSystemLoader
 from osgeo import gdal, ogr, osr
 
-#pylint: disable=invalid-name
-#pylint: disable=unused-variable
+# pylint: disable=invalid-name
+# pylint: disable=unused-variable
 
 JINJA_ENV = Environment(loader=FileSystemLoader('templates'))
 
+'''
+MAP Object template in Mapfile.
+'''
 TPL_MAP = '''
 MAP
 NAME "{fc_name}"
@@ -42,7 +45,11 @@ IMAGETYPE png
 
 END
 '''
-TPL_LAYER = """
+
+'''
+LAYER Object template in Mapfile. 
+'''
+TPL_LAYER = '''
 LAYER
     NAME 'land'
     TYPE POLYGON
@@ -71,8 +78,12 @@ LAYER
     CLASS
     end
 END
-"""
-TPL_CLASS = """
+'''
+
+'''
+CLASS Object template in Mapfile.
+'''
+TPL_CLASS = '''
 CLASS
     STYLE
                 
@@ -81,8 +92,11 @@ CLASS
         FONT "simsun"
     end
 END
-"""
+'''
 
+'''
+MapProxy config file template.
+'''
 TPL_MAPPROXY = '''
 services:
   demo:
@@ -124,10 +138,9 @@ globals:
 
 
 def get_mts(afile=None):
-    """
+    '''
     输出最近修改时间
-
-    """
+    '''
     if afile:
         return os.path.getmtime(afile)
     else:
@@ -137,11 +150,10 @@ def get_mts(afile=None):
             return 0
 
 
-def lyr_list(mslug, xls_file):
-    """
+def lyr_list(xls_file):
+    '''
     解析得到excel表内的值放入列表内
-
-    """
+    '''
     wb = load_workbook(filename=xls_file)
     sheet = wb.active
 
@@ -158,15 +170,18 @@ def lyr_list(mslug, xls_file):
 
 
 def get_html_title(html_file):
-    """
-    是从网页抓取数据
+    '''
+    Get the title of the page.
+    '''
 
-    """
-    #uu = BeautifulSoup(open(html_file), "html.parser")
+    # uu = BeautifulSoup(open(html_file), "html.parser")
     return BeautifulSoup(open(html_file), "html.parser").title.text
 
 
 def render_html(tmpl, outfile, **kwargs):
+    '''
+    Render HTML file using Jinja2.
+    '''
     template = JINJA_ENV.get_template(tmpl)
     output_from_parsed_template = template.render(kwargs)
 
@@ -176,6 +191,9 @@ def render_html(tmpl, outfile, **kwargs):
 
 
 def hex2dec(string_num):
+    '''
+    Convert HEX to DEC.
+    '''
     return str(int(string_num.upper(), 16))
 
 
@@ -266,7 +284,7 @@ def xlsx2dict(xls_file):
 
     with open('xx_out.xbj', 'w') as fo:
         fo.write(out_str)
-    #uu = yaml.load(out_str)
+    # uu = yaml.load(out_str)
     # from pprint import pprint
     # pprint(uu)
 
@@ -318,7 +336,6 @@ def get_epsg_code(img_file, raster=False):
             'proj4_code': srs.ExportToProj4(),
             # 'epsg_code': '', #epsg_code,
             'geom_type': geom_type}
-
 
 
 if __name__ == '__main__':

@@ -10,34 +10,41 @@ from gislite.helper import TPL_MAP, TPL_LAYER, TPL_CLASS
 
 MTS = helper.get_mts()
 
-#pylint: disable=invalid-name
-#pylint: disable=unused-variable
-#针对未使用的变量进行忽略
+
+def is_lyr_def(xlsfile):
+    '''
+    if the xlsx file used to define layer.
+    Not for Multiple layers, or group layers.
+    '''
+    if xlsfile.endswith('.xlsx'):
+        if '_mul' in xlsfile or '_grp' in xlsfile:
+            return False
+        else:
+            return True
+    else:
+        return True
+
+
+# pylint: disable=invalid-name
+# pylint: disable=unused-variable
+# 针对未使用的变量进行忽略
 
 def do_for_map_category(category_dir):
     '''
     按分类进行处理，生成总的 Mapfile.
     '''
-    mqian, mhou = os.path.split(category_dir)  # 得到路径与文件夹的名称
+    # 得到路径与文件夹的名称
+    mqian, mhou = os.path.split(category_dir)
 
-    midx, mname, mslug = mhou.split('_')  # 对文件夹名称进行切分，得到索引顺序， slug 与 名称。保存成变量
+    # 对文件夹名称进行切分，得到 索引顺序, 名称, slug
+    midx, mname, mslug = mhou.split('_')
 
     fc_inc = ''
     for wroot, wdirs, wfiles in os.walk(category_dir):
         for wfile in wfiles:
-            if wfile.endswith('.xlsx'):
-                if '_mul' in wfile:
-                    continue
-                elif '_grp' in wfile:
-                    continue
-                else:
-                    pass
-            else:
-                continue
-
-            # 只加入单个图层的。
-            for lyr_name in get_lyr_mapfile(category_dir, wfile, wroot):
-                fc_inc = fc_inc + 'include "{}"\n'.format(lyr_name)
+            if is_lyr_def(wfile):
+                for lyr_name in get_lyr_mapfile(category_dir, wfile, wroot):
+                    fc_inc = fc_inc + 'include "{}"\n'.format(lyr_name)
 
     # fc_map_file = os.path.join(map_dir, 'mapfile.map')
     fc_map_file = os.path.join(mqian, 'mfile_{}.map'.format(mslug))
@@ -59,12 +66,8 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
     '''
     得到图层的 Mapfile
     '''
-
-
     rrxlsx_file = os.path.join(wroot, wfile)
     print(rrxlsx_file)
-
-    # t_mts = helper.get_mts(rrxlsx_file)
 
     map_mata = helper.xlsx2dict(rrxlsx_file)
 
@@ -188,8 +191,6 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=None):
         new_layer['classes'].pop()
         # print(help(new_layer['classes']))
 
-
-
         with open(lyr_file, 'w') as fo:
             fo.write(mappyfile.dumps(new_layer, indent=1, spacer="    "))
     return lyr_file
@@ -198,12 +199,11 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=None):
 def run_it():
     """
     程序入口
-
     """
     for wroot, wdirs, wfile in os.walk(GIS_BASE):
         for wdir in wdirs:
+            # 'maplet', the Magic String.
             if wdir.startswith('maplet'):
-
                 do_for_map_category(os.path.join(wroot, wdir))
 
 

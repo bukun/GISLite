@@ -3,8 +3,8 @@
 '''
 Running with python3, with markdown module.
 '''
-#pylint: disable=invalid-name
-#pylint: disable=unused-variable
+# pylint: disable=invalid-name
+# pylint: disable=unused-variable
 import os
 import shutil
 import markdown
@@ -13,7 +13,7 @@ import gislite.helper as helper
 
 from config import GIS_BASE, TILE_SVR
 
-#pwd = os.getcwd()
+# pwd = os.getcwd()
 
 src_ws = GIS_BASE
 tpl_ws = os.path.join(os.getcwd(), 'static')
@@ -86,8 +86,9 @@ def format_leftnav(list_main, mname):
 </li>
 '''
     a_md = '''<li style="padding:8px 0;overflow: hidden; 
-                text-overflow:ellipsis; white-space: nowrap;">
+text-overflow:ellipsis; white-space: nowrap;">
 <a href="{slug}.html">{title}</a></li>'''
+
     out_str = ''
     idx = 1
     for idx_list, the_list in enumerate(list_main):
@@ -136,15 +137,13 @@ def gen_html_pages():
     '''
     list_main = fetch_structure()
     nav_formated = format_nav(list_main)
-    the_dirs = os.listdir(src_ws)
-    the_dirs.sort()
-    for idx_dir, the_dir in enumerate(the_dirs):
+
+    for idx_dir, the_dir in enumerate(os.listdir(src_ws).sort()):
         wroot = os.path.join(src_ws, the_dir)
         if os.path.isdir(wroot) and 'maplet' in wroot:
             pass
         else:
             continue
-
 
         # 处理 HTML 文件
         md_files = [x for x in os.listdir(wroot) if x.endswith('.xlsx') and x.startswith('meta_')]
@@ -177,12 +176,11 @@ def gen_html_pages():
                     'lyrgrp.jinja2',
                     out_html_file,
                     nav=nav_formated,
-                    layers=helper.lyr_list(mslug, os.path.join(wroot, md_file)),
+                    layers=helper.lyr_list(os.path.join(wroot, md_file)),
                     IP=TILE_SVR,
                     left_nav=left_nav,
                     title=lname,
                     mname=mname
-
                 )
             elif '[' in md_file:
                 chuli_serial_file(md_file, wroot, mslug, lslug, jinja2_file, left_nav, mname,
@@ -214,7 +212,6 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
     for wwfile in os.listdir(wroot):
         if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
             the_sig = wwfile[q_place: h_place - 1]
-
 
             npng = png.replace('[sig]', the_sig)
             print(npng)
@@ -264,6 +261,9 @@ def gen_html_index():
 
 
 def chuli_serial_structure(file_path, wroot):
+    '''
+    Deal with serial structure.
+    '''
     out_arr = []
 
     rrxlsx_file = os.path.join(wroot, file_path)
@@ -274,8 +274,6 @@ def chuli_serial_structure(file_path, wroot):
 
     for wwfile in os.listdir(wroot):
         if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
-
-
             the_sig = wwfile[q_place: h_place - 1]
             out_arr.append(file_path.replace('[sig]', the_sig))
     return out_arr
@@ -313,9 +311,7 @@ def fetch_structure():
 
         the_files.sort()
 
-        dir = the_dir.split('_')
-
-        dir_idx, dir_title, dir_slug = dir
+        dir_idx, dir_title, dir_slug = the_dir.split('_')
 
         list_md = []
         for wfile in the_files:

@@ -22,7 +22,7 @@ def is_lyr_def(xlsfile):
         else:
             return True
     else:
-        return True
+        return False
 
 
 # pylint: disable=invalid-name

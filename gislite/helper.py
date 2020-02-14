@@ -73,7 +73,7 @@ LAYER
     'wms_srs' 'EPSG:4326 EPSG:3857'
     "gml_include_items"   "all"
     "wms_include_items"   "all"
-    "wms_enable_request" "GetMap GetFeatureInfo GetCapabilities"
+    "wms_enable_request" "*"
     END
     CLASS
     end

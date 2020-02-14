@@ -108,7 +108,6 @@ text-overflow:ellipsis; white-space: nowrap;">
             nav_title=the_list['title'],
             idx=idx,
             ul_class=ul_class
-
         )
         idx = idx + 1
         out_str = out_str + a_nav_f
@@ -141,7 +140,7 @@ def gen_html_pages():
     the_dirs = os.listdir(src_ws)
     the_dirs.sort()
 
-    for idx_dir, the_dir in enumerate( the_dirs ):
+    for idx_dir, the_dir in enumerate(the_dirs):
         wroot = os.path.join(src_ws, the_dir)
         if os.path.isdir(wroot) and 'maplet' in wroot:
             pass

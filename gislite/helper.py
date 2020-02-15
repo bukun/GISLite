@@ -247,7 +247,7 @@ def xlsx2dict(xls_file):
 
                 the_cell_value = the_cell.value
 
-                if the_cell_value.startswith('#'):
+                if isinstance(colors, str) and the_cell_value.startswith('#'):
                     # 直接定义颜色的情况
                     the_cell_value = '"{}"'.format(the_cell_value.strip())
                 else:
@@ -259,8 +259,9 @@ def xlsx2dict(xls_file):
                     if colors in ['00000000', 0]:
                         pass
                     elif isinstance(colors, int):
+                        # 从颜色索引中获取
                         the_cell_value = '"#{}"'.format(COLOR_INDEX[colors])
-                    elif len(colors) == 8:
+                    elif isinstance(colors, str) and len(colors) == 8:
                         # red = int(hex2dec(colors[2:4]))
                         # green = int(hex2dec(colors[4:6]))
                         # blue = int(hex2dec(colors[6:8]))

@@ -201,35 +201,35 @@ def xlsx2dict(xls_file):
     '''
     将 XLSX 文件中记录的信息转换为 Python dict.
     '''
-    # COLOR_INDEX = (
-    #     '00000000', '00FFFFFF', '00FF0000', '0000FF00', '000000FF',
-    #     # 0-4
-    #     '00FFFF00', '00FF00FF', '0000FFFF', '00000000', '00FFFFFF',
-    #     # 5-9
-    #     '00FF0000', '0000FF00', '000000FF', '00FFFF00', '00FF00FF',
-    #     # 10-14
-    #     '0000FFFF', '00800000', '00008000', '00000080', '00808000',
-    #     # 15-19
-    #     '00800080', '00008080', '00C0C0C0', '00808080', '009999FF',
-    #     # 20-24
-    #     '00993366', '00FFFFCC', '00CCFFFF', '00660066', '00FF8080',
-    #     # 25-29
-    #     '000066CC', '00CCCCFF', '00000080', '00FF00FF', '00FFFF00',
-    #     # 30-34
-    #     '0000FFFF', '00800080', '00800000', '00008080', '000000FF',
-    #     # 35-39
-    #     '0000CCFF', '00CCFFFF', '00CCFFCC', '00FFFF99', '0099CCFF',
-    #     # 40-44
-    #     '00FF99CC', '00CC99FF', '00FFCC99', '003366FF', '0033CCCC',
-    #     # 45-49
-    #     '0099CC00', '00FFCC00', '00FF9900', '00FF6600', '00666699',
-    #     # 50-54
-    #     '00969696', '00003366', '00339966', '00003300', '00333300',
-    #     # 55-59
-    #     '00993300', '00993366', '00333399', '00333333',
-    #     'System Foreground', 'System Background'
-    #     # 60-64
-    # )
+    COLOR_INDEX = (
+        '00000000', '00FFFFFF', '00FF0000', '0000FF00', '000000FF',
+        # 0-4
+        '00FFFF00', '00FF00FF', '0000FFFF', '00000000', '00FFFFFF',
+        # 5-9
+        '00FF0000', '0000FF00', '000000FF', '00FFFF00', '00FF00FF',
+        # 10-14
+        '0000FFFF', '00800000', '00008000', '00000080', '00808000',
+        # 15-19
+        '00800080', '00008080', '00C0C0C0', '00808080', '009999FF',
+        # 20-24
+        '00993366', '00FFFFCC', '00CCFFFF', '00660066', '00FF8080',
+        # 25-29
+        '000066CC', '00CCCCFF', '00000080', '00FF00FF', '00FFFF00',
+        # 30-34
+        '0000FFFF', '00800080', '00800000', '00008080', '000000FF',
+        # 35-39
+        '0000CCFF', '00CCFFFF', '00CCFFCC', '00FFFF99', '0099CCFF',
+        # 40-44
+        '00FF99CC', '00CC99FF', '00FFCC99', '003366FF', '0033CCCC',
+        # 45-49
+        '0099CC00', '00FFCC00', '00FF9900', '00FF6600', '00666699',
+        # 50-54
+        '00969696', '00003366', '00339966', '00003300', '00333300',
+        # 55-59
+        '00993300', '00993366', '00333399', '00333333',
+        'System Foreground', 'System Background'
+        # 60-64
+    )
     wb = load_workbook(filename=xls_file)
     sheet = wb.active
 
@@ -237,40 +237,46 @@ def xlsx2dict(xls_file):
     max_col_num = sheet.max_column
     out_str = ''
     for row in range(1, max_row_num + 1):
-        # print('x:', xx)
+
         the_str = ''
         sig = True
         for col in range(1, max_col_num + 1):
-            # print('y:', yy)
 
             the_cell = sheet.cell(row=row, column=col)
             if the_cell and the_cell.value:
 
                 the_cell_value = the_cell.value
 
-                colors = the_cell.fill.fgColor.index
-                # print(colors)
+                if the_cell_value.startswith('#'):
+                    # 直接定义颜色的情况
+                    the_cell_value = '"{}"'.format(the_cell_value.strip())
+                else:
+                    # 进行颜色判断
+                    colors = the_cell.fill.fgColor.index
+                    # print(colors)
 
-                # '00000000' for not filled, 0 for `white`.
-                if colors in ['00000000', 0]:
-                    pass
-                elif len(colors) == 8:
-                    red = int(hex2dec(colors[2:4]))
-                    green = int(hex2dec(colors[4:6]))
-                    blue = int(hex2dec(colors[6:8]))
-                    the_cell_value = [red, green, blue]
+                    # '00000000' for not filled, 0 for `white`.
+                    if colors in ['00000000', 0]:
+                        pass
+                    elif isinstance(colors, int):
+                        the_cell_value = '"#{}"'.format(COLOR_INDEX[colors])
+                    elif len(colors) == 8:
+                        # red = int(hex2dec(colors[2:4]))
+                        # green = int(hex2dec(colors[4:6]))
+                        # blue = int(hex2dec(colors[6:8]))
+                        # the_cell_value = [red, green, blue]
+                        the_cell_value = '"#{}"'.format(colors)
+                        print(the_cell_value)
 
-                # else:
-                #     out_dic[row[0].value] = row[1].value
-
-                if str(the_cell_value).lower() in ['class',
-                                                   'classitem',
-                                                   'labelitem',
-                                                   'data',
-                                                   'labelminscaledenom',
-                                                   'labelmaxscaledenom',
-                                                   'encoding',
-                                                   'processing', ]:
+                mf_keys = ['class',
+                           'classitem',
+                           'labelitem',
+                           'data',
+                           'labelminscaledenom',
+                           'labelmaxscaledenom',
+                           'encoding',
+                           'processing', ]
+                if str(the_cell_value).lower() in mf_keys:
                     the_str = '- ' + the_str
 
                 if sig:
@@ -280,6 +286,7 @@ def xlsx2dict(xls_file):
                     the_str = the_str + str(the_cell_value)
             else:
                 the_str = the_str + '  '
+            print(the_str)
         out_str = out_str + the_str + '\r'
 
     with open('xx_out.xbj', 'w') as fo:
@@ -339,4 +346,7 @@ def get_epsg_code(img_file, raster=False):
 
 
 if __name__ == '__main__':
-    xlsx2dict('meta_poly.xlsx')
+    uu = xlsx2dict('xlsx.xlsx')
+    from pprint import pprint
+
+    pprint(uu)

@@ -257,16 +257,17 @@ def xlsx2dict(xls_file):
 
                     # '00000000' for not filled, 0 for `white`.
                     if colors in ['00000000', 0]:
+                        # 无颜色定义
                         pass
                     elif isinstance(colors, int):
                         # 从颜色索引中获取
-                        the_cell_value = '"#{}"'.format(COLOR_INDEX[colors])
+                        the_cell_value = '"#{}{}"'.format(COLOR_INDEX[colors][2:], COLOR_INDEX[colors][:2])
                     elif isinstance(colors, str) and len(colors) == 8:
                         # red = int(hex2dec(colors[2:4]))
                         # green = int(hex2dec(colors[4:6]))
                         # blue = int(hex2dec(colors[6:8]))
                         # the_cell_value = [red, green, blue]
-                        the_cell_value = '"#{}"'.format(colors)
+                        the_cell_value = '"#{}{}"'.format(colors[2:], colors[:2])
                         print(the_cell_value)
 
                 mf_keys = ['class',

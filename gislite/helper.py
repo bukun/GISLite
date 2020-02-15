@@ -247,7 +247,7 @@ def xlsx2dict(xls_file):
 
                 the_cell_value = the_cell.value
 
-                if isinstance(colors, str) and the_cell_value.startswith('#'):
+                if isinstance(the_cell_value, str) and the_cell_value.startswith('#'):
                     # 直接定义颜色的情况
                     the_cell_value = '"{}"'.format(the_cell_value.strip())
                 else:
@@ -347,7 +347,7 @@ def get_epsg_code(img_file, raster=False):
 
 
 if __name__ == '__main__':
-    uu = xlsx2dict('xlsx.xlsx')
+    uu = xlsx2dict('xx_xlsx.xlsx')
     from pprint import pprint
 
     pprint(uu)

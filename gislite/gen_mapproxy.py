@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 '''
-生成MapProxy的YAML配置文件
+2. 生成MapProxy的YAML配置文件
 '''
 
 import os
@@ -27,18 +27,15 @@ def chuli_serial_file(file_name, mapserver_ip, mapproxy_mold, wroot):
     """
     处理一系列文件的方法
     """
-    xlsx_file = os.path.join(wroot, file_name)
-
-    map_meta = helper.xlsx2dict(xlsx_file)
 
     data_apth = ''
-    for meta in map_meta:
+    for meta in helper.xlsx2dict(os.path.join(wroot, file_name)):
         for key in meta:
             if key == 'data':
                 data_apth = meta[key]
 
     if '[' in data_apth:
-        print('-' * 40)
+
         meta_q = data_apth.index('[')
         meta_h = data_apth.index(']')
         sig_q = data_apth[:meta_q]
@@ -66,7 +63,6 @@ def gen_yaml_file(mapserver_ip, out_yaml_file):
         else:
             continue
         for file_name in wfiles:
-
             if file_name.startswith('meta_') and file_name.endswith('.xlsx'):
                 if '_mul' in file_name:
                     gen_mul_lyr(file_name, mapproxy_mold, wroot)
@@ -85,6 +81,9 @@ def gen_yaml_file(mapserver_ip, out_yaml_file):
 
 
 def gen_mul_lyr(file_name, mapproxy_mold, wroot):
+    '''
+    处理多图层。
+    '''
     lqian, lhou = os.path.splitext(file_name)
     xxuu = lqian.split('_')
     if len(xxuu) > 2:
@@ -110,13 +109,16 @@ def gen_mul_lyr(file_name, mapproxy_mold, wroot):
 
     mapproxy_mold['caches'][sig] = {}
     mapproxy_mold['caches'][sig]['grids'] = ['webmercator']
-    mapproxy_mold['caches'][sig]['grids'] = ['webmercator']
     mapproxy_mold['caches'][sig]['sources'] = lyr_list
     new_dic = {'name': sig, 'title': sig, 'sources': [sig]}
     mapproxy_mold['layers'].append(new_dic)
 
 
 def gen_imagery4d(file_name, mapserver_ip, mapproxy_mold, wroot):
+    '''
+    对图层进行处理，
+    相关信息补充到传入的变量中。
+    '''
     lqian, lhou = os.path.splitext(file_name)
     file_dir = lqian.split('_')
     if len(file_dir) > 2:
@@ -145,7 +147,6 @@ def gen_imagery4d(file_name, mapserver_ip, mapproxy_mold, wroot):
         mapserver_ip, fc_map_file)
     mapproxy_mold['sources'][sig]['req']['layers'] = 'lyr_{}'.format(lslug)
     mapproxy_mold['caches'][sig] = {}
-    mapproxy_mold['caches'][sig]['grids'] = ['webmercator']
     mapproxy_mold['caches'][sig]['grids'] = ['webmercator']
     mapproxy_mold['caches'][sig]['sources'] = [sig]
     new_dic = {'name': sig, 'title': sig, 'sources': [sig]}

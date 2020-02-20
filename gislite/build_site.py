@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-Running with python3, with markdown module.
+3. Running with python3, with markdown module.
 '''
 # pylint: disable=invalid-name
 # pylint: disable=unused-variable
@@ -134,8 +134,6 @@ def gen_html_pages():
     '''
     根据输入的 MarkDown 文件，生成 HTML 结果。
     '''
-    list_main = fetch_structure()
-    nav_formated = format_nav(list_main)
 
     the_dirs = os.listdir(src_ws)
     the_dirs.sort()
@@ -143,61 +141,65 @@ def gen_html_pages():
     for idx_dir, the_dir in enumerate(the_dirs):
         wroot = os.path.join(src_ws, the_dir)
         if os.path.isdir(wroot) and 'maplet' in wroot:
-            pass
+            gen_html_pages2(wroot)
         else:
             continue
 
-        # 处理 HTML 文件
-        md_files = [x for x in os.listdir(wroot) if x.endswith('.xlsx') and x.startswith('meta_')]
-        for idx_file, md_file in enumerate(md_files):
-            name_before, name_after = os.path.split(the_dir)
-            midx, mname, mslug = name_after.split('_')
-            lqian, lhou = os.path.splitext(md_file)
-            left_nav = format_leftnav(list_main, mname)
-            file_dirs = lqian.split('_')
-            if len(file_dirs) > 2:
-                lidx, lname, lslug = file_dirs
-            else:
-                lidx, lslug = file_dirs
-                lname = file_dirs[-1]
 
-            #  对分组(grp)的XLSX进行处理。
-            # dir_idx, dir_slug, dir_title = the_dir.split('_')
-            # 使用分类 slug
-            # file_slug = '{}_{}'.format(mslug, lslug)
-            #  使用唯一ID
-            file_slug = '{}'.format(lslug)
-            file_name = file_slug + '.html'
-            out_html_file = os.path.join(dst_ws, file_name)
-            jinja2_file = 'templates/lyr.jinja2'
-            jinja2_file = '/'.join(jinja2_file.split('/')[1:])
+def gen_html_pages2(wroot):
+    # 处理 HTML 文件
+    _, the_dir = os.path.split(wroot)
+    list_main = fetch_structure()
+    nav_formated = format_nav(list_main)
+    md_files = [x for x in os.listdir(wroot) if x.endswith('.xlsx') and x.startswith('meta_')]
+    for idx_file, md_file in enumerate(md_files):
+        name_before, name_after = os.path.split(the_dir)
+        midx, mname, mslug = name_after.split('_')
+        lqian, lhou = os.path.splitext(md_file)
+        left_nav = format_leftnav(list_main, mname)
+        file_dirs = lqian.split('_')
+        if len(file_dirs) > 2:
+            lidx, lname, lslug = file_dirs
+        else:
+            lidx, lslug = file_dirs
+            lname = file_dirs[-1]
 
-            if '_grp' in md_file:
-                #  处理。
-                helper.render_html(
-                    'lyrgrp.jinja2',
-                    out_html_file,
-                    nav=nav_formated,
-                    layers=helper.lyr_list(os.path.join(wroot, md_file)),
-                    IP=TILE_SVR,
-                    left_nav=left_nav,
-                    title=lname,
-                    mname=mname
-                )
-            elif '[' in md_file:
-                chuli_serial_file(md_file, wroot, mslug, lslug, jinja2_file, left_nav, mname,
-                                  nav=nav_formated)
-            else:
-                helper.render_html(
-                    jinja2_file,
-                    out_html_file,
-                    nav=nav_formated,
-                    lyr_name=file_slug,
-                    IP=TILE_SVR,
-                    left_nav=left_nav,
-                    title=lname,
-                    mname=mname
-                )
+        #  对分组(grp)的XLSX进行处理。
+        # dir_idx, dir_slug, dir_title = the_dir.split('_')
+        # 使用分类 slug
+        # file_slug = '{}_{}'.format(mslug, lslug)
+        #  使用唯一ID
+        file_slug = '{}'.format(lslug)
+        out_html_file = os.path.join(dst_ws, file_slug + '.html')
+        jinja2_file = 'templates/lyr.jinja2'
+        jinja2_file = '/'.join(jinja2_file.split('/')[1:])
+
+        if '_grp' in md_file:
+            #  处理。
+            helper.render_html(
+                'lyrgrp.jinja2',
+                out_html_file,
+                nav=nav_formated,
+                layers=helper.lyr_list(os.path.join(wroot, md_file)),
+                IP=TILE_SVR,
+                left_nav=left_nav,
+                title=lname,
+                mname=mname
+            )
+        elif '[' in md_file:
+            chuli_serial_file(md_file, wroot, mslug, lslug, jinja2_file, left_nav, mname,
+                              nav=nav_formated)
+        else:
+            helper.render_html(
+                jinja2_file,
+                out_html_file,
+                nav=nav_formated,
+                lyr_name=file_slug,
+                IP=TILE_SVR,
+                left_nav=left_nav,
+                title=lname,
+                mname=mname
+            )
 
 
 def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, nav=None):
@@ -207,7 +209,7 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
 
     rrxlsx_file = os.path.join(wroot, png)
 
-    data_apth, h_place, q_place = method_name(rrxlsx_file)
+    data_apth, h_place, q_place = parse_serial_filename(rrxlsx_file)
     sig_q = data_apth[:q_place]
     sig_h = data_apth[h_place + 1:]
 
@@ -232,7 +234,7 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
             )
 
 
-def method_name(rrxlsx_file):
+def parse_serial_filename(rrxlsx_file):
     '''
     对于批量的使用变量的，获取路径，以及位置。
     '''
@@ -270,7 +272,7 @@ def chuli_serial_structure(file_path, wroot):
 
     rrxlsx_file = os.path.join(wroot, file_path)
 
-    data_apth, h_place, q_place = method_name(rrxlsx_file)
+    data_apth, h_place, q_place = parse_serial_filename(rrxlsx_file)
     sig_q = data_apth[:q_place]
     sig_h = data_apth[h_place + 1:]
 

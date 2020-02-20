@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-对 XLSX 进行遍历，生成 Mapfile.
+1. 对 XLSX 进行遍历，生成 Mapfile.
 '''
 import os
 import mappyfile
@@ -13,7 +13,7 @@ MTS = helper.get_mts()
 
 def is_lyr_def(xlsfile):
     '''
-    if the xlsx file used to define layer.
+    if the xlsx file is used to define layer.
     Not for Multiple layers, or group layers.
     '''
     if xlsfile.endswith('.xlsx'):
@@ -32,6 +32,7 @@ def is_lyr_def(xlsfile):
 def do_for_map_category(category_dir):
     '''
     按分类进行处理，生成总的 Mapfile.
+    这个分类的文件夹名称，以 ``maplet`` 开头。
     '''
     # 得到路径与文件夹的名称
     mqian, mhou = os.path.split(category_dir)
@@ -43,7 +44,8 @@ def do_for_map_category(category_dir):
     for wroot, wdirs, wfiles in os.walk(category_dir):
         for wfile in wfiles:
             if is_lyr_def(wfile):
-                for lyr_name in get_lyr_mapfile(category_dir, wfile, wroot):
+                # 只对 XLSX 定义的图层进行处理
+                for lyr_name in get_lyrs_name(category_dir, wfile, wroot):
                     fc_inc = fc_inc + 'include "{}"\n'.format(lyr_name)
 
     # fc_map_file = os.path.join(map_dir, 'mapfile.map')
@@ -62,11 +64,11 @@ def do_for_map_category(category_dir):
         fo2.write(tmp_str)
 
 
-def get_lyr_mapfile(category_dir, wfile, wroot):
+def get_lyrs_name(category_dir, xlsxfile_name, wroot):
     '''
-    得到图层的 Mapfile
+    在分类的文件夹下，得到所有图层的名称。
     '''
-    rrxlsx_file = os.path.join(wroot, wfile)
+    rrxlsx_file = os.path.join(wroot, xlsxfile_name)
     print(rrxlsx_file)
 
     map_mata = helper.xlsx2dict(rrxlsx_file)
@@ -93,13 +95,13 @@ def get_lyr_mapfile(category_dir, wfile, wroot):
                 the_sig = wwfile[q_place: h_place - 1]
                 shp = os.path.join(wroot, wwfile)
 
-                lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=the_sig)
+                lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, xlsxfile_name, sig=the_sig)
                 lyrs_file.append(lyr_file)
 
     else:
         shp = os.path.join(wroot, data_path)
 
-        lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, wfile, )
+        lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, xlsxfile_name, )
         lyrs_file.append(lyr_file)
 
     # print(yaml.dump(new_layer))

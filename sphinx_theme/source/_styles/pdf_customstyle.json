@@ -1,0 +1,31 @@
+{
+"pageTemplates" : {
+    "coverPage": {
+        "showFooter" : true,
+	    "defaultFooter" : "This work is licensed under a `Creative Commons Attribution 4.0 International License. <http://creativecommons.org/licenses/by/4.0/deed.en_US>`_"
+    },
+    "oneColumn": {
+        "showFooter" : false
+    }
+},
+"fontsAlias" : {
+    "stdFont": "Lucida Sans Unicode",
+    "stdBold": "Lucida Sans Unicode",
+    "stdItalic": "Helvetica-Oblique",
+    "stdBoldItalic": "Helvetica-BoldOblique",
+    "stdSans": "Lucida Sans Unicode",
+    "stdSansBold": "Lucida Sans Unicode",
+    "stdMono": "Courier"
+  },
+"styles": [
+    ["item-list" , {
+        "colWidths": ["30pt",null],
+        "spaceBefore": 20
+    }],
+    ["code", {
+        "spaceBefore": 20,
+        "borderPadding": 10,
+        "fontSize": 10
+    }]
+]
+}

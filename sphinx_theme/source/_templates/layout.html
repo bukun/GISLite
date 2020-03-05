@@ -1,0 +1,49 @@
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+{{ super() }}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+<script>
+    $(document).ready(function () {
+
+        var map_kd1 = L.map('map_kd1', {
+            maxZoom: 8,
+            minZoom: 3,
+            center: [37.8, 105],
+            zoom: 3
+        });
+        var uu = document.getElementById('map_kd1');
+
+        var kd1_0131 = L.tileLayer.wms('http://47.94.22.90:9011/service?', {
+            layers: uu.dataset.maplet,
+            format: 'image/png',
+            transparent: true
+        }).addTo(map_kd1);
+
+        var overlayMaps_kd1 = {
+            '2020/01/31': kd1_0131,
+        };
+        L.control.layers( overlayMaps_kd1).addTo(map_kd1);
+    });
+</script>
+
+<style>
+    #map_kd1{
+        width: 100%;
+        height: 400px;
+    }
+</style>
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+<div class="container">
+  <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a></p>
+</div>
+
+
+{% endblock %}
+

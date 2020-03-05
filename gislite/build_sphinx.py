@@ -146,6 +146,16 @@ def gen_html_pages():
         else:
             continue
 
+def generate_chfile(chdir, title):
+    chfile  = os.path.join(chdir, 'chapter.rst')
+
+    with open (chfile, 'w') as fo:
+        fo.write('''{title}
+=============================================
+
+{title}
+        
+'''.format(title = title))
 
 def gen_html_pages2(wroot, idx_dir = 0):
     # 处理 HTML 文件
@@ -173,6 +183,9 @@ def gen_html_pages2(wroot, idx_dir = 0):
         file_slug = '{}'.format(lslug)
 
         outdir = os.path.join(dst_ws, 'ch0{}-'.format(idx_dir) + mslug)
+
+        generate_chfile(outdir, mname)
+
         if os.path.exists(outdir):
             pass
         else:

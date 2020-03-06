@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import os
+import re
+
 import yaml
 from openpyxl import load_workbook
 from bs4 import BeautifulSoup
@@ -339,3 +341,105 @@ if __name__ == '__main__':
     from pprint import pprint
 
     pprint(uu)
+
+
+def rst_for_chapter(secws):
+    '''
+    '''
+    sec_list = os.listdir(secws)
+    sec_list = [x for x in sec_list if x.startswith('sec') and not x.endswith('_files') and (x[-3:] not in  ['jpg', 'gif', 'png']) ]
+    sec_list.sort()
+
+    index = 1
+    rst_new_list = []
+    for sec_dir in sec_list:
+
+        rst_new_list.append(sec_dir)
+
+
+    idxfile = os.path.join(secws, 'chapter.rst')
+    if os.path.exists(idxfile):
+        pass
+    else:
+        with open(idxfile, 'w') as fo:
+            fo.write('''Chapter
+==============================================
+
+''')
+    sec_cnt = open(idxfile).readlines()
+
+    with open(idxfile, 'w') as fo:
+        for uu in sec_cnt:
+            if '.. toctree::' in uu:
+                break
+            else:
+                fo.write(uu)
+        fo.write('''.. toctree::\n   :maxdepth: 2\n\n''')
+        for x in rst_new_list:
+            fo.write('   {0}\n'.format(x))
+
+
+def rst_for_book(secws):
+    sec_list = os.listdir(secws)
+    sec_list = [x for x in sec_list if x[:2] in ['ch', 'pt']]
+    sec_list.sort()
+
+    print(sec_list)
+
+    index = 1
+    rst_new_list = []
+    for sec_dir in sec_list:
+        tt = re.split('[-_]', sec_dir)
+        print(tt)
+        feaname = tt[1]
+        if sec_dir.startswith('ch'):
+            outname = 'ch{0}-{1}'.format(str(index).zfill(2), feaname)
+        else:
+            # for `part`.
+            outname = 'pt{0}-{1}'.format(str(index).zfill(2), feaname)
+
+        rst_new_list.append(outname)
+
+        index = index + 1
+
+    if os.path.exists(os.path.join(secws, 'index.rst')):
+        pass
+    else:
+        return False
+    sec_cnt = open(os.path.join(secws, 'index.rst')).readlines()
+
+    print(rst_new_list)
+    with open(os.path.join(secws, 'index.rst'), 'w') as fo:
+        for uu in sec_cnt:
+            if '.. toctree::' in uu:
+                break
+            else:
+                fo.write(uu)
+
+
+        if rst_new_list[0].startswith('ch'):
+            fo.write('''.. toctree::\n   :maxdepth: 3\n   :numbered: 3\n\n''')
+        else:
+            fo.write('''.. toctree::\n\n''')
+
+        for x in rst_new_list:
+            if x.startswith('ch'):
+                fo.write('   {0}/chapter\n'.format(x))
+            else:
+                fo.write('   {0}/part\n'.format(x))
+
+
+def clean_sphinx(fuws):
+    '''
+    do, one by one.
+    '''
+
+    for wroot, wdirs, wfiles in os.walk(fuws):
+        for wdir in wdirs:
+            if wdir.startswith('ch'):
+                inws = os.path.join(wroot, wdir)
+                rst_for_chapter(inws)
+
+    rst_for_book(fuws)
+
+

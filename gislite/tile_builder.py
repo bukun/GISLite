@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 
 '''
-2. 生成MapProxy的YAML配置文件
+2. create YAML file  for MapProxy.
 '''
 
 import os

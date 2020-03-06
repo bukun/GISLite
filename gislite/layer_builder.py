@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
-1. 对 XLSX 进行遍历，生成 Mapfile.
+1. Parse XLSX file, and generate Mapfile for layers.
 '''
 import os
 import mappyfile

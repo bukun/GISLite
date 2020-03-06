@@ -56,7 +56,7 @@ def gen_html_pages2(wroot, idx_dir=0):
         #  使用唯一ID
         file_slug = '{}'.format(lslug)
 
-        outdir = os.path.join(dst_ws, 'ch0{}-'.format(idx_dir) + mslug)
+        outdir = os.path.join(dst_ws, 'ch{}-'.format(str(idx_dir).zfill(2)) + mslug)
 
         if os.path.exists(outdir):
             pass
@@ -67,7 +67,7 @@ def gen_html_pages2(wroot, idx_dir=0):
 
         if '[' in md_file:
             file_slug = 'aa'
-        out_html_file = os.path.join(outdir, 'sec0{}-'.format(idx_file + 1) + file_slug + '.rst')
+        out_html_file = os.path.join(outdir, 'sec{}-'.format(str(idx_file + 1).zfill(2)) + file_slug + '.rst')
 
         # if '_grp' in md_file:
         #     pass

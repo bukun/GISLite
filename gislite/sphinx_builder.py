@@ -58,12 +58,12 @@ def gen_html_pages2(wroot, idx_dir=0):
 
         outdir = os.path.join(dst_ws, 'ch0{}-'.format(idx_dir) + mslug)
 
-        generate_chfile(outdir, mname)
-
         if os.path.exists(outdir):
             pass
         else:
             os.mkdir(outdir)
+
+        generate_chfile(outdir, mname)
 
         if '[' in md_file:
             file_slug = 'aa'

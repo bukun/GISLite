@@ -25,139 +25,19 @@ else:
     os.mkdir(dst_ws)
 
 
-def markdown2html(markdown_text):
-    '''
-    Convert markdown text to HTML. with extensions.
-    '''
-    html = markdown.markdown(
-        markdown_text,
-        extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.toc',
-            'markdown.extensions.codehilite',
-            'markdown.extensions.meta'
-        ]
-    )
-    han_biaodians = ['。', '，', '；', '、', '！', '？']
-    for han_biaodian in han_biaodians:
-        html = html.replace(han_biaodian + '\n', han_biaodian)
-    return html
-
-
-def format_nav(list_main):
-    '''
-    格式化菜单导航栏
-    '''
-    a_nav = '''<li class="dropdown">
-        <a href="{nav_slug}.html" class="dropdown-toggle" data-toggle="dropdown">
-         {nav_title} <b class="caret"></b></a>
-        <ul class="dropdown-menu">{nav_arr}</ul></li>'''
-    a_md = '<li><a href="{slug}.html">{title}</a></li>\n'
-
-    out_str = ''
-
-    for idx_list, the_list in enumerate(list_main):
-        sub_str = ''
-        for idx_link, the_link in enumerate(the_list['list_md']):
-            a_md_f = a_md.format(slug=the_link['slug'], title=the_link['title'])
-            sub_str = sub_str + a_md_f
-
-        a_nav_f = a_nav.format(
-            nav_arr=sub_str,
-            nav_slug=the_list['list_md'][0]['slug'],
-            nav_title=the_list['title']
-        )
-        out_str = out_str + a_nav_f
-
-    return out_str
-
-
-def format_leftnav(list_main, mname):
-    '''
-    格式化左侧导航栏
-    '''
-    a_nav = '''<li>
-<a href="#configSetting{idx}" class="nav-header collapsed" data-toggle="collapse">
-<i class="glyphicon glyphicon-th-list"></i>
-{nav_title}
-<span class="pull-right glyphicon  glyphicon-chevron-toggle"></span>
-</a>
-<ul id="configSetting{idx}" class=" secondmenu collapse  {ul_class}">{nav_arr}</ul>
-</li>
-'''
-    a_md = '''<li style="padding:8px 0;overflow: hidden; 
-text-overflow:ellipsis; white-space: nowrap;">
-<a href="{slug}.html">{title}</a></li>'''
-
-    out_str = ''
-    idx = 1
-    for idx_list, the_list in enumerate(list_main):
-        sub_str = ''
-
-        ul_class = ''
-        for idx_link, the_link in enumerate(the_list['list_md']):
-            a_md_f = a_md.format(slug=the_link['slug'], title=the_link['title'])
-            sub_str = sub_str + a_md_f
-
-        if the_list['title'] == mname:
-            ul_class = 'in'
-
-        a_nav_f = a_nav.format(
-            nav_arr=sub_str,
-            nav_slug=the_list['list_md'][0]['slug'],
-            nav_title=the_list['title'],
-            idx=idx,
-            ul_class=ul_class
-        )
-        idx = idx + 1
-        out_str = out_str + a_nav_f
-
-    return out_str
-
-
-def format_cntnav(cnt_arr):
-    '''
-    格式化内容导航栏
-    '''
-    tpl = '''<li {sig}><a href="#{index}">{title}</a></li>'''
-    out_str = ''
-    for idx, title in enumerate(cnt_arr):
-        if idx == 0:
-            the_str = tpl.format(index=title['key'], title=title['val'], sig='class="active"')
-        else:
-            the_str = tpl.format(index=title['key'], title=title['val'], sig='')
-        out_str = out_str + the_str
-    return out_str
-
-
-def gen_html_pages():
-    '''
-    根据输入的 MarkDown 文件，生成 HTML 结果。
-    '''
-
-    the_dirs = os.listdir(src_ws)
-    the_dirs = [x for x in the_dirs if os.path.isdir(os.path.join(src_ws, x)) and 'maplet' in x]
-    the_dirs.sort()
-
-    for idx_dir, the_dir in enumerate(the_dirs):
-        wroot = os.path.join(src_ws, the_dir)
-        if os.path.isdir(wroot) and 'maplet' in wroot:
-            gen_html_pages2(wroot,idx_dir = idx_dir + 1)
-        else:
-            continue
-
 def generate_chfile(chdir, title):
-    chfile  = os.path.join(chdir, 'chapter.rst')
+    chfile = os.path.join(chdir, 'chapter.rst')
 
-    with open (chfile, 'w') as fo:
+    with open(chfile, 'w') as fo:
         fo.write('''{title}
 =============================================
 
 {title}
         
-'''.format(title = title))
+'''.format(title=title))
 
-def gen_html_pages2(wroot, idx_dir = 0):
+
+def gen_html_pages2(wroot, idx_dir=0):
     # 处理 HTML 文件
     _, the_dir = os.path.split(wroot)
 
@@ -267,7 +147,6 @@ def parse_serial_filename(rrxlsx_file):
     return data_apth, h_place, q_place
 
 
-
 def chuli_serial_structure(file_path, wroot):
     '''
     Deal with serial structure.
@@ -287,13 +166,21 @@ def chuli_serial_structure(file_path, wroot):
     return out_arr
 
 
-
-
-
 def run_it():
-    # gen_html_index()
-    gen_html_pages()
-    # copy_static_files()
+    '''
+    根据输入的 MarkDown 文件，生成 HTML 结果。
+    '''
+
+    the_dirs = os.listdir(src_ws)
+    the_dirs = [x for x in the_dirs if os.path.isdir(os.path.join(src_ws, x)) and 'maplet' in x]
+    the_dirs.sort()
+
+    for idx_dir, the_dir in enumerate(the_dirs):
+        wroot = os.path.join(src_ws, the_dir)
+        if os.path.isdir(wroot) and 'maplet' in wroot:
+            gen_html_pages2(wroot, idx_dir=idx_dir + 1)
+        else:
+            continue
 
 
 if __name__ == '__main__':

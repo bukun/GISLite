@@ -8,8 +8,9 @@ Static site generator (SSG) for GIS data publishment as light WebGIS application
 SSG JUST means for HTML, CSS and JavaScript.
 The application run with MapServer with Apache2 CGI, and MapProxy which running via Python.
 
-
 Example: http://www.osgeo.cn/gislite/
+
+2020-3-5, update: Using Sphinx as the replacement to publish the HTML result.
 
 说明
 ---------------------------------------

@@ -1,19 +1,13 @@
 # -*- coding: utf-8 -*-
 
 '''
-3. Running with python3, with markdown module.
+Replacement for site_builder. Using Sphinx to generate website.
 '''
 # pylint: disable=invalid-name
 # pylint: disable=unused-variable
 import os
-import shutil
-import markdown
-
-# import gislite.helper as helper
 
 from config import GIS_BASE, TILE_SVR
-
-# pwd = os.getcwd()
 
 src_ws = GIS_BASE
 tpl_ws = os.path.join(os.getcwd(), 'static')

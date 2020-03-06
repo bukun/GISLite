@@ -6,6 +6,6 @@ import os
 import shutil
 import time
 
-from gislite import build_sphinx
+from gislite import sphinx_builder
 
-build_sphinx.run_it()
+sphinx_builder.run_it()

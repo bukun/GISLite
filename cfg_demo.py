@@ -7,6 +7,9 @@ GIS_BASE = '/home/bk/opt/geodata'
 ## 服务器的工作空间
 SITE_WS = '/home/bk/github/GISLite'
 
+# User name
+USER = 'bk'
+
 ###########################################################
 # 远程部署使用，客户端定义. 不使用远程部署可以不用定义
 machines = {

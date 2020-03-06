@@ -6,9 +6,9 @@ import os
 import shutil
 import time
 
-from gislite import gen_xlsx_lyr
-from gislite import gen_mapproxy
-from gislite import build_site
+from gislite import layer_builder
+from gislite import tile_builder
+from gislite import site_builder
 from config import TILE_SVR
 
 STR_RUN_WCS_TMPL = '''#!/bin/bash
@@ -27,11 +27,11 @@ start_time = time.time()
 ###########################################################
 
 print('Generating mapfiles ...')
-gen_xlsx_lyr.run_it()
+layer_builder.run_it()
 print('Generating mapproxy yaml ...')
-gen_mapproxy.gen_yaml_file(mapserver_ip, out_yaml_file)
+tile_builder.gen_yaml_file(mapserver_ip, out_yaml_file)
 print('build webgis ...')
-build_site.run_it()
+site_builder.run_it()
 
 ###########################################################
 wcs_cache_dir = 'wcs_imgmap/cache_data'

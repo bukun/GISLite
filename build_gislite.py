@@ -9,6 +9,9 @@ import time
 from gislite import layer_builder
 from gislite import tile_builder
 from gislite import site_builder
+from gislite import sphinx_builder
+
+
 from config import TILE_SVR
 
 STR_RUN_WCS_TMPL = '''#!/bin/bash
@@ -26,12 +29,14 @@ start_time = time.time()
 
 ###########################################################
 
-print('Generating mapfiles ...')
+print('generating mapfiles ...')
 layer_builder.run_it()
-print('Generating mapproxy yaml ...')
+print('generating mapproxy yaml ...')
 tile_builder.gen_yaml_file(mapserver_ip, out_yaml_file)
-print('build webgis ...')
+print('building for website ...')
 site_builder.run_it()
+print('building for Sphinx ...')
+sphinx_builder.run_it()
 
 ###########################################################
 wcs_cache_dir = 'wcs_imgmap/cache_data'

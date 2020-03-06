@@ -7,5 +7,8 @@ import shutil
 import time
 
 from gislite import sphinx_builder
+from gislite.helper import clean_sphinx
 
 sphinx_builder.run_it()
+
+clean_sphinx('./dist_sphinx/source')

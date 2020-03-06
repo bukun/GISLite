@@ -14,12 +14,15 @@
 import sys, os
 import sphinx_bootstrap_theme
 
-sys.path.insert(0, os.path.abspath('.'))
+# sys.path.insert(0, os.path.abspath('.'))
+
+sys.path.append(os.path.abspath("./_ext"))
 
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.doctest',
-    'sphinx.ext.intersphinx'
+    'sphinx.ext.intersphinx',
+    'gisphinx'
 ]
 
 templates_path = ['_templates']

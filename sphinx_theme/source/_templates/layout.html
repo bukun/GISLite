@@ -5,17 +5,24 @@
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+<script src="https://www.osgeo.cn/_f2elib/leaflet/leaflet.ChineseTmsProviders.js"></script>
 
 <script>
     $(document).ready(function () {
 
         var map_kd1 = L.map('map_kd1', {
-            maxZoom: 8,
+            maxZoom: 16,
             minZoom: 1,
             center: [0,0],
             zoom: 2
         });
         var uu = document.getElementById('map_kd1');
+
+
+      var basemap_kd1 = L.tileLayer.chinaProvider('Google.Satellite.Map', {
+        maxZoom: 18,
+        minZoom: 1
+      }).addTo(map_kd1);
 
         var kd1_0131 = L.tileLayer.wms('http://47.94.22.90:9011/service?', {
             layers: uu.dataset.maplet,
@@ -23,10 +30,21 @@
             transparent: true
         }).addTo(map_kd1);
 
-        var overlayMaps_kd1 = {
-            '2020/01/31': kd1_0131,
-        };
-        L.control.layers( overlayMaps_kd1).addTo(map_kd1);
+        var title = uu.dataset.title;
+
+
+
+      var baseLayers = {
+        "底图": basemap_kd1,
+
+      };
+
+      var overlayMaps_kd1 = new Array();
+      overlayMaps_kd1[title] = kd1_0131;
+
+      L.control.layers(baseLayers, overlayMaps_kd1).addTo(map_kd1);
+
+
     });
 </script>
 
@@ -41,7 +59,7 @@
 {% block footer %}
 {{ super() }}
 <div class="container">
-  <p>This work is licensed under a <a href="http://creativecommons.org/licenses/by/4.0/deed.en_US">Creative Commons Attribution 4.0 International License</a></p>
+  <p>This work is licensed under MIT License.</p>
 </div>
 
 

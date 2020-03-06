@@ -7,6 +7,8 @@ Replacement for site_builder. Using Sphinx to generate website.
 # pylint: disable=unused-variable
 import os
 
+import gislite.helper as helper
+
 from config import GIS_BASE, TILE_SVR
 
 src_ws = GIS_BASE
@@ -65,37 +67,58 @@ def gen_html_pages2(wroot, idx_dir=0):
 
         generate_chfile(outdir, mname)
 
-        if '[' in md_file:
-            file_slug = 'aa'
-        out_html_file = os.path.join(outdir, 'sec{}-'.format(str(idx_file + 1).zfill(2)) + file_slug + '.rst')
-
-        # if '_grp' in md_file:
-        #     pass
+        # if '[' in md_file:
+        #     file_slug = 'aa'
         #
-        # elif '[' in md_file:
-        #     #
-        #     pass
-        # else:
 
-        with open(out_html_file, 'w') as fo:
-            fo.write('''{}——{}
+        if '_grp' in md_file:
+            layers=helper.lyr_list(os.path.join(wroot, md_file))
+
+            out_html_file = os.path.join(
+                outdir,
+                'sec{}-'.format(str(idx_file + 1).zfill(2)) + file_slug + '.rst'
+            )
+            with open(out_html_file, 'w') as fo:
+                fo.write('''{lname}
 ==========================================
 
-Contents.
+{mname}——{lname} 。
 
 .. raw:: html
 
-  <div id="map_kd1" data-maplet="maplet_{}"></div>
+  <div id="map_kd1" data-maplet="{file_slug}" data-title="{lname}"></div>
    
 
 
-'''.format(mname, lname, file_slug))
+'''.format(mname=mname, lname=lname, file_slug=','.join(layers)))
+
+        elif '[' in md_file:
+            chuli_serial_file(wroot, md_file, lname, lslug, mname, outdir)
+        else:
+            out_html_file = os.path.join(
+                outdir,
+                'sec{}-'.format(str(idx_file + 1).zfill(2)) + file_slug + '.rst'
+            )
+            with open(out_html_file, 'w') as fo:
+                fo.write('''{lname}
+==========================================
+
+{mname}——{lname} 。
+
+.. raw:: html
+
+  <div id="map_kd1" data-maplet="maplet_{file_slug}" data-title="{lname}"></div>
+   
 
 
-def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, nav=None):
+'''.format(mname=mname, lname=lname, file_slug=file_slug))
+
+
+def chuli_serial_file(wroot, mdfile, lname, lslug, mname, outdir):
     '''
     处理满足条件的序列数据
     '''
+    png = mdfile
 
     rrxlsx_file = os.path.join(wroot, png)
 
@@ -103,25 +126,35 @@ def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, na
     sig_q = data_apth[:q_place]
     sig_h = data_apth[h_place + 1:]
 
+    idx_file = 0
     for wwfile in os.listdir(wroot):
+
         if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
             the_sig = wwfile[q_place: h_place - 1]
 
             npng = png.replace('[sig]', the_sig)
             print(npng)
             file_slug = '{}'.format(lslug.replace('[sig]', the_sig))
-            file_name = file_slug + '.html'
-            out_html_file = os.path.join(dst_ws, file_name)
-            helper.render_html(
-                jinja2_file,
-                out_html_file,
-                nav=nav,
-                left_nav=left_nav,
-                title=mslug + the_sig,
-                mname=mname,
-                lyr_name=file_slug,
-                IP=TILE_SVR
-            )
+
+            file_name = 'sec{}-'.format(str(idx_file + 1).zfill(2)) + file_slug + '.rst'
+
+            out_html_file = os.path.join(outdir, file_name)
+            idx_file = idx_file + 1
+            print(out_html_file)
+
+            with open(out_html_file, 'w') as fo:
+                fo.write('''{lname}{sig}
+==========================================
+
+{mname}——{lname}{sig} 。
+
+.. raw:: html
+
+  <div id="map_kd1" data-maplet="maplet_{file_slug}" data-title="{lname}{sig}"></div>
+   
+
+
+'''.format(mname=mname, lname=lname[: lname.index('[')], file_slug=file_slug, sig=the_sig))
 
 
 def parse_serial_filename(rrxlsx_file):

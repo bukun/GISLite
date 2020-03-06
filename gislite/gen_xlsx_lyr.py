@@ -48,7 +48,6 @@ def do_for_map_category(category_dir):
                 for lyr_name in get_lyrs_name(category_dir, wfile, wroot):
                     fc_inc = fc_inc + 'include "{}"\n'.format(lyr_name)
 
-    # fc_map_file = os.path.join(map_dir, 'mapfile.map')
     fc_map_file = os.path.join(mqian, 'mfile_{}.map'.format(mslug))
 
     with open(fc_map_file, 'w') as fo2:
@@ -104,7 +103,6 @@ def get_lyrs_name(category_dir, xlsxfile_name, wroot):
         lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, xlsxfile_name, )
         lyrs_file.append(lyr_file)
 
-    # print(yaml.dump(new_layer))
     return lyrs_file
 
 
@@ -118,7 +116,6 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=None):
         midx, mname, mslug = file_name
     else:
         midx, mslug = file_name
-        # mname = xxuu[-1]
     new_layer = mappyfile.loads(TPL_LAYER)
     shp_info = helper.get_epsg_code(shp)
     # print(shp)
@@ -204,7 +201,6 @@ def run_it():
     """
     for wroot, wdirs, wfile in os.walk(GIS_BASE):
         for wdir in wdirs:
-            # 'maplet', the Magic String.
             if wdir.startswith('maplet'):
                 do_for_map_category(os.path.join(wroot, wdir))
 

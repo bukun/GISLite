@@ -347,15 +347,13 @@ def rst_for_chapter(secws):
     '''
     '''
     sec_list = os.listdir(secws)
-    sec_list = [x for x in sec_list if x.startswith('sec') and not x.endswith('_files') and (x[-3:] not in  ['jpg', 'gif', 'png']) ]
+    sec_list = [x for x in sec_list if
+                x.startswith('sec') and not x.endswith('_files') and (x[-3:] not in ['jpg', 'gif', 'png'])]
     sec_list.sort()
 
-    index = 1
     rst_new_list = []
     for sec_dir in sec_list:
-
         rst_new_list.append(sec_dir)
-
 
     idxfile = os.path.join(secws, 'chapter.rst')
     if os.path.exists(idxfile):
@@ -386,21 +384,9 @@ def rst_for_book(secws):
 
     print(sec_list)
 
-    index = 1
     rst_new_list = []
     for sec_dir in sec_list:
-        tt = re.split('[-_]', sec_dir)
-        print(tt)
-        feaname = tt[1]
-        if sec_dir.startswith('ch'):
-            outname = 'ch{0}-{1}'.format(str(index).zfill(2), feaname)
-        else:
-            # for `part`.
-            outname = 'pt{0}-{1}'.format(str(index).zfill(2), feaname)
-
-        rst_new_list.append(outname)
-
-        index = index + 1
+        rst_new_list.append(sec_dir)
 
     if os.path.exists(os.path.join(secws, 'index.rst')):
         pass
@@ -415,7 +401,6 @@ def rst_for_book(secws):
                 break
             else:
                 fo.write(uu)
-
 
         if rst_new_list[0].startswith('ch'):
             fo.write('''.. toctree::\n   :maxdepth: 3\n   :numbered: 3\n\n''')
@@ -441,5 +426,3 @@ def clean_sphinx(fuws):
                 rst_for_chapter(inws)
 
     rst_for_book(fuws)
-
-

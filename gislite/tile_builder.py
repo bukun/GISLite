@@ -50,7 +50,7 @@ def chuli_serial_file(file_name, mapserver_ip, mapproxy_mold, wroot):
                 gen_imagery4d(npng, mapserver_ip, mapproxy_mold, wroot)
 
 
-def gen_yaml_file(mapserver_ip, out_yaml_file):
+def run(mapserver_ip, out_yaml_file):
     '''
     Generate YAML file.
     '''
@@ -159,4 +159,4 @@ if __name__ == '__main__':
     # mapserver_ip = '159.226.123.26' 也可以将IP设置为自己的IP
     out_yaml_file = 'out_mapproxy.yaml'
 
-    gen_yaml_file(mapserver_IP, out_yaml_file)
+    run(mapserver_IP, out_yaml_file)

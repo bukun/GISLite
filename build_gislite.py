@@ -30,13 +30,13 @@ start_time = time.time()
 ###########################################################
 
 print('generating mapfiles ...')
-layer_builder.run_it()
+layer_builder.run()
 print('generating mapproxy yaml ...')
-tile_builder.gen_yaml_file(mapserver_ip, out_yaml_file)
+tile_builder.run(mapserver_ip, out_yaml_file)
 print('building for website ...')
-site_builder.run_it()
+site_builder.run()
 print('building for Sphinx ...')
-sphinx_builder.run_it()
+sphinx_builder.run()
 
 ###########################################################
 wcs_cache_dir = 'wcs_imgmap/cache_data'

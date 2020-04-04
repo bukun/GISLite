@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 '''
 1. Parse XLSX file, and generate Mapfile for layers.
 '''
@@ -195,7 +196,7 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=None):
     return lyr_file
 
 
-def run_it():
+def run():
     """
     程序入口
     """
@@ -206,4 +207,4 @@ def run_it():
 
 
 if __name__ == '__main__':
-    run_it()
+    run()

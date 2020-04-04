@@ -18,7 +18,7 @@ dst_ws = os.path.join(os.getcwd(), 'dist_sphinx/source')
 if os.path.exists(dst_ws):
     pass
 else:
-    os.mkdir(dst_ws)
+    os.makedirs(dst_ws)
 
 
 def generate_chfile(chdir, title):
@@ -193,7 +193,7 @@ def chuli_serial_structure(file_path, wroot):
     return out_arr
 
 
-def run_it():
+def run():
     '''
     根据输入的 MarkDown 文件，生成 HTML 结果。
     '''
@@ -211,4 +211,4 @@ def run_it():
 
 
 if __name__ == '__main__':
-    run_it()
+    run()

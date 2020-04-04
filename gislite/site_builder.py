@@ -392,11 +392,11 @@ def copy_static_files():
             shutil.copy(inbb, outbb)
 
 
-def run_it():
+def run():
     gen_html_index()
     gen_html_pages()
     copy_static_files()
 
 
 if __name__ == '__main__':
-    run_it()
+    run()

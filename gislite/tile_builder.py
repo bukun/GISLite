@@ -7,10 +7,11 @@
 import os
 import yaml
 
-from config import GIS_BASE
+
 import gislite.helper as helper
 from gislite.const import TPL_MAPPROXY
 
+from config import GIS_BASE
 
 def chuli_serial_file(file_name, mapserver_ip, mapproxy_mold, wroot):
     """

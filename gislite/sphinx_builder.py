@@ -5,19 +5,17 @@ Replacement for site_builder. Using Sphinx to generate website.
 '''
 
 import os
-
 import gislite.helper as helper
 
 from config import GIS_BASE
 
-src_ws = GIS_BASE
-tpl_ws = os.path.join(os.getcwd(), 'static')
-dst_ws = os.path.join(os.getcwd(), 'dist_sphinx/source')
+# tpl_ws = os.path.join(os.getcwd(), 'static')
+SPHINX_SRC = os.path.join(os.getcwd(), 'dist_sphinx/source')
 
-if os.path.exists(dst_ws):
+if os.path.exists(SPHINX_SRC):
     pass
 else:
-    os.makedirs(dst_ws)
+    os.makedirs(SPHINX_SRC)
 
 
 def generate_chfile(chdir, title):
@@ -57,7 +55,7 @@ def gen_html_pages2(wroot, idx_dir=0):
         #  使用唯一ID
         file_slug = '{}'.format(lslug)
 
-        outdir = os.path.join(dst_ws, 'ch{}-'.format(str(idx_dir).zfill(2)) + mslug)
+        outdir = os.path.join(SPHINX_SRC, 'ch{}-'.format(str(idx_dir).zfill(2)) + mslug)
 
         if os.path.exists(outdir):
             pass
@@ -178,12 +176,12 @@ def run():
     根据输入的 MarkDown 文件，生成 HTML 结果。
     '''
 
-    the_dirs = os.listdir(src_ws)
-    the_dirs = [x for x in the_dirs if os.path.isdir(os.path.join(src_ws, x)) and 'maplet' in x]
+    the_dirs = os.listdir(GIS_BASE)
+    the_dirs = [x for x in the_dirs if os.path.isdir(os.path.join(GIS_BASE, x)) and 'maplet' in x]
     the_dirs.sort()
 
     for idx_dir, the_dir in enumerate(the_dirs):
-        wroot = os.path.join(src_ws, the_dir)
+        wroot = os.path.join(GIS_BASE, the_dir)
         if os.path.isdir(wroot) and 'maplet' in wroot:
             gen_html_pages2(wroot, idx_dir=idx_dir + 1)
         else:

@@ -7,15 +7,15 @@
 import os
 import yaml
 
-
 import gislite.helper as helper
 from gislite.const import TPL_MAPPROXY
 
 from config import GIS_BASE
 
-def chuli_serial_file(file_name, mapserver_ip, mapproxy_mold, wroot):
+
+def dispose_serial_file(file_name, mapserver_ip, mapproxy_mold, wroot):
     """
-    处理一系列文件的方法
+    处理系列文件的方法
     """
 
     data_apth = ''
@@ -35,17 +35,15 @@ def chuli_serial_file(file_name, mapserver_ip, mapproxy_mold, wroot):
             if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
                 the_sig = wwfile[meta_q: meta_h - 1]
 
-                # shp = os.path.join(wroot, wwfile)
-                npng = file_name.replace('[sig]', the_sig)
-                gen_imagery4d(npng, mapserver_ip, mapproxy_mold, wroot)
+                gdata = file_name.replace('[sig]', the_sig)
+                gen_imagery4d(gdata, mapserver_ip, mapproxy_mold, wroot)
 
 
 def run(mapserver_ip, out_yaml_file):
     '''
     Generate YAML file.
     '''
-
-    mapproxy_mold = yaml.load(TPL_MAPPROXY)
+    mapproxy_tmpl = yaml.load(TPL_MAPPROXY)
 
     for wroot, _, wfiles in os.walk(GIS_BASE):
         if 'maplet' in wroot:
@@ -55,28 +53,22 @@ def run(mapserver_ip, out_yaml_file):
         for file_name in wfiles:
             if file_name.startswith('meta_') and file_name.endswith('.xlsx'):
                 if '_mul' in file_name:
-                    gen_mul_lyr(file_name, mapproxy_mold, wroot)
+                    gen_mul_lyr(file_name, mapproxy_tmpl, wroot)
                 elif '_grp' in file_name:
                     pass
                 elif '[' in file_name:
-                    chuli_serial_file(
-                        file_name,
-                        mapserver_ip,
-                        mapproxy_mold,
-                        wroot
+                    dispose_serial_file(
+                        file_name, mapserver_ip, mapproxy_tmpl, wroot
                     )
                 else:
                     gen_imagery4d(
-                        file_name,
-                        mapserver_ip,
-                        mapproxy_mold,
-                        wroot
+                        file_name, mapserver_ip, mapproxy_tmpl, wroot
                     )
             else:
                 continue
 
-    with  open(out_yaml_file, 'w') as fo:
-        yaml.dump(mapproxy_mold, fo, encoding='utf-8', allow_unicode=True)
+    with open(out_yaml_file, 'w') as fo:
+        yaml.dump(mapproxy_tmpl, fo, encoding='utf-8', allow_unicode=True)
 
 
 def gen_mul_lyr(file_name, mapproxy_mold, wroot):
@@ -84,13 +76,12 @@ def gen_mul_lyr(file_name, mapproxy_mold, wroot):
     处理多图层。
     '''
     lqian, _ = os.path.splitext(file_name)
-    xxuu = lqian.split('_')
-    if len(xxuu) > 2:
-        lidx, lname, lslug = xxuu
+    tmp_arr = lqian.split('_')
+    if len(tmp_arr) > 2:
+        lidx, lname, lslug = tmp_arr
     else:
-        lidx, lslug = xxuu
+        lidx, lslug = tmp_arr
 
-    # mqian, mhou = os.path.split(wroot)
 
     the_file = os.path.join(wroot, file_name)
     lyr_list = helper.lyr_list(the_file)
@@ -104,7 +95,7 @@ def gen_mul_lyr(file_name, mapproxy_mold, wroot):
     mapproxy_mold['layers'].append(new_dic)
 
 
-def gen_imagery4d(file_name, mapserver_ip, mapproxy_mold, wroot):
+def gen_imagery4d(file_name, mapserver_ip, mapproxy_tmpl, wroot):
     '''
     对图层进行处理，
     相关信息补充到传入的变量中。
@@ -115,31 +106,28 @@ def gen_imagery4d(file_name, mapserver_ip, mapproxy_mold, wroot):
         lidx, lname, lslug = file_dir
     else:
         lidx, lslug = file_dir
-        # lname = xxuu[-1]
 
     mqian, mhou = os.path.split(wroot)
     _, _, mslug = mhou.split('_')
     fc_map_file = os.path.join(mqian, 'mfile_{}.map'.format(mslug))
 
     sig = 'maplet_{}'.format(lslug)  # 使用唯一 ID.
-    mapproxy_mold['sources'][sig] = {}
-    mapproxy_mold['sources'][sig]['type'] = 'wms'
-    mapproxy_mold['sources'][sig]['image'] = {'transparent_color_tolerance': 0,
+    mapproxy_tmpl['sources'][sig] = {}
+    mapproxy_tmpl['sources'][sig]['type'] = 'wms'
+    mapproxy_tmpl['sources'][sig]['image'] = {'transparent_color_tolerance': 0,
                                               'transparent_color': '#ffffff'}
-    mapproxy_mold['sources'][sig]['req'] = {}
-    mapproxy_mold['sources'][sig]['req']['url'] = 'http://{0}/cgi-bin/mapserv?map={1}'.format(
+    mapproxy_tmpl['sources'][sig]['req'] = {}
+    mapproxy_tmpl['sources'][sig]['req']['url'] = 'http://{0}/cgi-bin/mapserv?map={1}'.format(
         mapserver_ip, fc_map_file)
-    mapproxy_mold['sources'][sig]['req']['layers'] = 'lyr_{}'.format(lslug)
-    mapproxy_mold['caches'][sig] = {}
-    mapproxy_mold['caches'][sig]['grids'] = ['webmercator']
-    mapproxy_mold['caches'][sig]['sources'] = [sig]
+    mapproxy_tmpl['sources'][sig]['req']['layers'] = 'lyr_{}'.format(lslug)
+    mapproxy_tmpl['caches'][sig] = {}
+    mapproxy_tmpl['caches'][sig]['grids'] = ['webmercator']
+    mapproxy_tmpl['caches'][sig]['sources'] = [sig]
     new_dic = {'name': sig, 'title': sig, 'sources': [sig]}
-    mapproxy_mold['layers'].append(new_dic)
+    mapproxy_tmpl['layers'].append(new_dic)
 
 
 if __name__ == '__main__':
-    mapserver_IP = '127.0.0.1'
-
+    mapserver_ip = '127.0.0.1'
     out_yaml_file = 'out_mapproxy.yaml'
-
-    run(mapserver_IP, out_yaml_file)
+    run(mapserver_ip, out_yaml_file)

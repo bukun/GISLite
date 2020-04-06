@@ -16,7 +16,7 @@ MTS = helper.get_mts()
 def is_lyr_def(xlsfile):
     '''
     if the xlsx file is used to define layer.
-    Not for Multiple layers, or group layers.
+    NOT for Multiple layers, or group layers.
     '''
     if xlsfile.endswith('.xlsx'):
         if '_mul' in xlsfile or '_grp' in xlsfile:
@@ -36,7 +36,7 @@ def do_for_map_category(category_dir):
     mqian, mhou = os.path.split(category_dir)
 
     # 对文件夹名称进行切分，得到 索引顺序, 名称, slug
-    midx, mname, mslug = mhou.split('_')
+    _, _, mslug = mhou.split('_')
 
     fc_inc = ''
     for wroot, wdirs, wfiles in os.walk(category_dir):

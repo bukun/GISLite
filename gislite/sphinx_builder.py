@@ -19,10 +19,13 @@ else:
 
 
 def generate_chfile(chdir, title):
+    '''
+    Generate rst file for chapter.
+    '''
     chfile = os.path.join(chdir, 'chapter.rst')
 
-    with open(chfile, 'w') as fo:
-        fo.write('''{title}
+    with open(chfile, 'w') as fileo:
+        fileo.write('''{title}
 =============================================
 
 {title}
@@ -31,7 +34,10 @@ def generate_chfile(chdir, title):
 
 
 def gen_html_pages2(wroot, idx_dir=0):
-    # 处理 HTML 文件
+    '''
+    处理 HTML 文件
+    '''
+
     _, the_dir = os.path.split(wroot)
 
     # nav_formated = format_nav(list_main)
@@ -63,10 +69,6 @@ def gen_html_pages2(wroot, idx_dir=0):
             os.mkdir(outdir)
 
         generate_chfile(outdir, mname)
-
-        # if '[' in md_file:
-        #     file_slug = 'aa'
-        #
 
         if '_grp' in md_file:
             layers = helper.lyr_list(os.path.join(wroot, md_file))
@@ -164,8 +166,7 @@ def parse_serial_filename(rrxlsx_file):
         for key in mata:
             if key == 'data':
                 data_apth = mata[key]
-    print('-' * 40)
-    print(data_apth)
+
     q_place = data_apth.index('[')
     h_place = data_apth.index(']')
     return data_apth, h_place, q_place

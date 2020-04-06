@@ -15,7 +15,6 @@ from osgeo import gdal, ogr, osr
 from gislite.const import COLOR_INDEX
 
 
-
 def get_mts(afile=None):
     '''
     输出最近修改时间
@@ -33,16 +32,12 @@ def lyr_list(xls_file):
     '''
     解析得到excel表内的值放入列表内
     '''
-    wb = load_workbook(filename=xls_file)
-    sheet = wb.active
+    sheet = load_workbook(filename=xls_file).active
 
     max_row_num = sheet.max_row
 
     out_str = []
     for row in range(1, max_row_num + 1):
-        # with category
-        # the_cell = 'maplet_' + mslug + '_' + sheet.cell(row=xx, column=1).value
-        # slug only
         the_cell = 'maplet_' + sheet.cell(row=row, column=1).value
         out_str.append(the_cell)
     return out_str
@@ -52,8 +47,6 @@ def get_html_title(html_file):
     '''
     Get the title of the page.
     '''
-
-    # uu = BeautifulSoup(open(html_file), "html.parser")
     return BeautifulSoup(open(html_file), "html.parser").title.text
 
 
@@ -78,7 +71,6 @@ def xlsx2dict(xls_file):
     '''
     将 XLSX 文件中记录的信息转换为 Python dict.
     '''
-
 
     sheet = load_workbook(filename=xls_file).active
 

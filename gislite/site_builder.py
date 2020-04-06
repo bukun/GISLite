@@ -187,8 +187,8 @@ def gen_html_pages2(wroot):
                 mname=mname
             )
         elif '[' in md_file:
-            chuli_serial_file(md_file, wroot, mslug, lslug, jinja2_file, left_nav, mname,
-                              nav=nav_formated)
+            dispose_serial_file(md_file, wroot, mslug, lslug, jinja2_file, left_nav, mname,
+                                nav=nav_formated)
         else:
             helper.render_html(
                 jinja2_file,
@@ -202,7 +202,7 @@ def gen_html_pages2(wroot):
             )
 
 
-def chuli_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, nav=None):
+def dispose_serial_file(png, wroot, mslug, lslug, jinja2_file, left_nav, mname, nav=None):
     '''
     处理满足条件的序列数据
     '''
@@ -264,7 +264,7 @@ def gen_html_index():
     helper.render_html(index_in, index_out, nav=nav_formated, left_nav=left_nav)
 
 
-def chuli_serial_structure(file_path, wroot):
+def dispose_serial_structure(file_path, wroot):
     '''
     Deal with serial structure.
     '''
@@ -309,7 +309,7 @@ def fetch_structure():
 
         for xlsfile in the_files:
             if '[' in xlsfile:
-                serial_arr = chuli_serial_structure(xlsfile, os.path.join(src_ws, the_dir))
+                serial_arr = dispose_serial_structure(xlsfile, os.path.join(src_ws, the_dir))
                 the_files.remove(xlsfile)
                 the_files = the_files + serial_arr
 

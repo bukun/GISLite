@@ -5,9 +5,10 @@
 '''
 import os
 import mappyfile
+
+import gislite.const
 import gislite.helper as helper
 from config import GIS_BASE
-from gislite.helper import TPL_MAP, TPL_LAYER, TPL_CLASS
 
 MTS = helper.get_mts()
 
@@ -25,10 +26,6 @@ def is_lyr_def(xlsfile):
     else:
         return False
 
-
-# pylint: disable=invalid-name
-# pylint: disable=unused-variable
-# 针对未使用的变量进行忽略
 
 def do_for_map_category(category_dir):
     '''
@@ -52,7 +49,7 @@ def do_for_map_category(category_dir):
     fc_map_file = os.path.join(mqian, 'mfile_{}.map'.format(mslug))
 
     with open(fc_map_file, 'w') as fo2:
-        tmp_str = TPL_MAP.format(
+        tmp_str = gislite.const.TPL_MAP.format(
             basedir=category_dir,
             fc_name='map_dir_sig', fc_includes=fc_inc,
             fc_extent='{x_min} {y_min} {x_max} {y_max}'.format(
@@ -95,13 +92,24 @@ def get_lyrs_name(category_dir, xlsxfile_name, wroot):
                 the_sig = wwfile[q_place: h_place - 1]
                 shp = os.path.join(wroot, wwfile)
 
-                lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, xlsxfile_name, sig=the_sig)
+                lyr_file = generate_lyr_mapfile(
+                    category_dir,
+                    map_mata,
+                    shp,
+                    xlsxfile_name,
+                    sig=the_sig
+                )
                 lyrs_file.append(lyr_file)
 
     else:
         shp = os.path.join(wroot, data_path)
 
-        lyr_file = generate_lyr_mapfile(category_dir, map_mata, shp, xlsxfile_name, )
+        lyr_file = generate_lyr_mapfile(
+            category_dir,
+            map_mata,
+            shp,
+            xlsxfile_name
+        )
         lyrs_file.append(lyr_file)
 
     return lyrs_file
@@ -117,7 +125,7 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=None):
         midx, mname, mslug = file_name
     else:
         midx, mslug = file_name
-    new_layer = mappyfile.loads(TPL_LAYER)
+    new_layer = mappyfile.loads(gislite.const.TPL_LAYER)
     shp_info = helper.get_epsg_code(shp)
     # print(shp)
     # qian, hou = os.path.split(shp)
@@ -151,7 +159,7 @@ def generate_lyr_mapfile(category_dir, map_mata, shp, wfile, sig=None):
         new_layer['processing'] = []
         for idx, cl in enumerate(map_mata):
 
-            cls = mappyfile.loads(TPL_CLASS)
+            cls = mappyfile.loads(gislite.const.TPL_CLASS)
             for key in cl:
                 if key.lower() == 'classitem':
                     new_layer['classitem'] = cl[key]

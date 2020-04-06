@@ -10,6 +10,9 @@ SITE_WS = '/home/bk/github/GISLite'
 # User name
 USER = 'bk'
 
+# Supervisor: list. if not used , just leave as `[]`.
+DAMONS = ['supor1, supor1']
+
 ###########################################################
 # 远程部署使用，客户端定义. 不使用远程部署可以不用定义
 machines = {

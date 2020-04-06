@@ -139,7 +139,7 @@ def xlsx2dict(xls_file):
                     the_str = the_str + str(the_cell_value)
             else:
                 the_str = the_str + '  '
-            print(the_str)
+            # print(the_str)
         out_str = out_str + the_str + '\r'
 
     with open('xx_out.xbj', 'w') as fo:
@@ -174,8 +174,7 @@ def get_epsg_code(img_file, raster=False):
         lyr = ds.GetLayer(0)
         srs = lyr.GetSpatialRef()
 
-        sr2 = osr.SpatialReference()
-
+        # sr2 = osr.SpatialReference()
         # sr2.SetFromUserInput(srs)
         # epsg_code = srs.GetAttrValue("AUTHORITY", 1)
         # else:
@@ -239,7 +238,7 @@ def rst_for_book(secws):
     sec_list = [x for x in sec_list if x[:2] in ['ch', 'pt']]
     sec_list.sort()
 
-    print(sec_list)
+    # print(sec_list)
 
     rst_new_list = []
     for sec_dir in sec_list:
@@ -251,7 +250,7 @@ def rst_for_book(secws):
         return False
     sec_cnt = open(os.path.join(secws, 'index.rst')).readlines()
 
-    print(rst_new_list)
+    # print(rst_new_list)
     with open(os.path.join(secws, 'index.rst'), 'w') as fo:
         for uu in sec_cnt:
             if '.. toctree::' in uu:

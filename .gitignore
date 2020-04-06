@@ -102,4 +102,5 @@ wcs_*
 
 .sass-cache
 
-# Default directory for data.
+# For work.
+bushu_*.py

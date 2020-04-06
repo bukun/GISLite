@@ -3,13 +3,12 @@
 '''
 Replacement for site_builder. Using Sphinx to generate website.
 '''
-# pylint: disable=invalid-name
-# pylint: disable=unused-variable
+
 import os
 
 import gislite.helper as helper
 
-from config import GIS_BASE, TILE_SVR
+from config import GIS_BASE
 
 src_ws = GIS_BASE
 tpl_ws = os.path.join(os.getcwd(), 'static')
@@ -72,7 +71,7 @@ def gen_html_pages2(wroot, idx_dir=0):
         #
 
         if '_grp' in md_file:
-            layers=helper.lyr_list(os.path.join(wroot, md_file))
+            layers = helper.lyr_list(os.path.join(wroot, md_file))
 
             out_html_file = os.path.join(
                 outdir,
@@ -93,7 +92,7 @@ def gen_html_pages2(wroot, idx_dir=0):
 '''.format(mname=mname, lname=lname, file_slug=','.join(layers)))
 
         elif '[' in md_file:
-            chuli_serial_file(wroot, md_file, lname, lslug, mname, outdir)
+            dispose_serial_file(wroot, md_file, lname, lslug, mname, outdir)
         else:
             out_html_file = os.path.join(
                 outdir,
@@ -114,7 +113,7 @@ def gen_html_pages2(wroot, idx_dir=0):
 '''.format(mname=mname, lname=lname, file_slug=file_slug))
 
 
-def chuli_serial_file(wroot, mdfile, lname, lslug, mname, outdir):
+def dispose_serial_file(wroot, mdfile, lname, lslug, mname, outdir):
     '''
     处理满足条件的序列数据
     '''
@@ -172,25 +171,6 @@ def parse_serial_filename(rrxlsx_file):
     q_place = data_apth.index('[')
     h_place = data_apth.index(']')
     return data_apth, h_place, q_place
-
-
-def chuli_serial_structure(file_path, wroot):
-    '''
-    Deal with serial structure.
-    '''
-    out_arr = []
-
-    rrxlsx_file = os.path.join(wroot, file_path)
-
-    data_apth, h_place, q_place = parse_serial_filename(rrxlsx_file)
-    sig_q = data_apth[:q_place]
-    sig_h = data_apth[h_place + 1:]
-
-    for wwfile in os.listdir(wroot):
-        if wwfile.startswith(sig_q) and wwfile.endswith(sig_h):
-            the_sig = wwfile[q_place: h_place - 1]
-            out_arr.append(file_path.replace('[sig]', the_sig))
-    return out_arr
 
 
 def run():

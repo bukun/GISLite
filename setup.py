@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 desc = ('Static site generator (SSG) for GIS data publishment as light WebGIS application.')
 setup(
     name='gislite',
-    version='0.0.3',
+    version='0.0.4',
     keywords=('WebGIS', 'Static site generator'),
     description=desc,
     long_description=''.join(open('ReadMe.rst').readlines()),

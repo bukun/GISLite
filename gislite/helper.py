@@ -111,7 +111,12 @@ def xlsx2dict(xls_file):
                         # green = int(hex2dec(colors[4:6]))
                         # blue = int(hex2dec(colors[6:8]))
                         # the_cell_value = [red, green, blue]
-                        the_cell_value = '"#{}{}"'.format(colors[2:], colors[:2])
+
+
+                        # the_cell_value = '"#{}{}"'.format(colors[2:], colors[:2])
+                        # 末位为 00 会出错。
+                        the_cell_value = '"#{}"'.format(colors[2:])
+
 
                 mf_keys = ['class',
                            'classitem',

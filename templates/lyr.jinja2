@@ -34,6 +34,20 @@
                                 .setLatLng(e.latlng)
                                 .setContent("Location:" + e.latlng.toString())
                                 .openOn(map);
+                        var cmap_coor = e.latlng;
+                        var currentZoom = map.getZoom()
+                        var div_str_old = '{"x" : ' + cmap_coor.lng.toFixed(3).toString() + ', "y": ' + cmap_coor.lat.toFixed(3).toString() + ', "v":' + currentZoom.toString() + ',"k": 1}';
+                        var div_str = '&lt;div id="map" data-map = \'' + div_str_old + "'&gt;&lt;/div&gt;";
+
+                        $("#mapref").html(div_str)
+                    }
+                    function onZoomend() {
+                     var  cmap_coor = map.getCenter();
+                    var currentZoom = map.getZoom()
+                    var div_str_old = '{"x" : ' + cmap_coor.lng.toFixed(3).toString() + ', "y": ' + cmap_coor.lat.toFixed(3).toString() + ', "v":' + currentZoom.toString() + ',"k": 1}';
+                    var div_str = '&lt;div id="map" data-map = \'' + div_str_old + "'&gt;&lt;/div&gt;";
+
+                    $("#mapref").html(div_str)
                     }
                     var map = L.map('map', {
                         center: [0, 0],
@@ -55,7 +69,7 @@
                         transparent: true
 
                     }).addTo(map);
-                    map.on('click', onMapClick);
+                    map.on('click', onMapClick),map.on("zoomend", onZoomend), map.on("moveend", onZoomend);
                     var baseMaps = {
                         'BaseMap': the_basemap
                     };
@@ -76,7 +90,8 @@
                 <tr><td>title</td><td>{{ title }}</td></tr>
                 <tr><td>name</td><td>{{ mname }}</td></tr>
             </table>
-
+            
+<span id="mapref" class="codehilite hll c"></span>
         </div>
     </div>
     <div style="clear: both"></div>

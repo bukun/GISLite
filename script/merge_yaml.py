@@ -1,5 +1,6 @@
 '''
 Merge YAML files used for MapProxy.
+合并 MapProxy 中使用的 YAML.
 '''
 
 import ruamel.yaml

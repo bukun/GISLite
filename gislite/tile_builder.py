@@ -43,7 +43,9 @@ def run(mapserver_ip, out_yaml_file):
     '''
     Generate YAML file.
     '''
-    mapproxy_tmpl = yaml.load(TPL_MAPPROXY)
+    # mapproxy_tmpl = yaml.load(TPL_MAPPROXY )
+    mapproxy_tmpl = yaml.load(TPL_MAPPROXY, yaml.Loader)
+
 
     for wroot, _, wfiles in os.walk(GIS_BASE):
         if 'maplet' in wroot:

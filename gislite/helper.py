@@ -140,7 +140,7 @@ def xlsx2dict(xls_file):
     with open('xx_out.xbj', 'w') as fo:
         fo.write(out_str)
 
-    return yaml.load(out_str)
+    return yaml.load(out_str, yaml.Loader)
 
 
 def get_epsg_code(img_file, raster=False):
